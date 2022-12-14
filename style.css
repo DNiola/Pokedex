@@ -1,0 +1,18 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+}
+#pokedex {
+  display: flex;
+  min-height: 50vh;
+  background-color: #fb6C6C;
+  color: white;
+}
+
+.infoContainer {
+  background-color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  min-height: 400px;
+  margin-top: -40px;
+}
