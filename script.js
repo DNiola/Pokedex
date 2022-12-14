@@ -1,31 +1,30 @@
+let APIs = "https://pokeapi.co/api/v2/pokemon/";
 let currentPokemon;
 let currentAPI;
 
-async function loadPokemon() {
-  let APIs = "https://pokeapi.co/api/v2/pokemon/";
-  for (let t = 10; t < 11; t++) {
-    const API = `${APIs}${t}`;
-    console.log(API);
-    let response = await fetch(API);
-    currentPokemon = await response.json();
-    console.log("Pokemon:", currentPokemon);
-   pokemonFilter(currentPokemon, t)
+function loadAPIs() {
+  for (let t = 1; t < 11; t++) {
+    const url = `${APIs}${t}`;
+    console.log(url);
+    loadPokemon(url, t);
   }
 }
 
-function pokemonFilter(currentPokemon, t) {
-
-  if (currentPokemon['types']['length'] == 2) {
-    document.getElementById(`pokemonTypesX${t}`).innerHTML += currentPokemon["types"][0]['type']['name'];
-    document.getElementById(`pokemonTypes${t}`).innerHTML += currentPokemon["types"][1]['type']['name'];
-} else {
-  document.getElementById(`pokemonTypesX${t}`).innerHTML += currentPokemon["types"][0]['type']['name'];
+async function loadPokemon(url, t) {
+  let response = await fetch(url);
+  currentPokemon = await response.json();
+  console.log("Pokemon:", currentPokemon);
+  pokemonFilter(currentPokemon, t);
 }
+
+//TODO:Zwischen 1 und 2 Typen unterscheiden
+function pokemonFilter(currentPokemon, t) {
   pokeDexHTML.innerHTML += renderAllPokemons(t, currentPokemon);
   renderPokemonInfo(currentPokemon, t);
 }
 
 function renderPokemonInfo(currentPokemon, t) {
+  document.getElementById(`pokemonTypes${t}`).innerHTML += currentPokemon["types"][0]["type"]["name"];
   document.getElementById(`pokemonID${t}`).innerHTML += "#" + currentPokemon["id"];
   document.getElementById(`pokemonName${t}`).innerHTML += currentPokemon["name"];
   document.getElementById(`pokemonImage${t}`).src += currentPokemon["sprites"]["front_shiny"];
@@ -33,7 +32,7 @@ function renderPokemonInfo(currentPokemon, t) {
 
 function renderAllPokemons(t) {
   return `
-  <div id="pokemonContainer${t}"class="pokedex">
+  <div onclick="openPokemon(${t})" id="pokemonContainer${t}" class="pokedex">
     <div>
       <span id="pokemonID${t}"></span>
       <h1 id="pokemonName${t}"></h1>
@@ -46,3 +45,38 @@ function renderAllPokemons(t) {
   </div>`;
 }
 
+async function openPokemon(t) {
+  urlRE = APIs + t;
+  console.log("URL-RE:", urlRE);
+  let response = await fetch(urlRE);
+  const currentPokemon = await response.json();
+  console.log("Pokemon-RE:", currentPokemon);
+  pokeDexHTMLOpen.innerHTML = openPokemonHTML(t);
+  renderPokemonInfoRE(currentPokemon, t);
+}
+
+function renderPokemonInfoRE(currentPokemon, t) {
+  document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
+  document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
+  document.getElementById(`pokemonID${t}Open`).innerHTML += "#" + currentPokemon["id"];
+  document.getElementById(`pokemonName${t}Open`).innerHTML += currentPokemon["name"];
+  document.getElementById(`pokemonImage${t}Open`).src += currentPokemon["sprites"]["front_shiny"];
+}
+
+function openPokemonHTML(t) {
+  return `
+  <div class="pokemonContainerRE">
+    <div id="pokemonContainer${t}Open" class="pokedexCard">
+      <div>
+        <span id="pokemonID${t}Open"></span>
+        <h1 id="pokemonName${t}Open"></h1>
+      </div>
+      <div class="infoContainerOpen">
+        <img id="pokemonImage${t}Open">
+        <span style="color:black" id="pokemonTypes${t}Open"></span>
+        <span style="color:black" id="pokemonTypesX${t}Open"></span>;
+      </div>
+    </div>
+  </div>
+  `;
+}

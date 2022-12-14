@@ -12,7 +12,16 @@ body {
   margin: 8px;
   border-radius: 10px;
 }
-
+.pokedexCard {
+  display: flex;
+  background-color: #fb6C6C;
+  color: white;
+  flex-direction: column;
+  padding: 12px;
+  margin: 8px;
+  border-radius: 10px;
+  height: 600px;
+}
 .infoContainer {
   background-color: white;
   border-top-left-radius: 10px;
@@ -22,9 +31,37 @@ body {
   margin-top: -24px;
   width: 200px;
 }
+.infoContainerOpen{
+  background-color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  min-height: 195px;
+  margin-top: -24px;
+  width: 500px;
+}
 
 .pokeDexContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.pokemonContainerRE {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  right: calc( 50% - 50px);
+  left: calc( 50% - 50px);
+  top: 10%;
+}
+.mainContainerOpen {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.d-none{
+  display: none;
 }
