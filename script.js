@@ -3,7 +3,7 @@ let currentPokemon;
 let currentAPI;
 
 function loadAPIs() {
-  for (let t = 1; t < 11; t++) {
+  for (let t = 1; t < 50; t++) {
     const url = `${APIs}${t}`;
     console.log(url);
     loadPokemon(url, t);
@@ -17,17 +17,20 @@ async function loadPokemon(url, t) {
   pokemonFilter(currentPokemon, t);
 }
 
-//TODO:Zwischen 1 und 2 Typen unterscheiden
 function pokemonFilter(currentPokemon, t) {
   pokeDexHTML.innerHTML += renderAllPokemons(t, currentPokemon);
   renderPokemonInfo(currentPokemon, t);
+  document.getElementById(`pokemonTypes${t}`).innerHTML += currentPokemon["types"][0]["type"]["name"];
+  if (currentPokemon["types"][1]) {
+    document.getElementById(`pokemonTypesX${t}`).innerHTML += currentPokemon["types"][1]["type"]["name"];
+  }
+  setDesigns(t)
 }
 
 function renderPokemonInfo(currentPokemon, t) {
-  document.getElementById(`pokemonTypes${t}`).innerHTML += currentPokemon["types"][0]["type"]["name"];
   document.getElementById(`pokemonID${t}`).innerHTML += "#" + currentPokemon["id"];
   document.getElementById(`pokemonName${t}`).innerHTML += currentPokemon["name"];
-  document.getElementById(`pokemonImage${t}`).src += currentPokemon["sprites"]["front_shiny"];
+  document.getElementById(`pokemonImage${t}`).src += currentPokemon["sprites"]["other"]['dream_world']["front_default"];
 }
 
 function renderAllPokemons(t) {
@@ -38,7 +41,7 @@ function renderAllPokemons(t) {
       <h1 id="pokemonName${t}"></h1>
     </div>
     <div class="infoContainer">
-      <img id="pokemonImage${t}">
+      <img class="imgSize" id="pokemonImage${t}">
       <span style="color:black" id="pokemonTypes${t}"></span>
       <span style="color:black" id="pokemonTypesX${t}"></span>;
     </div>
@@ -52,15 +55,20 @@ async function openPokemon(t) {
   const currentPokemon = await response.json();
   console.log("Pokemon-RE:", currentPokemon);
   pokeDexHTMLOpen.innerHTML = openPokemonHTML(t);
-  renderPokemonInfoRE(currentPokemon, t);
+  renderPokemonInfoOpen(currentPokemon, t);
+  setDesignOpenCard(currentPokemon, t)
 }
 
-function renderPokemonInfoRE(currentPokemon, t) {
+
+function renderPokemonInfoOpen(currentPokemon, t) {
   document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
-  document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
   document.getElementById(`pokemonID${t}Open`).innerHTML += "#" + currentPokemon["id"];
   document.getElementById(`pokemonName${t}Open`).innerHTML += currentPokemon["name"];
-  document.getElementById(`pokemonImage${t}Open`).src += currentPokemon["sprites"]["front_shiny"];
+  document.getElementById(`pokemonImage${t}Open`).src += currentPokemon["sprites"]["other"]['dream_world']["front_default"];
+  document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
+  if (currentPokemon["types"][1]) {
+    document.getElementById(`pokemonTypesX${t}Open`).innerHTML += currentPokemon["types"][1]["type"]["name"];
+  }
 }
 
 function openPokemonHTML(t) {
@@ -72,10 +80,11 @@ function openPokemonHTML(t) {
         <h1 id="pokemonName${t}Open"></h1>
       </div>
       <div class="infoContainerOpen">
-        <img id="pokemonImage${t}Open">
+        <img class="imgSize" id="pokemonImage${t}Open">
         <span style="color:black" id="pokemonTypes${t}Open"></span>
         <span style="color:black" id="pokemonTypesX${t}Open"></span>;
       </div>
+      <div id="chart${t}">Chart</div>
     </div>
   </div>
   `;

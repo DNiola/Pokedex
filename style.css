@@ -3,15 +3,17 @@ body {
   margin: 0;
   background-color: black;
 }
+
 .pokedex {
   display: flex;
-  background-color: #fb6C6C;
+  background-color: #ffffff;
   color: white;
   flex-direction: column;
   padding: 12px;
   margin: 8px;
   border-radius: 10px;
 }
+
 .pokedexCard {
   display: flex;
   background-color: #fb6C6C;
@@ -22,6 +24,7 @@ body {
   border-radius: 10px;
   height: 600px;
 }
+
 .infoContainer {
   background-color: white;
   border-top-left-radius: 10px;
@@ -31,6 +34,7 @@ body {
   margin-top: -24px;
   width: 200px;
 }
+
 .infoContainerOpen{
   background-color: white;
   border-top-left-radius: 10px;
@@ -55,13 +59,91 @@ body {
   left: calc( 50% - 50px);
   top: 10%;
 }
+
 .mainContainerOpen {
   position: relative;
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
+.imgSize{
+  height: 180px;
+  width: 200px;
+}
 
 .d-none{
   display: none;
+}
+
+.designGrass{
+  background-color:  #006400 !important;
+}
+
+.designFire{
+  background-color: #FF4500 !important;
+}
+
+.designWater{
+  background-color: #0066ff  !important;
+}
+
+.designBug{
+  background-color:  #3D9970 !important;
+}
+
+.designNormal{
+  background-color: #D3D3D3  !important;
+}
+
+.designPoison{
+  background-color: #A040A0 !important;
+}
+
+.designElectric{
+  background-color: #F8D030  !important;
+}
+
+.designGround{
+  background-color: #E0C068 !important;
+}
+
+.designFairy{
+  background-color: #EE99AC !important;
+}
+
+.designFighting{
+  background-color: #C04000  !important;
+}
+
+.designPsychic{
+  background-color: #F85888  !important;
+}
+
+.designRock{
+  background-color: #B8A038 !important;
+}
+
+.designGhost{
+  background-color: #705898 !important;
+}
+
+
+
+.designIce{
+  background-color: #00bfff !important;
+}
+
+.designDragon{
+  background-color: #003366 !important;
+}
+
+.designDark{
+  background-color: #161616!important;
+}
+.designSteel{
+  background-color: #708090 !important;
+}
+
+.designFlying{
+  background-color: #add8e6!important;
 }
