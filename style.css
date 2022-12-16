@@ -41,7 +41,6 @@ body {
   border-top-right-radius: 50px;
   border-bottom-left-radius: 50px;
   min-height: 195px;
-  margin-top: -24px;
   width: 500px;
 }
 
@@ -66,6 +65,12 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.positionWH {
+  display: flex;
+  justify-content: space-around;
+}
+
 .imgSize{
   height: 180px;
   width: 200px;

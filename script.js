@@ -61,14 +61,67 @@ async function openPokemon(t) {
 
 
 function renderPokemonInfoOpen(currentPokemon, t) {
-  document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
-  document.getElementById(`pokemonID${t}Open`).innerHTML += "#" + currentPokemon["id"];
-  document.getElementById(`pokemonName${t}Open`).innerHTML += currentPokemon["name"];
-  document.getElementById(`pokemonImage${t}Open`).src += currentPokemon["sprites"]["other"]['dream_world']["front_default"];
-  document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
   if (currentPokemon["types"][1]) {
     document.getElementById(`pokemonTypesX${t}Open`).innerHTML += currentPokemon["types"][1]["type"]["name"];
   }
+  document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
+  document.getElementById(`pokemonImage${t}Open`).src += currentPokemon["sprites"]["other"]['dream_world']["front_default"];
+  document.getElementById(`pokemonID${t}Open`).innerHTML += "#" + currentPokemon["id"];
+  document.getElementById(`pokemonName${t}Open`).innerHTML += currentPokemon["name"];
+  document.getElementById(`weight${t}`).innerHTML += currentPokemon["weight"];
+  document.getElementById(`height${t}`).innerHTML += currentPokemon["height"];
+  document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
+  openDiagram(currentPokemon, t)
+}
+
+function openDiagram(currentPokemon, t) {
+  statHP = currentPokemon["stats"][0]['base_stat'];
+  statHP1 = currentPokemon["stats"][1]['base_stat'];
+  statHP2 = currentPokemon["stats"][2]['base_stat'];
+  statHP3 = currentPokemon["stats"][3]['base_stat'];
+  statHP4 = currentPokemon["stats"][4]['base_stat'];
+  statHP5 = currentPokemon["stats"][5]['base_stat'];
+  
+  
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["HP", "ATK", 'DEF', 'S.ATK', 'S.DEF', "SPEED"],
+      datasets: [{
+        label: 'Stats:',
+        data: [statHP, statHP1, statHP2, statHP3, statHP4, statHP5],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.7)',
+          'rgba(255, 159, 64, 0.7)',
+          'rgba(255, 205, 86, 0.7)',
+          'rgba(75, 192, 192, 0.7)',
+          'rgba(54, 162, 235, 0.7)',
+          'rgba(153, 102, 255, 0.7)',
+          'rgba(201, 203, 207, 0.7)'
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)'
+        ],
+        borderWidth: 10
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 }
 
 function openPokemonHTML(t) {
@@ -78,13 +131,17 @@ function openPokemonHTML(t) {
       <div>
         <span id="pokemonID${t}Open"></span>
         <h1 id="pokemonName${t}Open"></h1>
-      </div>
+        <div class="positionWH">
+          <span id="weight${t}">weight:</span> <span id="height${t}">size:</span>
+        </div>
       <div class="infoContainerOpen">
         <img class="imgSize" id="pokemonImage${t}Open">
         <span style="color:black" id="pokemonTypes${t}Open"></span>
         <span style="color:black" id="pokemonTypesX${t}Open"></span>;
       </div>
-      <div id="chart${t}">Chart</div>
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
     </div>
   </div>
   `;
