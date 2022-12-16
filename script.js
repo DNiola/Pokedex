@@ -3,7 +3,7 @@ let currentPokemon;
 let currentAPI;
 
 function loadAPIs() {
-  for (let t = 1; t < 50; t++) {
+  for (let t = 640; t < 700; t++) {
     const url = `${APIs}${t}`;
     console.log(url);
     loadPokemon(url, t);
@@ -28,14 +28,28 @@ function pokemonFilter(currentPokemon, t) {
 }
 
 function renderPokemonInfo(currentPokemon, t) {
+  const imageUrl = getPokemonImage(currentPokemon);
+  document.getElementById(`pokemonImage${t}`).src = imageUrl;
   document.getElementById(`pokemonID${t}`).innerHTML += "#" + currentPokemon["id"];
   document.getElementById(`pokemonName${t}`).innerHTML += currentPokemon["name"];
-  document.getElementById(`pokemonImage${t}`).src += currentPokemon["sprites"]["other"]['dream_world']["front_default"];
+}
+
+function getPokemonImage(currentPokemon) {
+  if (currentPokemon["sprites"]["other"]['dream_world'] && currentPokemon["sprites"]["other"]['dream_world']["front_default"]) {
+    return currentPokemon["sprites"]["other"]['dream_world']["front_default"];
+  } 
+  else if (currentPokemon["sprites"]["other"]['official-artwork'] && currentPokemon["sprites"]["other"]['official-artwork']["front_default"]) {
+    return currentPokemon["sprites"]["other"]['official-artwork']["front_default"];
+  }
+  return null;
 }
 
 function renderAllPokemons(t) {
   return `
   <div onclick="openPokemon(${t})" id="pokemonContainer${t}" class="pokedex">
+    <div class="imgCardContainerBG">
+      <img class="imgCardBG" src="img/pokemonBallBG.png">
+    </div>
     <div>
       <span id="pokemonID${t}"></span>
       <h1 id="pokemonName${t}"></h1>
@@ -61,15 +75,24 @@ async function openPokemon(t) {
 
 
 function renderPokemonInfoOpen(currentPokemon, t) {
+  const imageUrl = getPokemonImage(currentPokemon);
+  document.getElementById(`pokemonImage${t}Open`).src = imageUrl;
   if (currentPokemon["types"][1]) {
     document.getElementById(`pokemonTypesX${t}Open`).innerHTML += currentPokemon["types"][1]["type"]["name"];
   }
+  if (currentPokemon["abilities"][1]) {
+    document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][1]["ability"]["name"] + ", ";
+  }
+  if (currentPokemon["abilities"][2]) {
+    document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][2]["ability"]["name"] + ", ";
+  }
   document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
-  document.getElementById(`pokemonImage${t}Open`).src += currentPokemon["sprites"]["other"]['dream_world']["front_default"];
   document.getElementById(`pokemonID${t}Open`).innerHTML += "#" + currentPokemon["id"];
   document.getElementById(`pokemonName${t}Open`).innerHTML += currentPokemon["name"];
   document.getElementById(`weight${t}`).innerHTML += currentPokemon["weight"];
   document.getElementById(`height${t}`).innerHTML += currentPokemon["height"];
+  document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][0]["ability"]["name"];
+
   document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
   openDiagram(currentPokemon, t)
 }
@@ -81,10 +104,7 @@ function openDiagram(currentPokemon, t) {
   statHP3 = currentPokemon["stats"][3]['base_stat'];
   statHP4 = currentPokemon["stats"][4]['base_stat'];
   statHP5 = currentPokemon["stats"][5]['base_stat'];
-  
-  
   const ctx = document.getElementById('myChart');
-
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -127,6 +147,9 @@ function openDiagram(currentPokemon, t) {
 function openPokemonHTML(t) {
   return `
   <div class="pokemonContainerRE">
+  <div>
+  <button onclick="closeCard()">x</button>
+  </div>
     <div id="pokemonContainer${t}Open" class="pokedexCard">
       <div>
         <span id="pokemonID${t}Open"></span>
@@ -134,6 +157,7 @@ function openPokemonHTML(t) {
         <div class="positionWH">
           <span id="weight${t}">weight:</span> <span id="height${t}">size:</span>
         </div>
+        <span id="abilities${t}">Abilities: </span>
       <div class="infoContainerOpen">
         <img class="imgSize" id="pokemonImage${t}Open">
         <span style="color:black" id="pokemonTypes${t}Open"></span>
