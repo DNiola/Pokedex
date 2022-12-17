@@ -3,7 +3,7 @@ let currentPokemon;
 let currentAPI;
 
 function loadAPIs() {
-  for (let t = 640; t < 700; t++) {
+  for (let t = 1; t < 50; t++) {
     const url = `${APIs}${t}`;
     console.log(url);
     loadPokemon(url, t);
@@ -71,6 +71,22 @@ async function openPokemon(t) {
   pokeDexHTMLOpen.innerHTML = openPokemonHTML(t);
   renderPokemonInfoOpen(currentPokemon, t);
   setDesignOpenCard(currentPokemon, t)
+
+  // ... andere Code hier ...
+
+  // Ermittle die URL für die Evolutionskette des angegebenen Pokémon
+  const evolutionChainUrl = await getEvolutionChainUrl(currentPokemon);
+
+  // Verwende die URL, um die Evolutionskette des angegebenen Pokémon abzurufen
+  const evolutionChainResponse = await fetch(evolutionChainUrl);
+  const evolutionChain = await evolutionChainResponse.json();
+
+  // Ermittle die Namen der Pokémon in der Evolutionskette
+  const pokemonNames = evolutionChain.chain.evolves_to.map(evolution => evolution.species.name);
+
+  // Zeige die Namen der Pokémon in der Evolutionskette in der angegebenen `div` an
+  document.getElementById(`evolutionChain${t}`).innerHTML += pokemonNames.join(', ');
+
 }
 
 
@@ -89,7 +105,7 @@ function renderPokemonInfoOpen(currentPokemon, t) {
   document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
   document.getElementById(`pokemonID${t}Open`).innerHTML += "#" + currentPokemon["id"];
   document.getElementById(`pokemonName${t}Open`).innerHTML += currentPokemon["name"];
-  document.getElementById(`weight${t}`).innerHTML += currentPokemon["weight"];
+  document.getElementById(`weight${t}`).innerHTML += currentPokemon["weight"] + " kg";
   document.getElementById(`height${t}`).innerHTML += currentPokemon["height"];
   document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][0]["ability"]["name"];
 
@@ -166,7 +182,34 @@ function openPokemonHTML(t) {
       <div>
         <canvas id="myChart"></canvas>
       </div>
+      <div id=evolutionChain${t} ></div>
     </div>
   </div>
   `;
+}
+let pokemonName;
+async function getEvolutionChainUrl(currentPokemon) {
+  const currentPokemonID = currentPokemon['id']
+  try {
+    // Ermittle die URL für die Evolutionskette des angegebenen Pokémon
+    const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`);
+    const speciesData = await speciesResponse.json();
+    const evolutionChainUrl = speciesData.evolution_chain.url;
+    return evolutionChainUrl;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function renderEvolutionChain(evolutionChain) {
+  let html = '';
+  for (const evolution of evolutionChain) {
+    html += `
+      <div class="evolution">
+        <img src="${evolution.imageUrl}" alt="${evolution.name}">
+        <p>${evolution.name}</p>
+      </div>
+    `;
+  }
+  return html;
 }

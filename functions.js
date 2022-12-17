@@ -56,7 +56,7 @@ function setDesigns(t) {
       pokemonStyle.classList.add('designFlying')
     }
     else {
-      console.log('Hier fehlt der design')
+      console.log('Hier fehlt der design/Neues Pokemon Typ')
     }
   }
 
