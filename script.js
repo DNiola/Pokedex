@@ -1,6 +1,7 @@
 let APIs = "https://pokeapi.co/api/v2/pokemon/";
 let currentPokemon;
 let currentAPI;
+let pokemonName;
 
 function loadAPIs() {
   for (let t = 1; t < 50; t++) {
@@ -72,8 +73,6 @@ async function openPokemon(t) {
   renderPokemonInfoOpen(currentPokemon, t);
   setDesignOpenCard(currentPokemon, t)
 
-  // ... andere Code hier ...
-
   // Ermittle die URL für die Evolutionskette des angegebenen Pokémon
   const evolutionChainUrl = await getEvolutionChainUrl(currentPokemon);
 
@@ -103,12 +102,11 @@ function renderPokemonInfoOpen(currentPokemon, t) {
     document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][2]["ability"]["name"] + ", ";
   }
   document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
+  document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][0]["ability"]["name"];
   document.getElementById(`pokemonID${t}Open`).innerHTML += "#" + currentPokemon["id"];
   document.getElementById(`pokemonName${t}Open`).innerHTML += currentPokemon["name"];
   document.getElementById(`weight${t}`).innerHTML += currentPokemon["weight"] + " kg";
   document.getElementById(`height${t}`).innerHTML += currentPokemon["height"];
-  document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][0]["ability"]["name"];
-
   document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
   openDiagram(currentPokemon, t)
 }
@@ -187,7 +185,10 @@ function openPokemonHTML(t) {
   </div>
   `;
 }
-let pokemonName;
+
+function closeCard(){
+  document.getElementById('pokeDexHTMLOpen').classList.add('d-none')
+}
 async function getEvolutionChainUrl(currentPokemon) {
   const currentPokemonID = currentPokemon['id']
   try {
@@ -201,15 +202,4 @@ async function getEvolutionChainUrl(currentPokemon) {
   }
 }
 
-function renderEvolutionChain(evolutionChain) {
-  let html = '';
-  for (const evolution of evolutionChain) {
-    html += `
-      <div class="evolution">
-        <img src="${evolution.imageUrl}" alt="${evolution.name}">
-        <p>${evolution.name}</p>
-      </div>
-    `;
-  }
-  return html;
-}
+
