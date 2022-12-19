@@ -24,6 +24,7 @@ body {
   border-radius: 10px;
   height: 990px;
   border: 2px solid gray;
+  overflow-y: auto;
 }
 
 .pokedexBorder {
@@ -39,6 +40,10 @@ body {
   height: 100%;
   width: 100%;
   z-index: 1;
+}
+
+.pokemonPosiID{
+    display: flex;
 }
 
 .test {
@@ -115,6 +120,18 @@ body {
   justify-content: space-around;
 }
 
+.positionTypes {
+  display: flex;
+  justify-content: space-between;
+}
+.subInfoCounatiner{
+  margin-top: -72px;
+}
+.cardheader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .imgSize {
   height: 180px;
   width: 200px;
@@ -140,6 +157,10 @@ body {
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+}
+
+.evolutionSoloContainer{
+  justify-content: center !important;
 }
 
 .evolutionPokemonContainer {
