@@ -1,5 +1,8 @@
 function renderAllPokemons(t) {
   return `
+  
+    <div class="pokedexBG">
+    
     <div onclick="openPokemon(${t})" id="pokemonContainer${t}" class="pokedex">
       <div class="imgCardContainerBG">
         <img class="imgCardBG" src="img/pokemonBallBG.png">
@@ -13,38 +16,46 @@ function renderAllPokemons(t) {
         <span style="color:black" id="pokemonTypes${t}"></span>
         <span style="color:black" id="pokemonTypesX${t}"></span>;
       </div>
+    </div>
+    
     </div>`;
 }
   
-  function openPokemonHTML(t) {
-    return `
-    <div id="cardContainer" class="pokemonContainerRE roll-in-blurred-bottom">
-      <div class="test">
-        <div id="pokemonContainer${t}Open" class="pokedexCard">
-          <div>
+function openPokemonHTML(t) {
+  return `
+  <div id="cardContainer" class="pokemonContainerRE roll-in-blurred-bottom">
+    <div class="test">
+      <div id="pokemonContainer${t}Open" class="pokedexCard">
+        <div>
           <div class="cardheader">
-          <div><h3 class="pokemonPosiID" id="pokemonID${t}Open"></h3></div>
-          <div><h1 class="pokemonNamePosi" id="pokemonName${t}Open"></h1></div>
-          <div><button onclick="closeCard()">X</button></div>
-          </div>  
-       <div class="infoContainerPosi">
-       <div class="infoContainerOpen">  
-         <img class="imgSize" id="pokemonImage${t}Open">
-       </div> 
-       </div>
-       <div class="subInfoCounatiner">
-       <div class="positionTypes">
-       <b class="abilities" id="pokemonTypes${t}Open"></b>
-        <b class="abilities" id="pokemonTypesX${t}Open"></b>
+            <div>
+              <h3 class="pokemonPosiID" id="pokemonID${t}Open"></h3>
+            </div>
+            <div>
+              <h1 class="pokemonNamePosi" id="pokemonName${t}Open"></h1>
+            </div>
+            <div>
+              <button onclick="closeCard()">X</button>
+            </div>
           </div>
-      <div class="positionWH">
-          <b class="abilities" id="weight${t}">weight</b> 
-            <b class="abilities" id="height${t}">size</b>
-      </div>
-       <b class="abilities positionWH" id="abilities${t}">Abilities: </b>
-       </div>
-       </div>
-          <canvas style="background:black;" id="myChart"></canvas>
+          <div class="infoContainerPosi">
+            <div class="infoContainerOpen">
+              <img class="imgSize" id="pokemonImage${t}Open">
+            </div>
+          </div>
+          <div class="subInfoCounatiner">
+            <div class="positionTypes">
+              <b class="abilities" id="pokemonTypes${t}Open"></b>
+              <b class="abilities" id="pokemonTypesX${t}Open"></b>
+            </div>
+            <div class="positionWH">
+              <b class="abilities" id="weight${t}">weight</b>
+              <b class="abilities" id="height${t}">size</b>
+            </div>
+            <b class="abilities positionWH" id="abilities${t}">Abilities: </b>
+          </div>
+        </div>
+        <canvas style="background:black;" id="myChart"></canvas>
         <div class="evolutionContainer" id="evolutionContainer">
           <div class="evolutionPokemonContainer d-none" id=evolutionChain0${t}>
             <img class="evolutionIMG" id="evolutionChainIMG0${t}">
@@ -58,11 +69,17 @@ function renderAllPokemons(t) {
             <img class="evolutionIMG" id="evolutionChainIMG2${t}">
           </div>
         </div>
+        <div>
+        <div class="positionTypes">
+        <span class="abilities" id="moves${t}"><h3>moves:</h3></span>
+        </div>
+        </div>
       </div>
     </div>
-    </div>
-    `;
-  }
+  </div>
+  `;
+}
+
   
 
   function openDiagram(currentPokemon) {

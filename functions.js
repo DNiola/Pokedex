@@ -147,12 +147,9 @@ async function getFirstEvolutionImg(evolutionChain, t) {
   const evoURL1 = evolutionChain["chain"]["species"]["url"];
   const evoResponse1 = await fetch(evoURL1);
   const evoTest = await evoResponse1.json();
-  console.log(evoTest);
   const API = APIs + evoTest["id"];
-  console.log(API);
   let response = await fetch(API);
   const currentPokemon = await response.json();
-  console.log("First Evolution:", currentPokemon);
   const evoIMG0 = getPokemonImage(currentPokemon);
   
   document.getElementById(`evolutionChain0${t}`).classList.remove('d-none')
@@ -166,12 +163,9 @@ async function getSecondEvolutionImg(evolutionChain, t) {
   const evoURL1 = evolutionChain["chain"]["evolves_to"][0]["species"]["url"];
   const evoResponse1 = await fetch(evoURL1);
   const evoTest = await evoResponse1.json();
-  console.log(evoTest);
   const API = APIs + evoTest["id"];
-  console.log(API);
   let response = await fetch(API);
   const currentPokemon = await response.json();
-  console.log("Second Evolution:", currentPokemon);
   const evoIMG1 = getPokemonImage(currentPokemon);
   
   document.getElementById(`evolutionChain1${t}`).classList.remove('d-none')
@@ -184,12 +178,9 @@ async function getLastEvolutionImg(evolutionChain, t) {
   const evoURL1 = evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["url"];
   const evoResponse1 = await fetch(evoURL1);
   const evoTest = await evoResponse1.json();
-  console.log(evoTest);
   const API = APIs + evoTest["id"];
-  console.log(API);
   let response = await fetch(API);
   const currentPokemon = await response.json();
-  console.log("Last Evolution:", currentPokemon);
   const evoIMG2 = getPokemonImage(currentPokemon);
   document.getElementById(`evolutionChain2${t}`).classList.remove('d-none')
   document.getElementById(`evolutionChainIMG2${t}`).src = evoIMG2;
@@ -209,6 +200,11 @@ function setCurrentPokemonInfo(currentPokemon, t) {
   document.getElementById(`height${t}`).innerHTML += "<br> " + sizeInMeters + "m";
   document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
   document.getElementById('backgroundCard').classList.remove('d-none')
+for (let m = 0; m < currentPokemon['moves'].length; m++) {
+  
+  document.getElementById(`moves${t}`).innerHTML +=  currentPokemon['moves'][`${m}`]['move']['name'] + ", "
+}
+
 }
 
 

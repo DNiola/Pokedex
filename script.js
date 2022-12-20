@@ -5,7 +5,7 @@ let pokemonName;
 
 
 function loadAPIs() {
-  for (let t = 1; t < 50; t++) {
+  for (let t = 10; t < 100; t++) {
     const url = `${APIs}${t}`;
     console.log(url);
     loadPokemon(url, t);
@@ -62,7 +62,8 @@ async function getEvolutionChainUrl(currentPokemon) {
   try {
     const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`);
     const speciesData = await speciesResponse.json();
-    const evolutionChainUrl = speciesData.evolution_chain.url;
+    const evolutionChainUrl = speciesData['evolution_chain']['url'];
+    console.log(evolutionChainUrl);
     return evolutionChainUrl;
   } catch (error) {
     console.error(error);
@@ -77,10 +78,8 @@ async function getCurrentEvolutionChain(currentPokemon, t) {
   for (const evolution of evolutionChain.chain.evolves_to) {
     const requiredExperience = evolution['evolution_details'][0]['min_level'];
     const requiredExperiencee = evolution['evolves_to'][0]['evolution_details'][0]['min_level']
-    console.log(`Die benötigte Erfahrung für diese Evolution beträgt ${requiredExperiencee}`);
-    document.getElementById(`experiencePoints${t}`).innerHTML = "LVL Up" + requiredExperience
-    document.getElementById(`experiencePointsX${t}`).innerHTML = "LVL Up" + requiredExperiencee
-    
+    document.getElementById(`experiencePoints${t}`).innerHTML = "need LVL " + requiredExperience;
+    document.getElementById(`experiencePointsX${t}`).innerHTML = "need LVL " + requiredExperiencee;
   }
   proofAndSetCurrentEvolutionPokemonName(evolutionChain, t)
 }
