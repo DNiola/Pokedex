@@ -4,12 +4,14 @@ let currentAPI;
 let pokemonName;
 let NumberOfUrl = ["0"];
 
- function loadAPIs() {
-  for (let t = 1; t < 10; t++) {
+ async function loadAPIs() {
+  const pokemonCountFrom = document.getElementById('pokemon-count-from').value;
+  const pokemonCountTo = document.getElementById('pokemon-count-to').value;
+  for (let t = pokemonCountFrom; t < pokemonCountTo; t++) {
     const url = `${APIs}${t}`;
     NumberOfUrl.push(url);
     console.log(url);
-    loadPokemon(url, t);
+    await loadPokemon(url, t)
   }
 }
 

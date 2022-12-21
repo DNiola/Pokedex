@@ -32,6 +32,11 @@
     <div class="inputCountainer">
         <input id="search" onchange="getSearch()" type="text" class="inputCss" autocomplete="off" maxlength="20" minlength="2" placeholder="Pokemon suchen...">
     </div>
+    <div>
+        <label for="pokemon-count">Anzahl der Pokemon:</label>
+            <input id="pokemon-count-from" type="number" value="1" onchange="loadAPIs()">
+            <input id="pokemon-count-to" type="number" value="50" onchange="loadAPIs()">
+    </div>
     <div class="menuPosi">
         <button>INFO</button>
     </div>
