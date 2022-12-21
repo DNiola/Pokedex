@@ -5,6 +5,24 @@ body {
   background-image: url("img/pokeballSideBG.jpg");
 }
 
+.headerContainer {
+  display: flex;
+  height: 70px;
+  background-color: #0a106f;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoPosi{
+  display: flex;
+  padding: 10px;
+  padding-left: 5%;
+}
+.menuPosi{
+  display: flex;
+  padding: 10px;
+  padding-right: 5%;
+}
 .pokedex {
   display: flex;
   position: relative;
@@ -28,11 +46,13 @@ body {
   border: 2px solid gray;
   overflow-y: scroll;
 }
+
 .pokedexBG {
   padding-left: 9px;
   padding-right: 9px;
   background-color: #000221;
 }
+
 .pokedexBorder {
   padding: 1px;
   border-radius: 13px;
@@ -103,7 +123,8 @@ body {
 
 .infoContainerPosi {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -191,12 +212,19 @@ body {
   justify-content: center;
 }
 
-.rightSideImgContainer {
+.inputCss {
+  height: 34px;
+  width: 250px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  background: rgb(245, 245, 245)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
+    no-repeat 8px center;
+  padding-left: 26px;
+  outline: none;
+  border-color: #0000001e;
 }
-.leftSideIMG {
-}
-.rightSideIMG {
-}
+
 .d-none {
   display: none;
 }
@@ -328,4 +356,52 @@ body {
     transform: translateY(-1000px);
     opacity: 0;
   }
+}
+
+table.blueTable {
+  border: 1px solid #1C6EA4;
+  background-color: #EEEEEE;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.blueTable td, table.blueTable th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+table.blueTable tbody td {
+  font-size: 13px;
+}
+table.blueTable tr:nth-child(even) {
+  background: #D0E4F5;
+}
+table.blueTable thead {
+  background: #1C6EA4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  border-bottom: 2px solid #444444;
+}
+table.blueTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  border-left: 2px solid #D0E4F5;
+}
+table.blueTable thead th:first-child {
+  border-left: none;
+}
+
+table.blueTable tfoot td {
+  font-size: 14px;
+}
+table.blueTable tfoot .links {
+  text-align: right;
+}
+table.blueTable tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
 }

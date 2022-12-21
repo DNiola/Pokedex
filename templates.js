@@ -1,3 +1,26 @@
+function renderSearchPokemons(t) {
+  return `
+  
+    <div class="pokedexBG">
+    
+    <div onclick="openPokemon(${t})" id="pokemonContainer${t}" class="pokedex">
+      <div class="imgCardContainerBG">
+        <img class="imgCardBG" src="img/pokemonBallBG.png">
+      </div>
+      <div>
+        <span id="pokemonID${t}"></span>
+        <h1 id="pokemonName${t}"></h1>
+      </div>
+      <div class="infoContainer">
+        <img class="imgSize" id="pokemonImage${t}">
+        <span style="color:black" id="pokemonTypes${t}"></span>
+        <span style="color:black" id="pokemonTypesX${t}"></span>;
+      </div>
+    </div>
+    
+    </div>`;
+}
+
 function renderAllPokemons(t) {
   return `
   
@@ -39,8 +62,14 @@ function openPokemonHTML(t) {
             </div>
           </div>
           <div class="infoContainerPosi">
+          <div>
+            <button onclick="lastPokemon(${[t,]})"><</button>
+          </div>
             <div class="infoContainerOpen">
               <img class="imgSize" id="pokemonImage${t}Open">
+            </div>
+            <div>   
+            <button onclick="nextPokemon(${[t,]})">></button>
             </div>
           </div>
           <div class="subInfoCounatiner">
@@ -60,16 +89,34 @@ function openPokemonHTML(t) {
           <div class="evolutionPokemonContainer d-none" id=evolutionChain0${t}>
             <img class="evolutionIMG" id="evolutionChainIMG0${t}">
           </div>
-          <span id="experiencePoints${t}"></span>
           <div class="evolutionPokemonContainer d-none" id=evolutionChain1${t}>
             <img class="evolutionIMG" id="evolutionChainIMG1${t}">
           </div>
-          <span id="experiencePointsX${t}"></span>
           <div class="evolutionPokemonContainer d-none" id="evolutionChain2${t}">
             <img class="evolutionIMG" id="evolutionChainIMG2${t}">
           </div>
         </div>
         <div>
+        <table class="blueTable">
+<thead>
+<tr>
+<th>Growth Rate</th>
+<th>Capture Rate</th>
+<th>Egg Group</th>
+<th>Generation</th>
+<th>Habitat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td id="growthRate${t}"></td>
+<td id="captureRate${t}"></td>
+<td id="eggGroup${t}"></td>
+<td id="generation${t}"></td>
+<td id="habitat${t}"></td>
+</tr>
+</tbody>
+</table>
         <div class="positionTypes">
         <span class="abilities" id="moves${t}"><h3>moves:</h3></span>
         </div>
