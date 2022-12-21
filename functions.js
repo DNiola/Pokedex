@@ -281,7 +281,7 @@ async function filterPosts(searchIt) {
     let pokemonName = pokemon["name"];
     let pokemonID = pokemon["id"]
     if (pokemonName.toLocaleLowerCase().includes(searchIt)||
-    pokemonID.toLocaleLowerCase().includes(searchIt)
+    pokemonID.toString().includes(searchIt)
     ) {
       loadPokemon(url, t)
     } 
