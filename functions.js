@@ -1,8 +1,8 @@
 function proofAndSetCurrentPokemonTypes(currentPokemon, t) {
-  document.getElementById(`pokemonTypes${t}`).innerHTML +=
+  document.getElementById(`pokemonTypes${t}`).innerHTML =
     currentPokemon["types"][0]["type"]["name"];
   if (currentPokemon["types"][1]) {
-    document.getElementById(`pokemonTypesX${t}`).innerHTML +=
+    document.getElementById(`pokemonTypesX${t}`).innerHTML =
       currentPokemon["types"][1]["type"]["name"];
   }
 }

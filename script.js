@@ -34,10 +34,8 @@ async function loadPokemon(url, t) {
 function renderPokemonInfo(currentPokemon, t) {
   const imageUrl = getPokemonImage(currentPokemon);
   document.getElementById(`pokemonImage${t}`).src = imageUrl;
-  document.getElementById(`pokemonID${t}`).innerHTML +=
-    "#" + currentPokemon["id"];
-  document.getElementById(`pokemonName${t}`).innerHTML +=
-    currentPokemon["name"];
+  document.getElementById(`pokemonID${t}`).innerHTML = "#" + currentPokemon["id"];
+  document.getElementById(`pokemonName${t}`).innerHTML = currentPokemon["name"];
 }
 
 async function openPokemon(t) {
