@@ -3,27 +3,15 @@ let currentPokemon;
 let currentAPI;
 let pokemonName;
 let NumberOfUrl = ["0"];
-let countNumberFrom = [];
-let countNumberTo = [];
 
 
 
-async function loadAPIs() {
-  loadInputValues();
-  if (countNumberFrom == "") {
+async function loadAPIs()  {
     for (let t = 1; t < 10; t++) {
       const url = `${APIs}${t}`;
       NumberOfUrl.push(url);
       console.log(url);
       await loadPokemon(url, t);
-    }
-  } else{
-    for (let t = countNumberFrom; t < countNumberTo; t++) {
-      const url = `${APIs}${t}`;
-      NumberOfUrl.push(url);
-      console.log(url);
-      await loadPokemon(url, t);
-    }
   }
 }
 

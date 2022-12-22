@@ -240,29 +240,3 @@ function setHatchCounter(speciesData, t){
 
 
 
-
-function saveInputValues() {
-  let pokemonCountFrom = document.getElementById('pokemon-count-from').value;
-  let pokemonCountTo = document.getElementById('pokemon-count-to').value;
-
-  let pokemonCountFromAsText = JSON.stringify(pokemonCountFrom);
-  let pokemonCountToAsText = JSON.stringify(pokemonCountTo);
-
-  localStorage.setItem("Count_from:", pokemonCountFromAsText);
-  localStorage.setItem("Count_to:", pokemonCountToAsText);
-}
-
-
-function loadInputValues() {
-  let pokemonCountFromAsText = localStorage.getItem("Count_from:");
-  let pokemonCountToAsText = localStorage.getItem("Count_to:");
-
-  if (pokemonCountFromAsText && pokemonCountToAsText) {
-    let pokemonCountFrom = JSON.parse(pokemonCountFromAsText);
-    let pokemonCountTo = JSON.parse(pokemonCountToAsText);
-
-    document.getElementById('pokemon-count-from').value = pokemonCountFrom;
-    document.getElementById('pokemon-count-to').value = pokemonCountTo;
-  }
-}
-
