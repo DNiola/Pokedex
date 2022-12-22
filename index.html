@@ -13,13 +13,14 @@
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
     <script src="templates.js"></script>
+    <script src="infosFrom.js"></script>
     <script src="functions.js"></script>
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Pokédex</title>
 </head>
 
-<body onload="loadAPIs()">
+<body onload="loadAPIs(), countFromTo()">
 <div class="headerContainer">   
     <div class="logoPosi">
         <div>
@@ -34,8 +35,9 @@
     </div>
     <div>
         <label for="pokemon-count">Anzahl der Pokemon:</label>
-            <input id="pokemon-count-from" type="number" value="1" onchange="loadAPIs()">
-            <input id="pokemon-count-to" type="number" value="50" onchange="loadAPIs()">
+            <input id="pokemon-count-from" type="number" value="1">
+            <input id="pokemon-count-to" type="number" value="5">
+            <button onclick="countFromTo()">Count!</button>
     </div>
     <div class="menuPosi">
         <button>INFO</button>

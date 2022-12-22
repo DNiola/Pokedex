@@ -152,85 +152,7 @@ function proofAndSetPokemonTypAndAbilities(currentPokemon, t) {
   }
 }
 
-async function getFirstEvolutionImg(evolutionChain, t) {
-  const evoURL1 = evolutionChain["chain"]["species"]["url"];
-  const evoResponse1 = await fetch(evoURL1);
-  const evoTest = await evoResponse1.json();
-  const API = APIs + evoTest["id"];
-  let response = await fetch(API);
-  const currentPokemon = await response.json();
-  const evoIMG0 = getPokemonImage(currentPokemon);
-  document.getElementById(`evolutionChain0${t}`).classList.remove("d-none");
-  document
-    .getElementById(`evolutionContainer`)
-    .classList.add("evolutionSoloContainer");
-  document.getElementById(`evolutionChainIMG0${t}`).src = evoIMG0;
-  return;
-}
 
-async function getSecondEvolutionImg(evolutionChain, t) {
-  const evoURL1 = evolutionChain["chain"]["evolves_to"][0]["species"]["url"];
-  const evoResponse1 = await fetch(evoURL1);
-  const evoTest = await evoResponse1.json();
-  const API = APIs + evoTest["id"];
-  let response = await fetch(API);
-  const currentPokemon = await response.json();
-  const evoIMG1 = getPokemonImage(currentPokemon);
-  document.getElementById(`evolutionChain1${t}`).classList.remove("d-none");
-  document.getElementById(`evolutionChainIMG1${t}`).src = evoIMG1;
-  return;
-}
-
-async function getLastEvolutionImg(evolutionChain, t) {
-  const evoURL1 =
-    evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["url"];
-  const evoResponse1 = await fetch(evoURL1);
-  const evoTest = await evoResponse1.json();
-  const API = APIs + evoTest["id"];
-  let response = await fetch(API);
-  const currentPokemon = await response.json();
-  const evoIMG2 = getPokemonImage(currentPokemon);
-  document.getElementById(`evolutionChain2${t}`).classList.remove("d-none");
-  document.getElementById(`evolutionChainIMG2${t}`).src = evoIMG2;
-  return;
-}
-
-function setCurrentPokemonInfo(currentPokemon, t) {
-  const sizeInMeters = currentPokemon["height"] / 10;
-  const imageUrl = getPokemonImage(currentPokemon);
-  document.getElementById(`pokemonImage${t}Open`).src = imageUrl;
-  document.getElementById(`pokemonTypes${t}Open`).innerHTML +=
-    currentPokemon["types"][0]["type"]["name"];
-  document.getElementById(`abilities${t}`).innerHTML +=
-    currentPokemon["abilities"][0]["ability"]["name"];
-  document.getElementById(`pokemonID${t}Open`).innerHTML +=
-    "#" + currentPokemon["id"];
-  document.getElementById(`pokemonName${t}Open`).innerHTML +=
-    currentPokemon["name"];
-  document.getElementById(`weight${t}`).innerHTML +=
-    "<br> " + currentPokemon["weight"] + " kg";
-  document.getElementById(`height${t}`).innerHTML +=
-    "<br> " + sizeInMeters + "m";
-  document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
-  document.getElementById("backgroundCard").classList.remove("d-none");
-  for (let m = 0; m < currentPokemon["moves"].length; m++) {
-    document.getElementById(`moves${t}`).innerHTML +=
-      currentPokemon["moves"][`${m}`]["move"]["name"] + ", ";
-  }
-}
-
-function setRestOfPokemonSubInfo(speciesData, t) {
-  document.getElementById(`growthRate${t}`).innerHTML =
-    speciesData["growth_rate"]["name"];
-  document.getElementById(`captureRate${t}`).innerHTML =
-    speciesData["capture_rate"];
-  document.getElementById(`eggGroup${t}`).innerHTML =
-    speciesData["egg_groups"][0]["name"];
-  document.getElementById(`generation${t}`).innerHTML =
-    speciesData["generation"]["name"];
-  document.getElementById(`habitat${t}`).innerHTML =
-    speciesData["habitat"]["name"];
-}
 
 function closeCard() {
   document
@@ -267,10 +189,10 @@ function lastPokemon(t) {
 function getSearch() {
   let search = document.getElementById("search").value;
   search = search.toLowerCase();
-  filterPosts(search);
+  filterPokemons(search);
 }
 
-async function filterPosts(searchIt) {
+async function filterPokemons(searchIt) {
   let searchContainer = document.getElementById("pokeDexHTML");
   searchContainer.innerHTML = "";
   for (let t = 1; t < NumberOfUrl.length; t++) {
@@ -291,3 +213,54 @@ async function proofURL(url) {
   pokemonIs = await response.json();
   return pokemonIs;
 }
+
+
+function setGenderRate(speciesData, t) {
+  const { maleRate, femaleRate } = extractGenderRates(speciesData);
+  document.getElementById(`genderRate${t}`).innerHTML += (maleRate * 100).toFixed(2) + "%<br>" ;
+  document.getElementById(`genderRate${t}`).innerHTML += (femaleRate * 100).toFixed(2) + "%";
+}
+
+
+
+function setCaptureRate(speciesData, t){
+const { captureRate, captureRateInPercent } = extractCaptureRates(speciesData);
+console.log(captureRate, captureRateInPercent );
+document.getElementById(`captureRate${t}`).innerHTML += (captureRateInPercent * 1).toFixed(2) + "%<br>" ;
+document.getElementById(`captureRate${t}`).innerHTML += (captureRate);
+}
+
+function setHatchCounter(speciesData, t){
+  let steps = calculateSteps(speciesData);
+  document.getElementById(`hatchCounter${t}`).innerHTML = "Count: " + speciesData["hatch_counter"] + "<br>";
+  document.getElementById(`hatchCounter${t}`).innerHTML += "Steps: " + (steps);
+  }
+
+
+
+
+function saveInputValues() {
+  let pokemonCountFrom = document.getElementById('pokemon-count-from').value;
+  let pokemonCountTo = document.getElementById('pokemon-count-to').value;
+
+  let pokemonCountFromAsText = JSON.stringify(pokemonCountFrom);
+  let pokemonCountToAsText = JSON.stringify(pokemonCountTo);
+
+  localStorage.setItem("Count_from:", pokemonCountFromAsText);
+  localStorage.setItem("Count_to:", pokemonCountToAsText);
+}
+
+
+function loadInputValues() {
+  let pokemonCountFromAsText = localStorage.getItem("Count_from:");
+  let pokemonCountToAsText = localStorage.getItem("Count_to:");
+
+  if (pokemonCountFromAsText && pokemonCountToAsText) {
+    let pokemonCountFrom = JSON.parse(pokemonCountFromAsText);
+    let pokemonCountTo = JSON.parse(pokemonCountToAsText);
+
+    document.getElementById('pokemon-count-from').value = pokemonCountFrom;
+    document.getElementById('pokemon-count-to').value = pokemonCountTo;
+  }
+}
+

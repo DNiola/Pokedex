@@ -1,4 +1,33 @@
+
+function renderInputValues(pokemonCountFrom, pokemonCountTo) {
+  return`
+ 
+  `
+}
+
 function renderSearchPokemons(t) {
+  return `
+  
+    <div class="pokedexBG">
+    
+    <div onclick="openPokemon(${t})" id="pokemonContainer${t}" class="pokedex">
+      <div class="imgCardContainerBG">
+        <img class="imgCardBG" src="img/pokemonBallBG.png">
+      </div>
+      <div>
+        <span id="pokemonID${t}"></span>
+        <h1 id="pokemonName${t}"></h1>
+      </div>
+      <div class="infoContainer">
+        <img class="imgSize" id="pokemonImage${t}">
+        <span style="color:black" id="pokemonTypes${t}"></span>
+        <span style="color:black" id="pokemonTypesX${t}"></span>;
+      </div>
+    </div>
+    
+    </div>`;
+}
+function renderCountsPokemons(t) {
   return `
   
     <div class="pokedexBG">
@@ -23,9 +52,7 @@ function renderSearchPokemons(t) {
 
 function renderAllPokemons(t) {
   return `
-  
     <div class="pokedexBG">
-    
     <div onclick="openPokemon(${t})" id="pokemonContainer${t}" class="pokedex">
       <div class="imgCardContainerBG">
         <img class="imgCardBG" src="img/pokemonBallBG.png">
@@ -100,19 +127,25 @@ function openPokemonHTML(t) {
         <table class="blueTable">
 <thead>
 <tr>
-<th>Growth Rate</th>
-<th>Capture Rate</th>
-<th>Egg Group</th>
+<th>Happiness</th>
 <th>Generation</th>
+<th>Gender Rate</th>
+<th>Capture Rate</th>
+<th>Growth Rate</th>
+<th>Egg Group</th>
+<th>Hatch Counter</th>
 <th>Habitat</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td id="growthRate${t}"></td>
-<td id="captureRate${t}"></td>
-<td id="eggGroup${t}"></td>
+<td id="happiness${t}"></td>
 <td id="generation${t}"></td>
+<td id="genderRate${t}"></td>
+<td id="captureRate${t}"></td>
+<td id="growthRate${t}"></td>
+<td id="eggGroup${t}"></td>
+<td id="hatchCounter${t}"></td>
 <td id="habitat${t}"></td>
 </tr>
 </tbody>
