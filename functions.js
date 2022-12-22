@@ -217,8 +217,9 @@ async function proofURL(url) {
 
 function setGenderRate(speciesData, t) {
   const { maleRate, femaleRate } = extractGenderRates(speciesData);
-  document.getElementById(`genderRate${t}`).innerHTML += (maleRate * 100).toFixed(2) + "%<br>" ;
-  document.getElementById(`genderRate${t}`).innerHTML += (femaleRate * 100).toFixed(2) + "%";
+  document.getElementById(`genderRate${t}`).innerHTML += speciesData['gender_rate'];
+  document.getElementById(`maleRate${t}`).innerHTML += "" + (maleRate * 100).toFixed(2) + "%";
+  document.getElementById(`femaleRate${t}`).innerHTML += "" + (femaleRate * 100).toFixed(2) + "%";
 }
 
 
@@ -226,8 +227,9 @@ function setGenderRate(speciesData, t) {
 function setCaptureRate(speciesData, t){
 const { captureRate, captureRateInPercent } = extractCaptureRates(speciesData);
 console.log(captureRate, captureRateInPercent );
-document.getElementById(`captureRate${t}`).innerHTML += (captureRateInPercent * 1).toFixed(2) + "%<br>" ;
-document.getElementById(`captureRate${t}`).innerHTML += (captureRate);
+document.getElementById(`captureRate${t}`).innerHTML += "Rate: " + captureRate + "<br>"
+document.getElementById(`captureRate${t}`).innerHTML += (captureRateInPercent * 1).toFixed(2) + "%"
+
 }
 
 function setHatchCounter(speciesData, t){

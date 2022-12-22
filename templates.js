@@ -1,10 +1,4 @@
 
-function renderInputValues(pokemonCountFrom, pokemonCountTo) {
-  return`
- 
-  `
-}
-
 function renderSearchPokemons(t) {
   return `
   
@@ -70,7 +64,7 @@ function renderAllPokemons(t) {
     
     </div>`;
 }
-  
+
 function openPokemonHTML(t) {
   return `
   <div id="cardContainer" class="pokemonContainerRE roll-in-blurred-bottom">
@@ -90,13 +84,13 @@ function openPokemonHTML(t) {
           </div>
           <div class="infoContainerPosi">
           <div>
-            <button onclick="lastPokemon(${[t,]})"><</button>
+            <button onclick="lastPokemon(${[t]})"><</button>
           </div>
             <div class="infoContainerOpen">
               <img class="imgSize" id="pokemonImage${t}Open">
             </div>
             <div>   
-            <button onclick="nextPokemon(${[t,]})">></button>
+            <button onclick="nextPokemon(${[t]})">></button>
             </div>
           </div>
           <div class="subInfoCounatiner">
@@ -111,19 +105,7 @@ function openPokemonHTML(t) {
             <b class="abilities positionWH" id="abilities${t}">Abilities: </b>
           </div>
         </div>
-        <canvas style="background:black;" id="myChart"></canvas>
-        <div class="evolutionContainer" id="evolutionContainer">
-          <div class="evolutionPokemonContainer d-none" id=evolutionChain0${t}>
-            <img class="evolutionIMG" id="evolutionChainIMG0${t}">
-          </div>
-          <div class="evolutionPokemonContainer d-none" id=evolutionChain1${t}>
-            <img class="evolutionIMG" id="evolutionChainIMG1${t}">
-          </div>
-          <div class="evolutionPokemonContainer d-none" id="evolutionChain2${t}">
-            <img class="evolutionIMG" id="evolutionChainIMG2${t}">
-          </div>
-        </div>
-        <div>
+
         <table class="blueTable">
 <thead>
 <tr>
@@ -141,7 +123,17 @@ function openPokemonHTML(t) {
 <tr>
 <td id="happiness${t}"></td>
 <td id="generation${t}"></td>
-<td id="genderRate${t}"></td>
+<td > 
+<div class="genderSingleRate">
+<span id="genderRate${t}"></span>
+</div>
+  <div class="genderContainer">
+  <img class="genderMaleIMG" src="img/male.png">
+  <span id="maleRate${t}"></span>
+  <img class="genderIMG" src="img/female.png">
+  <span id="femaleRate${t}"></span>
+  </div>
+</td>
 <td id="captureRate${t}"></td>
 <td id="growthRate${t}"></td>
 <td id="eggGroup${t}"></td>
@@ -150,6 +142,25 @@ function openPokemonHTML(t) {
 </tr>
 </tbody>
 </table>
+
+        <canvas style="background:black; border: 1px solid;" id="myChart"></canvas>
+
+
+        <div class="evolutionContainer" id="evolutionContainer">
+          <div class="evolutionPokemonContainer d-none" id=evolutionChain0${t}>
+            <img class="evolutionIMG" id="evolutionChainIMG0${t}">
+          </div>
+          <div class="evolutionPokemonContainer d-none" id=evolutionChain1${t}>
+            <img class="evolutionIMG" id="evolutionChainIMG1${t}">
+          </div>
+          <div class="evolutionPokemonContainer d-none" id="evolutionChain2${t}">
+            <img class="evolutionIMG" id="evolutionChainIMG2${t}">
+          </div>
+        </div>
+        <div>
+
+
+
         <div class="positionTypes">
         <span class="abilities" id="moves${t}"><h3>moves:</h3></span>
         </div>
@@ -160,53 +171,51 @@ function openPokemonHTML(t) {
   `;
 }
 
-  
-
-  function openDiagram(currentPokemon) {
-    statHP = currentPokemon["stats"][0]["base_stat"];
-    statHP1 = currentPokemon["stats"][1]["base_stat"];
-    statHP2 = currentPokemon["stats"][2]["base_stat"];
-    statHP3 = currentPokemon["stats"][3]["base_stat"];
-    statHP4 = currentPokemon["stats"][4]["base_stat"];
-    statHP5 = currentPokemon["stats"][5]["base_stat"];
-    const ctx = document.getElementById("myChart");
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["HP", "ATK", "DEF", "S.ATK", "S.DEF", "SPEED"],
-        datasets: [
-          {
-            label: "Stats:",
-            data: [statHP, statHP1, statHP2, statHP3, statHP4, statHP5],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.7)",
-              "rgba(255, 159, 64, 0.7)",
-              "rgba(255, 205, 86, 0.7)",
-              "rgba(75, 192, 192, 0.7)",
-              "rgba(54, 162, 235, 0.7)",
-              "rgba(153, 102, 255, 0.7)",
-              "rgba(201, 203, 207, 0.7)",
-            ],
-            borderColor: [
-              "rgb(255, 99, 132)",
-              "rgb(255, 159, 64)",
-              "rgb(255, 205, 86)",
-              "rgb(75, 192, 192)",
-              "rgb(54, 162, 235)",
-              "rgb(153, 102, 255)",
-              "rgb(201, 203, 207)",
-            ],
-            borderWidth: 10,
-          },
-        ],
-      },
-      options: {
-        indexAxis: "y",
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
+function openDiagram(currentPokemon) {
+  statHP = currentPokemon["stats"][0]["base_stat"];
+  statHP1 = currentPokemon["stats"][1]["base_stat"];
+  statHP2 = currentPokemon["stats"][2]["base_stat"];
+  statHP3 = currentPokemon["stats"][3]["base_stat"];
+  statHP4 = currentPokemon["stats"][4]["base_stat"];
+  statHP5 = currentPokemon["stats"][5]["base_stat"];
+  const ctx = document.getElementById("myChart");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["HP", "ATK", "DEF", "S.ATK", "S.DEF", "SPEED"],
+      datasets: [
+        {
+          label: "Stats:",
+          data: [statHP, statHP1, statHP2, statHP3, statHP4, statHP5],
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.7)",
+            "rgba(255, 159, 64, 0.7)",
+            "rgba(255, 205, 86, 0.7)",
+            "rgba(75, 192, 192, 0.7)",
+            "rgba(54, 162, 235, 0.7)",
+            "rgba(153, 102, 255, 0.7)",
+            "rgba(201, 203, 207, 0.7)",
+          ],
+          borderColor: [
+            "rgb(255, 99, 132)",
+            "rgb(255, 159, 64)",
+            "rgb(255, 205, 86)",
+            "rgb(75, 192, 192)",
+            "rgb(54, 162, 235)",
+            "rgb(153, 102, 255)",
+            "rgb(201, 203, 207)",
+          ],
+          borderWidth: 10,
+        },
+      ],
+    },
+    options: {
+      indexAxis: "y",
+      scales: {
+        y: {
+          beginAtZero: true,
         },
       },
-    });
-  }
+    },
+  });
+}

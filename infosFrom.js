@@ -23,8 +23,8 @@ function calculateSteps(speciesData) {
   }
 
   function extractGenderRates(speciesData) {
-    const maleRate = speciesData['gender_rate'] / 8;
-    const femaleRate = (8 - speciesData['gender_rate']) / 8;
+    const femaleRate = speciesData['gender_rate'] / 8;
+    const maleRate = (8 - speciesData['gender_rate']) / 8;
     return { maleRate, femaleRate };
   }
 

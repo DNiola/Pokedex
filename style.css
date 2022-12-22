@@ -198,7 +198,7 @@ body {
 }
 
 .evolutionSoloContainer {
-  justify-content: center !important;
+  justify-content: center;
 }
 
 .evolutionPokemonContainer {
@@ -224,7 +224,23 @@ body {
   outline: none;
   border-color: #0000001e;
 }
+.genderContainer {
+  display: flex;
+  align-items: center;
+}
+.genderIMG{
+  height: 20px;
+}
 
+.genderMaleIMG{
+  height: 17px;
+}
+
+.genderSingleRate {
+  border-bottom: 1px solid white;
+  display: flex;
+  justify-content: center;
+}
 .d-none {
   display: none;
 }
@@ -367,6 +383,7 @@ table.blueTable {
 }
 table.blueTable td, table.blueTable th {
   border: 1px solid #ffffff;
+  border-bottom: black;
   padding: 3px 2px;
 }
 table.blueTable tbody td {

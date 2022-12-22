@@ -3,20 +3,27 @@ let currentPokemon;
 let currentAPI;
 let pokemonName;
 let NumberOfUrl = ["0"];
+let countNumberFrom = [];
+let countNumberTo = [];
 
-function countFromTo() {
-  let pokemonCountFrom = document.getElementById("pokemon-count-from").value;
-  let pokemonCountTo = document.getElementById("pokemon-count-to").value;
-  saveInputValues(pokemonCountFrom, pokemonCountTo)
-  loadAPIs(pokemonCountFrom, pokemonCountTo);
-}
 
-async function loadAPIs(pokemonCountFrom, pokemonCountTo) {
-  for (let t = pokemonCountFrom; t < pokemonCountTo; t++) {
-    const url = `${APIs}${t}`;
-    NumberOfUrl.push(url);
-    console.log(url);
-    await loadPokemon(url, t);
+
+async function loadAPIs() {
+  loadInputValues();
+  if (countNumberFrom == "") {
+    for (let t = 1; t < 10; t++) {
+      const url = `${APIs}${t}`;
+      NumberOfUrl.push(url);
+      console.log(url);
+      await loadPokemon(url, t);
+    }
+  } else{
+    for (let t = countNumberFrom; t < countNumberTo; t++) {
+      const url = `${APIs}${t}`;
+      NumberOfUrl.push(url);
+      console.log(url);
+      await loadPokemon(url, t);
+    }
   }
 }
 
@@ -25,11 +32,10 @@ async function loadPokemon(url, t) {
   currentPokemon = await response.json();
   console.log("Pokemon:", currentPokemon);
   pokemonFilter(currentPokemon, t);
-  
 }
 
 function pokemonFilter(currentPokemon, t) {
-  pokeDexHTML.innerHTML += renderCountsPokemons(t);
+  pokeDexHTML.innerHTML += renderAllPokemons(t);
   renderPokemonInfo(currentPokemon, t);
   proofDesigns(currentPokemon, t);
   proofAndSetCurrentPokemonTypes(currentPokemon, t);
@@ -94,6 +100,3 @@ async function getCurrentEvolutionChain(currentPokemon, t) {
   const evolutionChain = await evolutionChainResponse.json();
   proofAndSetCurrentEvolutionPokemonName(evolutionChain, t);
 }
-
-
-
