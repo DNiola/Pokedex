@@ -2,23 +2,24 @@
 async function countFromTo() {
   pokeDexHTML.innerHTML = "";
   pokeDexCountHTML.innerHTML ="";
-  const pokemonCountFrom = document.getElementById("pokemon-count-from").value;
-  const pokemonCountTo = document.getElementById("pokemon-count-to").value;
-  for (let t = pokemonCountFrom; t < pokemonCountTo; t++) {
-    await  loadCountAPIs(pokemonCountFrom, t);
-  }
-}
-
-
-async function loadCountAPIs(pokemonCountFrom, t) {
-  if (pokemonCountFrom == "") {
-    for (let t = 1; t < 10; t++) {
+  const getPokemonCountFrom = document.getElementById("pokemon-count-from").value;
+  const getPokemonCountTo = document.getElementById("pokemon-count-to").value;
+  if (getPokemonCountFrom == "" || getPokemonCountTo == "" || getPokemonCountFrom == "0" || getPokemonCountTo == "0") {
+    for (let t = 1; t < 31; t++) {
       const url = `${APIs}${t}`;
       NumberOfUrl.push(url);
       console.log(url);
       await loadCountPokemon(url, t);
     }
   } else{
+  const pokemonCountTo = Number(getPokemonCountTo) + 1
+  for (let t = getPokemonCountFrom; t < pokemonCountTo ; t++) {
+    await  loadCountAPIs(t);
+  }
+}
+
+
+async function loadCountAPIs(t) {
       const url = `${APIs}${t}`;
       NumberOfUrl.push(url);
       console.log(url);

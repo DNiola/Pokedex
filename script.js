@@ -5,9 +5,8 @@ let pokemonName;
 let NumberOfUrl = ["0"];
 
 
-
 async function loadAPIs()  {
-    for (let t = 1; t < 10; t++) {
+    for (let t = 1; t < 31; t++) {
       const url = `${APIs}${t}`;
       NumberOfUrl.push(url);
       console.log(url);
