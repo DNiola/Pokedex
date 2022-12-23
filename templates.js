@@ -82,7 +82,6 @@ function openPokemonHTML(t) {
             <b class="abilities positionWH" id="abilities${t}">Abilities: </b>
           </div>
         </div>
-
         <table class="blueTable">
 <thead>
 <tr>
@@ -162,8 +161,8 @@ function openDiagram(currentPokemon) {
       labels: ["HP", "ATK", "DEF", "S.ATK", "S.DEF", "SPEED"],
       datasets: [
         {
-          label: "Stats:",
-          data: [statHP, statHP1, statHP2, statHP3, statHP4, statHP5],
+          label: "Pokemon base stats:",
+          data: [statHP, statHP1, statHP2, statHP3, statHP4, statHP5, 250],
           backgroundColor: [
             "rgba(255, 99, 132, 0.7)",
             "rgba(255, 159, 64, 0.7)",

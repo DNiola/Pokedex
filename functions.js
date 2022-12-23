@@ -195,6 +195,8 @@ function getSearch() {
 async function filterPokemons(searchIt) {
   let searchContainer = document.getElementById("pokeDexHTML");
   searchContainer.innerHTML = "";
+  let searchCountContainer = document.getElementById("pokeDexCountHTML");
+  searchCountContainer.innerHTML = "";
   for (let t = 1; t < NumberOfUrl.length; t++) {
     const url = APIs + t
     let pokemon = await proofURL(url);
@@ -203,7 +205,7 @@ async function filterPokemons(searchIt) {
     if (pokemonName.toLocaleLowerCase().includes(searchIt)||
     pokemonID.toString().includes(searchIt)
     ) {
-      loadPokemon(url, t)
+      loadCountPokemon(url, t)
     } 
   }
 }
@@ -216,10 +218,17 @@ async function proofURL(url) {
 
 
 function setGenderRate(speciesData, t) {
-  const { maleRate, femaleRate } = extractGenderRates(speciesData);
-  document.getElementById(`genderRate${t}`).innerHTML += speciesData['gender_rate'];
+  genderRate = speciesData['gender_rate']
+  if ( genderRate == -1) {
+    document.getElementById(`genderRate${t}`).innerHTML += speciesData['gender_rate'];
+    document.getElementById(`maleRate${t}`).innerHTML += "?" ;
+  document.getElementById(`femaleRate${t}`).innerHTML += "?" ;
+  } else {
+    const { maleRate, femaleRate } = extractGenderRates(speciesData);
+    document.getElementById(`genderRate${t}`).innerHTML += speciesData['gender_rate'];
   document.getElementById(`maleRate${t}`).innerHTML += "" + (maleRate * 100).toFixed(2) + "%";
   document.getElementById(`femaleRate${t}`).innerHTML += "" + (femaleRate * 100).toFixed(2) + "%";
+  }
 }
 
 
@@ -240,3 +249,13 @@ function setHatchCounter(speciesData, t){
 
 
 
+  function proofEvolutionChain(speciesData){
+    const evolution = speciesData["evolution_chain"]
+  if (evolution == null) {
+    const evolutionChainUrl = "?"
+    return  evolutionChainUrl
+  } else {
+    const evolutionChainUrl = speciesData["evolution_chain"]["url"];
+    return  evolutionChainUrl
+  }
+  }

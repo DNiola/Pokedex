@@ -23,9 +23,10 @@ function calculateSteps(speciesData) {
   }
 
   function extractGenderRates(speciesData) {
-    const femaleRate = speciesData['gender_rate'] / 8;
+       const femaleRate = speciesData['gender_rate'] / 8;
     const maleRate = (8 - speciesData['gender_rate']) / 8;
     return { maleRate, femaleRate };
+    
   }
 
 
@@ -90,21 +91,36 @@ function calculateSteps(speciesData) {
       "<br> " + weightInKilograms + " kg";
     document.getElementById(`height${t}`).innerHTML +=
       "<br> " + sizeInMeters + "m";
+
+
     document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
     document.getElementById("backgroundCard").classList.remove("d-none");
-    for (let m = 0; m < currentPokemon["moves"].length; m++) {
-      document.getElementById(`moves${t}`).innerHTML +=
-        currentPokemon["moves"][`${m}`]["move"]["name"] + ", ";
-    }
+
+proofAndSetMoves(currentPokemon, t)
+
+   
   }
   
-  function setRestOfPokemonSubInfo(speciesData, t) {
-    document.getElementById(`generation${t}`).innerHTML =speciesData["generation"]["name"]
-    document.getElementById(`happiness${t}`).innerHTML = speciesData["base_happiness"];
-    document.getElementById(`growthRate${t}`).innerHTML = speciesData["growth_rate"]["name"];
-    document.getElementById(`eggGroup${t}`).innerHTML = speciesData["egg_groups"][0]["name"];
-    document.getElementById(`habitat${t}`).innerHTML = speciesData["habitat"]["name"];
-    setGenderRate(speciesData, t)
-    setCaptureRate(speciesData, t)
-    setHatchCounter(speciesData, t)
+function proofAndSetMoves(currentPokemon, t) {
+  const pokemonMoves = currentPokemon["moves"]
+  if (pokemonMoves == "") {
+    document.getElementById(`moves${t}`).innerHTML += "Unknow"
+  } else {
+    for (let m = 0; m < currentPokemon["moves"].length; m++) {
+      const moves = currentPokemon["moves"][`${m}`]["move"]["name"]
+      document.getElementById(`moves${t}`).innerHTML +=
+      moves + ", ";
+    }
+  }
+}
+
+  function setHabitat(speciesData, t){
+    let habitat = speciesData["habitat"];
+    if (speciesData["habitat"] === null) {
+      document.getElementById(`habitat${t}`).innerHTML = "?"
+      console.log(speciesData["habitat"], habitat);
+    } else {
+      document.getElementById(`habitat${t}`).innerHTML = speciesData["habitat"]['name']
+    }
+    
   }

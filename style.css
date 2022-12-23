@@ -160,14 +160,14 @@ body {
 
 .positionTypes {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 .subInfoCounatiner {
   margin-top: -72px;
 }
 .cardheader {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 }
 .imgSize {
@@ -224,10 +224,11 @@ body {
   outline: none;
   border-color: #0000001e;
 }
-.genderContainer {
+genderContainer {
   display: flex;
   align-items: center;
-}
+  justify-content: center;
+} 
 .genderIMG{
   height: 20px;
 }

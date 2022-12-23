@@ -6,7 +6,7 @@ let NumberOfUrl = ["0"];
 
 
 async function loadAPIs()  {
-    for (let t = 1; t < 31; t++) {
+    for (let t = 900; t < 906; t++) {
       const url = `${APIs}${t}`;
       NumberOfUrl.push(url);
       console.log(url);
@@ -55,6 +55,35 @@ function renderPokemonCardOpen(currentPokemon, t) {
   getRestOfPokemonSubInfo(currentPokemon, t);
 }
 
+
+function setRestOfPokemonSubInfo(speciesData, t) {
+  document.getElementById(`generation${t}`).innerHTML =speciesData["generation"]["name"]
+  
+  document.getElementById(`growthRate${t}`).innerHTML = speciesData["growth_rate"]["name"];
+  document.getElementById(`eggGroup${t}`).innerHTML = speciesData["egg_groups"][0]["name"];
+  setHabitat(speciesData, t)
+  setHeppiness(speciesData, t)
+  setGenderRate(speciesData, t)
+  setCaptureRate(speciesData, t)
+  setHatchCounter(speciesData, t)
+}
+
+function setHeppiness(speciesData, t) {
+  happiness = speciesData["base_happiness"];
+  if (happiness == null) {
+    document.getElementById(`happiness${t}`).innerHTML = "?";
+  } else {
+    document.getElementById(`happiness${t}`).innerHTML = happiness;
+  }
+}
+
+async function getCurrentEvolutionChain(currentPokemon, t) {
+  const evolutionChainUrl = await getEvolutionChainUrl(currentPokemon);
+  const evolutionChainResponse = await fetch(evolutionChainUrl);
+  const evolutionChain = await evolutionChainResponse.json();
+  proofAndSetCurrentEvolutionPokemonName(evolutionChain, t);
+}
+
 async function getEvolutionChainUrl(currentPokemon) {
   const currentPokemonID = currentPokemon["id"];
   try {
@@ -62,13 +91,15 @@ async function getEvolutionChainUrl(currentPokemon) {
       `https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`
     );
     const speciesData = await speciesResponse.json();
-    const evolutionChainUrl = speciesData["evolution_chain"]["url"];
+    const evolutionChainUrl = proofEvolutionChain(speciesData)
     console.log(evolutionChainUrl);
     return evolutionChainUrl;
   } catch (error) {
     console.error(error);
   }
 }
+
+
 
 async function getRestOfPokemonSubInfo(currentPokemon, t) {
   const currentPokemonID = currentPokemon["id"];
@@ -81,9 +112,3 @@ async function getRestOfPokemonSubInfo(currentPokemon, t) {
   } catch (error) {}
 }
 
-async function getCurrentEvolutionChain(currentPokemon, t) {
-  const evolutionChainUrl = await getEvolutionChainUrl(currentPokemon);
-  const evolutionChainResponse = await fetch(evolutionChainUrl);
-  const evolutionChain = await evolutionChainResponse.json();
-  proofAndSetCurrentEvolutionPokemonName(evolutionChain, t);
-}
