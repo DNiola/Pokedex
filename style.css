@@ -196,7 +196,9 @@ body {
   justify-content: space-between;
   padding-top: 10px;
 }
-
+.evolutionTwoContainer{
+  justify-content: space-evenly;;
+}
 .evolutionSoloContainer {
   justify-content: center;
 }

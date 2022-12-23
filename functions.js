@@ -160,9 +160,6 @@ function closeCard() {
     .classList.remove("roll-in-blurred-bottom");
   document.getElementById("cardContainer").classList.add("slide-out-top");
   document.getElementById("backgroundCard").classList.add("d-none");
-  setTimeout(function () {
-    document .getElementById(`evolutionContainer`).classList.remove("evolutionSoloContainer");
-  }, 3000);
 }
 
 function nextPokemon(t) {
