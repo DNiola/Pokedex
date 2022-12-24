@@ -32,8 +32,9 @@ body {
   padding: 12px;
   margin: 8px;
   border-radius: 10px;
+  height: 127px;
+  width: 332px;
 }
-
 .pokedexCard {
   display: flex;
   background-color: #ffffff00;
@@ -88,7 +89,6 @@ body {
     inset 0px -10px 27px -8px #fff7f8, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 .infoContainer {
-  background-color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 50px;
   border-bottom-left-radius: 50px;

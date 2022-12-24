@@ -5,16 +5,17 @@ function renderAllPokemons(t) {
     <div onclick="openPokemon(${t})" id="pokemonContainer${t}" class="pokedex">
       <div class="imgCardContainerBG">
         <img class="imgCardBG" src="img/pokemonBallBG.png">
+         <div class="infoContainer">
+        <img class="imgSize" id="pokemonImage${t}">
+        
+      </div>
       </div>
       <div>
         <span id="pokemonID${t}"></span>
-        <h1 id="pokemonName${t}"></h1>
+        <h1 id="pokemonName${t}"></h1><span style="color:black" id="pokemonTypes${t}"></span>
+        <span style="color:black" id="pokemonTypesX${t}"></span>
       </div>
-      <div class="infoContainer">
-        <img class="imgSize" id="pokemonImage${t}">
-        <span style="color:black" id="pokemonTypes${t}"></span>
-        <span style="color:black" id="pokemonTypesX${t}"></span>;
-      </div>
+     
     </div>
     
     </div>`;
@@ -23,23 +24,24 @@ function renderAllPokemons(t) {
 
 function renderCountsPokemons(t) {
   return `
-    <div class="pokedexBG">
-    <div onclick="openPokemon(${t})" id="pokemonCountContainer${t}" class="pokedex">
-      <div class="imgCardContainerBG">
-        <img class="imgCardBG" src="img/pokemonBallBG.png">
-      </div>
-      <div>
-        <span id="pokemonCountID${t}"></span>
-        <h1 id="pokemonCountName${t}"></h1>
-      </div>
-      <div class="infoContainer">
-        <img class="imgSize" id="pokemonCountImage${t}">
-        <span style="color:black" id="pokemonCountTypes${t}"></span>
-        <span style="color:black" id="pokemonCountTypesX${t}"></span>;
-      </div>
+  <div class="pokedexBG">
+  <div onclick="openPokemon(${t})" id="pokemonCountContainer${t}" class="pokedex">
+    <div class="imgCardContainerBG">
+      <img class="imgCardBG" src="img/pokemonBallBG.png">
+       <div class="infoContainer">
+      <img class="imgSize" id="pokemonCountImage${t}">
     </div>
-    
-    </div>`;
+    </div>
+    <div>
+      <span id="pokemonCountID${t}"></span>
+      <h1 id="pokemonCountName${t}">
+      </h1><span style="color:black" id="pokemonCountTypes${t}"></span>
+      <span style="color:black" id="pokemonCountTypesX${t}"></span>
+    </div>
+   
+  </div>
+  
+  </div>`;
 }
 
 function openPokemonHTML(t) {
