@@ -58,18 +58,18 @@ function openPokemonHTML(t) {
               <h1 class="pokemonNamePosi" id="pokemonName${t}Open"></h1>
             </div>
             <div>
-              <button onclick="closeCard()">X</button>
+              <button class="cardBtnIcons" onclick="closeCard()"><img class="cardIconsImg" src="icon/close.png"></button>
             </div>
           </div>
           <div class="infoContainerPosi">
           <div>
-            <button onclick="lastPokemon(${[t]})"><</button>
+            <button class="cardBtnIcons" onclick="lastPokemon(${[t]})"><img class="cardIconsImg" src="icon/left.png"></button>
           </div>
             <div class="infoContainerOpen">
               <img class="imgSize" id="pokemonImage${t}Open">
             </div>
             <div>   
-            <button onclick="nextPokemon(${[t]})">></button>
+            <button class="cardBtnIcons" onclick="nextPokemon(${[t]})"><img class="cardIconsImg" src="icon/right.png"></button>
             </div>
           </div>
           <div class="subInfoCounatiner">
@@ -128,9 +128,11 @@ function openPokemonHTML(t) {
           <div class="evolutionPokemonContainer d-none" id=evolutionChain0${t}>
             <img class="evolutionIMG" id="evolutionChainIMG0${t}">
           </div>
+          <img class="cardIconsImg d-none" id="evolutionArray" src="icon/right.png">
           <div class="evolutionPokemonContainer d-none" id=evolutionChain1${t}>
             <img class="evolutionIMG" id="evolutionChainIMG1${t}">
           </div>
+          <img class="cardIconsImg d-none" id="secondEvolutionArray" src="icon/right.png">
           <div class="evolutionPokemonContainer d-none" id="evolutionChain2${t}">
             <img class="evolutionIMG" id="evolutionChainIMG2${t}">
           </div>

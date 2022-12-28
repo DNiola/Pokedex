@@ -53,6 +53,7 @@ function calculateSteps(speciesData) {
     let response = await fetch(API);
     const currentPokemon = await response.json();
     const evoIMG1 = getPokemonImage(currentPokemon);
+    document.getElementById(`evolutionArray`).classList.remove("d-none");
     document .getElementById(`evolutionContainer`).classList.remove("evolutionSoloContainer");
     document.getElementById(`evolutionContainer`).classList.add("evolutionTwoContainer");
     document.getElementById(`evolutionChain1${t}`).classList.remove("d-none");
@@ -69,6 +70,8 @@ function calculateSteps(speciesData) {
     let response = await fetch(API);
     const currentPokemon = await response.json();
     const evoIMG2 = getPokemonImage(currentPokemon);
+    
+    document.getElementById(`secondEvolutionArray`).classList.remove("d-none");
     document .getElementById(`evolutionContainer`).classList.remove("evolutionSoloContainer");
     document.getElementById(`evolutionChain2${t}`).classList.remove("d-none");
     document.getElementById(`evolutionChainIMG2${t}`).src = evoIMG2;
