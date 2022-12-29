@@ -23,22 +23,23 @@
 
 <body onload="loadAPIs()">
 <div class="headerContainer">   
-    <div class="logoPosi">
+    <div class="logoPosi centerFlex">
         <div>
-         Logo   
+            <img class="logoIcon" src="img/fav-icon.png"> 
         </div>
-        <div>
-            PokeDexAPI
+        <div class="centerFlex">
+            <h2>PokeDexAPI</h2>
         </div>
     </div>
     <div class="inputCountainer">
-        <input id="search" onchange="getSearch()" type="text" class="inputText" autocomplete="off" maxlength="20" minlength="2" placeholder="Pokemon suchen.."><img class="headerIcons" src="icon/search-alt.png">
+        <input id="search" type="text" class="inputText" autocomplete="off" maxlength="20" minlength="2" placeholder="Search Pokemon..">
+        <button onclick="getSearch()"><img class="headerIcons" src="icon/search-alt.png"></button>
     </div>
     <div>
-        <label for="pokemon-count">Anzahl der Pokemon:</label>
+        <label for="pokemon-count">Number of Pokemon From:</label>
             <input placeholder="from min. 1" id="pokemon-count-from" min="1" type="number" value="1">
-            <input placeholder="to min. 1" id="pokemon-count-to" min="1" type="number" value="30">
-            <button onclick="countFromTo()">Count! <img class="headerIcons" src="icon/apps-sort.png"> </button>
+            To: <input placeholder="to min. 1" id="pokemon-count-to" min="1" type="number" value="30">
+            <button onclick="countFromTo()">Show! <img class="headerIcons" src="icon/apps-sort.png"> </button>
     </div>
     <div class="menuPosi">
         <button>INFO</button>

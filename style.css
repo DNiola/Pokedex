@@ -8,21 +8,28 @@ body {
 .headerContainer {
   display: flex;
   height: 70px;
-  background-color: #0a106f;
+  background-color: #cf2b2b;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  border-bottom: 1px solid #0000003d;
 }
 
-.logoPosi{
+.logoPosi {
   display: flex;
-  padding: 10px;
   padding-left: 5%;
 }
-.menuPosi{
+
+
+.menuPosi {
   display: flex;
   padding: 10px;
   padding-right: 5%;
 }
+
+
 .pokedex {
   display: flex;
   position: relative;
@@ -35,6 +42,7 @@ body {
   height: 127px;
   width: 332px;
 }
+
 .pokedexCard {
   display: flex;
   background-color: #ffffff00;
@@ -44,7 +52,7 @@ body {
   border-radius: 10px;
   height: 990px;
   width: 700px;
-  border: 2px solid gray;
+  border: 1px solid rgb(0, 0, 0);
   overflow-y: scroll;
 }
 
@@ -62,47 +70,62 @@ body {
 }
 .sideShadow {
   position: fixed;
-  background-color: #0000008b;
+  background-color:#00000038;
   height: 100%;
   width: 100%;
+  box-shadow: 0px 0px 40px 35px #000000;
 }
 .shadow {
   position: fixed;
-  background-color: #0000008b;
+  backdrop-filter: blur(2px);
   height: 100%;
   width: 100%;
   z-index: 1;
 }
 
-.pokemonPosiID {
-  display: flex;
-}
-.headerIcons{
-  height: 20px;
-}
-.cardIconsImg{
-  height: 26px;
-}
-.cardBtnIcons{
-  padding: 10px;
-  background-color: #00000000;
-  border-radius:100%;
+.centerFlex{
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 0px 0px #a0a0a0,  0px 0px 27px 0px #ffffff4e,
+}
+
+.pokemonPosiID {
+  display: flex;
+}
+.headerIcons {
+  height: 20px;
+}
+.logoIcon{
+  height: 40px;
+  padding: 4px;
+}
+.cardIconsImg {
+  height: 26px;
+}
+.cardBtnIcons {
+  padding: 10px;
+  background-color: #00000000;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 0px 0px #a0a0a0, 0px 0px 27px 0px #ffffff4e,
     inset 0px 0px 0px 1px #fff7f8, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 .test {
+  
+  border: 10px solid black;
   border-radius: 12px;
-  box-shadow: 0px 0px 40px 50px #000000, 0px 0px 0px 16px #4b4c4b,
-    0px 0px 0px 24px #3d3f3d, 0px 0px 15px 0px rgb(0 0 0 / 0%);
+  box-shadow: 0px 0px 71px 26px #000000, 0px 0px 0px 0px #4b4c4b,
+    0px 0px 0px 0px #3d3f3d, 0px 0px 0px 0px rgb(0 0 0 / 0%);
 }
 
 .test2 {
-  box-shadow: 0px 0px 0px 5px #a0a0a0,  0px 10px 27px -8px #141414,
+  box-shadow: 0px 0px 0px 5px #a0a0a0, 0px 10px 27px -8px #141414,
     inset 0px -10px 27px -8px #fff7f8, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
+
+
 .infoContainer {
   border-top-left-radius: 10px;
   border-top-right-radius: 50px;
@@ -110,6 +133,14 @@ body {
   min-height: 195px;
   margin-top: -24px;
   width: 200px;
+}
+
+
+.infoPosiContainerOpen {
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.374);
+  border-radius: 100%;
+  box-shadow: 0px 0 10px 0;
 }
 
 .infoContainerOpen {
@@ -147,11 +178,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-left: 156px;
-  margin-right: 156px;
+  margin-left: 400px;
+  margin-right: 400px;
+      padding-top: 100px;
 }
 
-.pokemonContainerRE {
+.pokemonContainerOpen {
   display: flex;
   justify-content: center;
   position: fixed;
@@ -210,9 +242,10 @@ body {
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+  align-items: center;
 }
-.evolutionTwoContainer{
-  justify-content: space-evenly;;
+.evolutionTwoContainer {
+  justify-content: space-evenly;
 }
 .evolutionSoloContainer {
   justify-content: center;
@@ -241,16 +274,15 @@ body {
   outline: none;
   border-color: #0000001e;
 }
-genderContainer {
+.genderContainer {
   display: flex;
   align-items: center;
-  justify-content: center;
-} 
-.genderIMG{
+}
+.genderIMG {
   height: 20px;
 }
 
-.genderMaleIMG{
+.genderMaleIMG {
   height: 17px;
 }
 
@@ -399,7 +431,8 @@ table.blueTable {
   text-align: left;
   border-collapse: collapse;
 }
-table.blueTable td, table.blueTable th {
+table.blueTable td,
+table.blueTable th {
   border: 1px solid #ffffff;
   border-bottom: black;
   padding: 3px 2px;
@@ -416,19 +449,17 @@ table.blueTable thead th {
   font-size: 15px;
   font-weight: bold;
   color: #ffffff;
-  border-left: 2px solid #D0E4F5;
+  border-left: 2px solid #d0e4f5;
 }
-
 
 ::-webkit-scrollbar {
   width: 10px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #000000;
   border-radius: 10px;
+  
 }
-
-

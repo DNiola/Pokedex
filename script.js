@@ -6,7 +6,7 @@ let NumberOfUrl = ["0"];
 
 
 async function loadAPIs()  {
-    for (let t = 900; t < 906; t++) {
+    for (let t = 880; t < 906; t++) {
       const url = `${APIs}${t}`;
       NumberOfUrl.push(url);
       console.log(url);

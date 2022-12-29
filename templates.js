@@ -46,7 +46,7 @@ function renderCountsPokemons(t) {
 
 function openPokemonHTML(t) {
   return `
-  <div id="cardContainer" class="pokemonContainerRE roll-in-blurred-bottom">
+  <div id="cardContainer" class="pokemonContainerOpen roll-in-blurred-bottom">
     <div class="test">
       <div id="pokemonContainer${t}Open" class="pokedexCard">
         <div>
@@ -58,15 +58,20 @@ function openPokemonHTML(t) {
               <h1 class="pokemonNamePosi" id="pokemonName${t}Open"></h1>
             </div>
             <div>
-              <button class="cardBtnIcons" onclick="closeCard()"><img class="cardIconsImg" src="icon/close.png"></button>
+              <button class="cardBtnIcons" onclick="closeCard()">
+                <img class="cardIconsImg" src="icon/close.png">
+              </button>
             </div>
           </div>
           <div class="infoContainerPosi">
           <div>
-            <button class="cardBtnIcons" onclick="lastPokemon(${[t]})"><img class="cardIconsImg" src="icon/left.png"></button>
+            <button class="cardBtnIcons" onclick="lastPokemon(${[t]})">
+            <img class="cardIconsImg" src="icon/left.png"></button>
           </div>
-            <div class="infoContainerOpen">
+            <div class="infoPosiContainerOpen">
+              <div class="infoContainerOpen">
               <img class="imgSize" id="pokemonImage${t}Open">
+              </div>
             </div>
             <div>   
             <button class="cardBtnIcons" onclick="nextPokemon(${[t]})"><img class="cardIconsImg" src="icon/right.png"></button>
@@ -83,7 +88,7 @@ function openPokemonHTML(t) {
             </div>
             <b class="abilities positionWH" id="abilities${t}">Abilities: </b>
           </div>
-        </div>
+        
         <table class="blueTable">
 <thead>
 <tr>
@@ -99,24 +104,27 @@ function openPokemonHTML(t) {
 </thead>
 <tbody>
 <tr>
-<td id="happiness${t}"></td>
-<td id="generation${t}"></td>
+<td>
+<span id="happiness${t}" class="centerFlex"></span>
+</td>
+<td ><span class="centerFlex" id="generation${t}"></span> 
+</td>
 <td > 
 <div class="genderSingleRate">
-<span id="genderRate${t}"></span>
+  <span id="genderRate${t}"></span>
 </div>
   <div class="genderContainer">
-  <img class="genderMaleIMG" src="img/male.png">
-  <span id="maleRate${t}"></span>
-  <img class="genderIMG" src="img/female.png">
-  <span id="femaleRate${t}"></span>
+    <img class="genderMaleIMG" src="img/male.png">
+      <span id="maleRate${t}"></span>
+        <img class="genderIMG" src="img/female.png">
+          <span id="femaleRate${t}"></span>
   </div>
 </td>
-<td id="captureRate${t}"></td>
-<td id="growthRate${t}"></td>
-<td id="eggGroup${t}"></td>
-<td id="hatchCounter${t}"></td>
-<td id="habitat${t}"></td>
+<td><span class="centerFlex" id="captureRate${t}"></span></td>
+<td><span class="centerFlex" id="growthRate${t}"></span></td>
+<td><span class="centerFlex" id="eggGroup${t}"></span></td>
+<td><span class="centerFlex" id="hatchCounter${t}"></span></td>
+<td><span class="centerFlex" id="habitat${t}"></span></td>
 </tr>
 </tbody>
 </table>
