@@ -49,15 +49,18 @@ function openPokemonHTML(t) {
   <div id="cardContainer" class="pokemonContainerOpen roll-in-blurred-bottom">
     <div class="test">
       <div id="pokemonContainer${t}Open" class="pokedexCard">
-        <div>
+        <div> 
+        <div class="pokemonNameContainerPosi">
+          <div class="pokemonNameContainer">
+                <h1 class="pokemonNamePosi" id="pokemonName${t}Open"></h1>
+              </div>
+          </div>
           <div class="cardheader">
-            <div>
+            <div class="idPosi">
               <h3 class="pokemonPosiID" id="pokemonID${t}Open"></h3>
             </div>
-            <div>
-              <h1 class="pokemonNamePosi" id="pokemonName${t}Open"></h1>
-            </div>
-            <div>
+           
+            <div class="closeBtnPosi">
               <button class="cardBtnIcons" onclick="closeCard()">
                 <img class="cardIconsImg" src="icon/close.png">
               </button>
@@ -83,8 +86,8 @@ function openPokemonHTML(t) {
               <b class="abilities" id="pokemonTypesX${t}Open"></b>
             </div>
             <div class="positionWH">
-              <b class="abilities" id="weight${t}">weight</b>
-              <b class="abilities" id="height${t}">size</b>
+              <b class="propotion" id="weight${t}">Weight</b>
+              <b class="propotion" id="height${t}">Size</b>
             </div>
             <b class="abilities positionWH" id="abilities${t}">Abilities: </b>
           </div>
@@ -129,7 +132,7 @@ function openPokemonHTML(t) {
 </tbody>
 </table>
 
-        <canvas style="background:black; border: 1px solid;" id="myChart"></canvas>
+        <canvas class="chart" id="myChart"></canvas>
 
 
         <div class="evolutionContainer" id="evolutionContainer">
@@ -150,7 +153,7 @@ function openPokemonHTML(t) {
 
 
         <div class="positionTypes">
-        <span class="abilities" id="moves${t}"><h3>moves:</h3></span>
+        <span class="moves" id="moves${t}"><h3>moves:</h3></span>
         </div>
         </div>
       </div>
@@ -161,11 +164,14 @@ function openPokemonHTML(t) {
 
 function openDiagram(currentPokemon) {
   statHP = currentPokemon["stats"][0]["base_stat"];
-  statHP1 = currentPokemon["stats"][1]["base_stat"];
-  statHP2 = currentPokemon["stats"][2]["base_stat"];
-  statHP3 = currentPokemon["stats"][3]["base_stat"];
-  statHP4 = currentPokemon["stats"][4]["base_stat"];
-  statHP5 = currentPokemon["stats"][5]["base_stat"];
+  statATK = currentPokemon["stats"][1]["base_stat"];
+  statDEF = currentPokemon["stats"][2]["base_stat"];
+  statSATK = currentPokemon["stats"][3]["base_stat"];
+  statSDEF = currentPokemon["stats"][4]["base_stat"];
+  statSPEED = currentPokemon["stats"][5]["base_stat"];
+  statMAX = 250;
+  Chart.defaults.borderColor = '#fafafa';
+  Chart.defaults.color = 'white';
   const ctx = document.getElementById("myChart");
   new Chart(ctx, {
     type: "bar",
@@ -173,9 +179,19 @@ function openDiagram(currentPokemon) {
       labels: ["HP", "ATK", "DEF", "S.ATK", "S.DEF", "SPEED"],
       datasets: [
         {
-          label: "Pokemon base stats:",
-          data: [statHP, statHP1, statHP2, statHP3, statHP4, statHP5, 250],
-          backgroundColor: [
+          label: "Base stats:",
+          data: [statHP, statATK, statDEF, statSATK, statSDEF, statSPEED, statMAX],
+          borderRadius: 8,
+          backgroundColor: [ 
+            "rgb(255, 99, 132)",
+            "rgb(255, 159, 64)",
+            "rgb(255, 205, 86)",
+            "rgb(75, 192, 192)",
+            "rgb(54, 162, 235)",
+            "rgb(153, 102, 255)",
+            "rgb(201, 203, 207)",   
+          ],
+          borderColor: [
             "rgba(255, 99, 132, 0.7)",
             "rgba(255, 159, 64, 0.7)",
             "rgba(255, 205, 86, 0.7)",
@@ -184,26 +200,21 @@ function openDiagram(currentPokemon) {
             "rgba(153, 102, 255, 0.7)",
             "rgba(201, 203, 207, 0.7)",
           ],
-          borderColor: [
-            "rgb(255, 99, 132)",
-            "rgb(255, 159, 64)",
-            "rgb(255, 205, 86)",
-            "rgb(75, 192, 192)",
-            "rgb(54, 162, 235)",
-            "rgb(153, 102, 255)",
-            "rgb(201, 203, 207)",
-          ],
-          borderWidth: 10,
+          borderWidth: 2,
         },
       ],
     },
     options: {
       indexAxis: "y",
+      barPercentage: 0.6,
       scales: {
         y: {
           beginAtZero: true,
         },
       },
     },
+    plugins: [ChartDataLabels]
   });
 }
+
+

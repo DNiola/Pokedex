@@ -8,21 +8,47 @@ body {
 .headerContainer {
   display: flex;
   height: 70px;
-  background-color: #cf2b2b;
+  background-color: #8d0808;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   z-index: 1;
   width: 100%;
   border-bottom: 1px solid #0000003d;
+  box-shadow: 0px 0px 20px 10px #000000;
 }
 
+.paddLe5{
+padding-left: 5px;
+}
 .logoPosi {
   display: flex;
   padding-left: 5%;
 }
+.pokemonNameContainerPosi {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.pokemonNameContainer{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  background: black;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  width: 500px;
+  border-bottom: 1px solid rgba(86, 85, 85, 0.998);
+  box-shadow: 0px 0px 10px 0px #000000;
+  top: 0;
 
-
+}
+.chart{
+  background:black;
+  height: 320px !important;
+  border: 1px solid white;
+  
+}
 .menuPosi {
   display: flex;
   padding: 10px;
@@ -41,25 +67,24 @@ body {
   border-radius: 10px;
   height: 127px;
   width: 332px;
+  box-shadow: 0px 0 10px 0;
 }
 
 .pokedexCard {
   display: flex;
-  background-color: #ffffff00;
   color: white;
   flex-direction: column;
-  padding: 12px;
-  border-radius: 10px;
   height: 990px;
   width: 700px;
-  border: 1px solid rgb(0, 0, 0);
   overflow-y: scroll;
+  box-shadow: inset 0px 0px 20px 10px #000000;
 }
-
 .pokedexBG {
-  padding-left: 9px;
-  padding-right: 9px;
+  padding-left: 28px;
+  padding-right: 28px;
   background-color: #000221;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .pokedexBorder {
@@ -73,7 +98,6 @@ body {
   background-color:#00000038;
   height: 100%;
   width: 100%;
-  box-shadow: 0px 0px 40px 35px #000000;
 }
 .shadow {
   position: fixed;
@@ -93,7 +117,7 @@ body {
   display: flex;
 }
 .headerIcons {
-  height: 20px;
+  height: 16px;
 }
 .logoIcon{
   height: 40px;
@@ -104,17 +128,16 @@ body {
 }
 .cardBtnIcons {
   padding: 10px;
-  background-color: #00000000;
+  background-color: #ffffff21;
   border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 0px 0px #a0a0a0, 0px 0px 27px 0px #ffffff4e,
-    inset 0px 0px 0px 1px #fff7f8, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: 0 0 16px 0px black, inset 0px 0px 4px 0px white;
 }
 .test {
   
-  border: 10px solid black;
+  border: 14px solid black;
   border-radius: 12px;
   box-shadow: 0px 0px 71px 26px #000000, 0px 0px 0px 0px #4b4c4b,
     0px 0px 0px 0px #3d3f3d, 0px 0px 0px 0px rgb(0 0 0 / 0%);
@@ -140,7 +163,7 @@ body {
   padding: 8px;
   background: rgba(0, 0, 0, 0.374);
   border-radius: 100%;
-  box-shadow: 0px 0 10px 0;
+  box-shadow: 0 0 16px 0px black, inset 0px 0px 4px 0px white;
 }
 
 .infoContainerOpen {
@@ -152,12 +175,28 @@ body {
   justify-content: space-evenly;
   align-items: center;
 }
-
-.abilities {
+.moves{
   padding: 10px;
   background: black;
   border-radius: 10px;
-  margin: 11px;
+  margin-top: 10px;
+}
+.abilities {
+  background: black;
+  box-shadow: 0px 0px 10px 0px black;
+}
+.propotion{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  background: black;
+  border-radius: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  width: 80px;
+  box-shadow: 0px 0px 10px 0px black;
+  border-top: 1px solid rgba(86, 85, 85, 0.998);
 }
 .pokemonNamePosi {
   display: flex;
@@ -168,19 +207,28 @@ body {
 }
 
 .infoContainerPosi {
+  padding-top: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  padding-bottom: 20px;
 }
 
-.pokeDexContainer {
+.pokeDexCountContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-left: 400px;
   margin-right: 400px;
-      padding-top: 100px;
+  
+  box-shadow: 0px 0px 20px 10px #000000;
+}
+.pokeDexContainer {
+  padding-top: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .pokemonContainerOpen {
@@ -199,7 +247,16 @@ body {
   display: flex;
   flex-direction: column;
 }
+.idPosi{
+  
+    padding-left: 32px;
 
+}
+
+.closeBtnPosi{
+  padding-right: 22px;
+  padding-top: 13px;
+}
 .positionWH {
   display: flex;
   justify-content: space-around;
@@ -214,7 +271,7 @@ body {
 }
 .cardheader {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 }
 .imgSize {
@@ -260,19 +317,49 @@ body {
   height: 160px;
   width: 160px;
   justify-content: center;
+  box-shadow: 0 0 9px 0px black, inset 0px 0px 2px 0px white;
 }
 
 .inputText {
-  height: 34px;
+  height: 30px;
   width: 250px;
   border-radius: 10px;
   border: 1px solid gray;
   background: rgb(245, 245, 245)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
-    no-repeat 8px center;
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
+  no-repeat 8px center;
   padding-left: 26px;
   outline: none;
   border-color: #0000001e;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.searchBtn{
+  height: 34px;
+  width: 35px;
+  border: 0px solid gray;
+  border-color: #0000001e;
+  border-left: 0;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  background: rgb(245, 245, 245);
+}
+.searchBtn:hover{
+background-color: rgb(233, 80, 80);
+}
+
+.countBtn {
+  display: flex;
+  height: 57px;
+  width: 59px;
+  border: 2px solid;
+  border-color: #0000001e;
+  border-radius: 100%;
+  background: rgb(245, 245, 245);
+  align-items: center;
+  justify-content: center;
 }
 .genderContainer {
   display: flex;
@@ -425,7 +512,6 @@ body {
 }
 
 table.blueTable {
-  border: 1px solid #f8f8f8;
   background-color: #000000;
   width: 100%;
   text-align: left;
@@ -449,17 +535,16 @@ table.blueTable thead th {
   font-size: 15px;
   font-weight: bold;
   color: #ffffff;
-  border-left: 2px solid #d0e4f5;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
-  background-color: #f5f5f5;
+  background-color: #000000;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000000;
+  background-color: #fafffa;
   border-radius: 10px;
   
 }

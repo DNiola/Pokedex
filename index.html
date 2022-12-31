@@ -12,8 +12,12 @@
         href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
-        <script src="script.js"></script>
-        <script src="templates.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"
+        integrity="sha512-JPcRR8yFa8mmCsfrw4TNte1ZvF1e3+1SdGMslZvmrzDYxS69J7J49vkFL8u6u8PlPJK+H3voElBtUCzaXj+6ig=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+    <script src="templates.js"></script>
     <script src="infosFrom.js"></script>
     <script src="functions.js"></script>
     <script src="count.js"></script>
@@ -22,37 +26,47 @@
 </head>
 
 <body onload="loadAPIs()">
-<div class="headerContainer">   
-    <div class="logoPosi centerFlex">
-        <div>
-            <img class="logoIcon" src="img/fav-icon.png"> 
+    <div class="headerContainer">
+        <div class="logoPosi centerFlex">
+            <div>
+                <img class="logoIcon" src="img/fav-icon.png">
+            </div>
+            <div class="centerFlex">
+                <h2>PokeDexAPI</h2>
+            </div>
         </div>
         <div class="centerFlex">
-            <h2>PokeDexAPI</h2>
+            <form action="">
+                <input id="search" type="text" class="inputText" autocomplete="off" maxlength="20" minlength="2"
+                    placeholder="Search Pokemon.." required>
+            </form>
+            <button class="searchBtn" onclick="getSearch()"><img class="headerIcons" src="icon/search-alt.png"></button>
+        </div>
+        <div class="centerFlex">
+            <form action=""><label for="pokemon-count">Number of Pokemon from:</label>
+                <input placeholder="from min. 1" id="pokemon-count-from" min="1" type="number" value="1" required>
+                To:
+                <input placeholder="to min. 1" id="pokemon-count-to" min="1" type="number" value="30" required>
+            </form>
+            <div class="paddLe5">
+                <button class="countBtn" onclick="countFromTo()">
+                    Show!
+                    <img class="headerIcons" src="icon/apps-sort.png">
+                </button>
+            </div>
+        </div>
+        <div class="menuPosi">
+            <button>INFO</button>
         </div>
     </div>
-    <div class="inputCountainer">
-        <input id="search" type="text" class="inputText" autocomplete="off" maxlength="20" minlength="2" placeholder="Search Pokemon..">
-        <button onclick="getSearch()"><img class="headerIcons" src="icon/search-alt.png"></button>
-    </div>
-    <div>
-        <label for="pokemon-count">Number of Pokemon From:</label>
-            <input placeholder="from min. 1" id="pokemon-count-from" min="1" type="number" value="1">
-            To: <input placeholder="to min. 1" id="pokemon-count-to" min="1" type="number" value="30">
-            <button onclick="countFromTo()">Show! <img class="headerIcons" src="icon/apps-sort.png"> </button>
-    </div>
-    <div class="menuPosi">
-        <button>INFO</button>
-    </div>
-</div>
     <div class="sideShadow"></div>
     <div id="backgroundCard" onclick="closeCard()" class="shadow d-none"></div>
-    
+
     <div class="mainContainerOpen">
-        <div class="pokeDexContainerOpen d-none" id="pokeDexHTMLOpen"></div>
-        <div class="pokeDexContainer pokedexBG" id="pokeDexCountHTML"></div>
-        <div class="pokeDexContainer pokedexBG" id="pokeDexHTML"></div>
-     </div>
+        <div class="pokeDexContainerOpen" id="pokeDexHTMLOpen"></div>
+        <div class="pokeDexContainer d-none" id="pokeDexCountHTML"></div>
+        <div class="pokeDexContainer" id="pokeDexHTML"></div>
+    </div>
 </body>
 
 </html>

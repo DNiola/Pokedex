@@ -183,15 +183,20 @@ function lastPokemon(t) {
 }
 
 
-function getSearch() {
+async function getSearch() {
   let search = document.getElementById("search").value;
-  search = search.toLowerCase();
-  filterPokemons(search);
+  if (search === "") {
+    console.log('search input need name of Pokemon or the ID number ');
+  } else {
+      search = search.toLowerCase();
+ await filterPokemons(search);
+  }
 }
 
 async function filterPokemons(searchIt) {
   let searchContainer = document.getElementById("pokeDexHTML");
   searchContainer.innerHTML = "";
+  document.getElementById('pokeDexCountHTML').classList.remove('d-none')
   let searchCountContainer = document.getElementById("pokeDexCountHTML");
   searchCountContainer.innerHTML = "";
   for (let t = 1; t < NumberOfUrl.length; t++) {
