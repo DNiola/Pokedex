@@ -58,17 +58,16 @@ function renderPokemonCardOpen(currentPokemon, t) {
 
 function setRestOfPokemonSubInfo(speciesData, t) {
   document.getElementById(`generation${t}`).innerHTML =speciesData["generation"]["name"]
-  
   document.getElementById(`growthRate${t}`).innerHTML = speciesData["growth_rate"]["name"];
   document.getElementById(`eggGroup${t}`).innerHTML = speciesData["egg_groups"][0]["name"];
   setHabitat(speciesData, t)
-  setHeppiness(speciesData, t)
   setGenderRate(speciesData, t)
   setCaptureRate(speciesData, t)
-  setHatchCounter(speciesData, t)
+  setHatchCounter(speciesData, t) 
+  proofAndSetHeppiness(speciesData, t)
 }
 
-function setHeppiness(speciesData, t) {
+function proofAndSetHeppiness(speciesData, t) {
   happiness = speciesData["base_happiness"];
   if (happiness == null) {
     document.getElementById(`happiness${t}`).innerHTML = "?";

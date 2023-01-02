@@ -1,9 +1,7 @@
 function proofAndSetCurrentPokemonTypes(currentPokemon, t) {
-  document.getElementById(`pokemonTypes${t}`).innerHTML =
-    currentPokemon["types"][0]["type"]["name"];
+  document.getElementById(`pokemonTypes${t}`).innerHTML = currentPokemon["types"][0]["type"]["name"];
   if (currentPokemon["types"][1]) {
-    document.getElementById(`pokemonTypesX${t}`).innerHTML =
-      currentPokemon["types"][1]["type"]["name"];
+    document.getElementById(`pokemonTypesX${t}`).innerHTML = currentPokemon["types"][1]["type"]["name"];
   }
 }
 
@@ -98,60 +96,59 @@ function setDesignCardOpen(currentPokemon, t) {
 }
 
 function getPokemonImage(currentPokemon) {
-  if (
-    currentPokemon["sprites"]["other"]["dream_world"] &&
-    currentPokemon["sprites"]["other"]["dream_world"]["front_default"]
-  ) {
+  if (currentPokemon["sprites"]["other"]["dream_world"] && currentPokemon["sprites"]["other"]["dream_world"]["front_default"]) {
     return currentPokemon["sprites"]["other"]["dream_world"]["front_default"];
-  } else if (
-    currentPokemon["sprites"]["other"]["official-artwork"] &&
-    currentPokemon["sprites"]["other"]["official-artwork"]["front_default"]
-  ) {
-    return currentPokemon["sprites"]["other"]["official-artwork"][
-      "front_default"
-    ];
+  } else if ( currentPokemon["sprites"]["other"]["official-artwork"] && currentPokemon["sprites"]["other"]["official-artwork"]["front_default"]) {
+    return currentPokemon["sprites"]["other"]["official-artwork"]["front_default"];
   }
   return null;
 }
 
 function proofAndSetCurrentEvolutionPokemonName(evolutionChain, t) {
   if (evolutionChain["chain"]["species"]) {
-    document.getElementById(`evolutionChain0${t}`).innerHTML +=
-      " " + evolutionChain["chain"]["species"]["name"];
+    document.getElementById(`evolutionChain0${t}`).innerHTML += " " + evolutionChain["chain"]["species"]["name"];
     getFirstEvolutionImg(evolutionChain, t);
   }
   if (evolutionChain["chain"]["evolves_to"][0]) {
-    document.getElementById(`evolutionChain1${t}`).innerHTML +=
-      " " + evolutionChain["chain"]["evolves_to"][0]["species"]["name"];
+    document.getElementById(`evolutionChain1${t}`).innerHTML += " " + evolutionChain["chain"]["evolves_to"][0]["species"]["name"];
     getSecondEvolutionImg(evolutionChain, t);
   }
   if (evolutionChain["chain"]["evolves_to"][0] == undefined) {
     console.log("This Pokemon dont evolve/undefined");
   } else if (evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]) {
-    document.getElementById(`evolutionChain2${t}`).innerHTML +=
-      " " +
-      evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"][
-        "name"
-      ];
+    document.getElementById(`evolutionChain2${t}`).innerHTML += " " + evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["name"];
     getLastEvolutionImg(evolutionChain, t);
   }
 }
 
+
 function proofAndSetPokemonTypAndAbilities(currentPokemon, t) {
   if (currentPokemon["types"][1]) {
-    document.getElementById(`pokemonTypesX${t}Open`).innerHTML +=
-      currentPokemon["types"][1]["type"]["name"];
+    setPokemonTypes(currentPokemon, t)
   }
   if (currentPokemon["abilities"][1]) {
-    document.getElementById(`abilities${t}`).innerHTML +=
-      currentPokemon["abilities"][1]["ability"]["name"] + ", ";
+    setOneAbilities(currentPokemon, t)
   }
   if (currentPokemon["abilities"][2]) {
-    document.getElementById(`abilities${t}`).innerHTML +=
-      currentPokemon["abilities"][2]["ability"]["name"] + ", ";
+    setTwoAbilities(currentPokemon, t)
   }
 }
 
+
+function setTwoAbilities(currentPokemon, t) {
+    document.getElementById(`abilities${t}`).innerHTML +=
+      currentPokemon["abilities"][2]["ability"]["name"] + ", ";
+}
+
+function setOneAbilities(currentPokemon, t) {
+  document.getElementById(`abilities${t}`).innerHTML +=
+      currentPokemon["abilities"][1]["ability"]["name"] + ", ";
+}
+
+function setPokemonTypes(currentPokemon, t) {
+  document.getElementById(`pokemonTypesX${t}Open`).innerHTML +=
+      currentPokemon["types"][1]["type"]["name"];
+}
 
 
 function closeCard() {
@@ -183,22 +180,36 @@ function lastPokemon(t) {
 }
 
 
+//TODO:
+//function namee() { 
+//  document.getElementById("search").addEventListener("keyup", function(event) {
+//  if (event.key === 13) {
+//    document.getElementById("getSearch").click();
+//  }
+//});
+//}
+
+
 async function getSearch() {
   let search = document.getElementById("search").value;
   if (search === "") {
-    console.log('search input need name of Pokemon or the ID number ');
+    console.log('search field need name of Pokemon/Text or the ID number ');
   } else {
       search = search.toLowerCase();
+      setSearchContainer()
  await filterPokemons(search);
   }
 }
 
-async function filterPokemons(searchIt) {
-  let searchContainer = document.getElementById("pokeDexHTML");
-  searchContainer.innerHTML = "";
+function setSearchContainer(){
   document.getElementById('pokeDexCountHTML').classList.remove('d-none')
   let searchCountContainer = document.getElementById("pokeDexCountHTML");
+  let searchContainer = document.getElementById("pokeDexHTML");
   searchCountContainer.innerHTML = "";
+  searchContainer.innerHTML = "";
+}
+
+async function filterPokemons(searchIt) {
   for (let t = 1; t < NumberOfUrl.length; t++) {
     const url = APIs + t
     let pokemon = await proofURL(url);
@@ -244,7 +255,7 @@ document.getElementById(`captureRate${t}`).innerHTML += (captureRateInPercent * 
 }
 
 function setHatchCounter(speciesData, t){
-  let steps = calculateSteps(speciesData);
+  let steps = proofSteps(speciesData);
   document.getElementById(`hatchCounter${t}`).innerHTML = "Count: " + speciesData["hatch_counter"] + "<br>";
   document.getElementById(`hatchCounter${t}`).innerHTML += "Steps: " + (steps);
   }

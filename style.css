@@ -172,9 +172,10 @@ padding-left: 5px;
   height: 320px;
   width: 320px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
+
 .moves{
   padding: 10px;
   background: black;
