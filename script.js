@@ -6,7 +6,7 @@ let NumberOfUrl = ["0"];
 
 
 async function loadAPIs()  {
-    for (let t = 1; t < 2; t++) {
+    for (let t = 1; t < 51; t++) {
       const url = `${APIs}${t}`;
       NumberOfUrl.push(url);
       console.log(url);
@@ -31,8 +31,7 @@ function pokemonFilter(currentPokemon, t) {
 function renderPokemonInfo(currentPokemon, t) {
   const imageUrl = getPokemonImage(currentPokemon);
   document.getElementById(`pokemonImage${t}`).src = imageUrl;
-  document.getElementById(`pokemonID${t}`).innerHTML =
-    "#" + currentPokemon["id"];
+  document.getElementById(`pokemonID${t}`).innerHTML = "#" + currentPokemon["id"];
   document.getElementById(`pokemonName${t}`).innerHTML = currentPokemon["name"];
 }
 

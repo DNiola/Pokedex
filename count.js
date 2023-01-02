@@ -55,12 +55,13 @@ async function loadCountAPIs(t) {
 
 
   function proofAndSetCountCurrentPokemonTypes(currentPokemon, t) {
-    document.getElementById(`pokemonCountTypes${t}`).innerHTML =
-      currentPokemon["types"][0]["type"]["name"];
+    document.getElementById(`pokemonCountTypes${t}`).innerHTML = currentPokemon["types"][0]["type"]["name"];
     if (currentPokemon["types"][1]) {
-      document.getElementById(`pokemonCountTypesX${t}`).innerHTML =
-        currentPokemon["types"][1]["type"]["name"];
+      document.getElementById(`pokemonCountTypesX${t}`).innerHTML = currentPokemon["types"][1]["type"]["name"];
     }
+    if (currentPokemon["types"].length == 1) {
+      document.getElementById(`pokemonCountTypesX${t}`).classList.add('d-none')
+    } 
   }
 
 

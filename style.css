@@ -68,6 +68,27 @@ padding-left: 5px;
   height: 127px;
   width: 332px;
   box-shadow: 0px 0 10px 0;
+  border: 1px solid white;
+  align-items: center;
+  flex-wrap: wrap;
+  
+}
+.zIndex1{
+    z-index: 1;
+}
+
+.pokeballIMG {
+  height: 150px;
+  width: 216px;
+  opacity: 0.1;
+  left: 0px;
+  top:0;
+  bottom: 0;
+  position: absolute;
+  background-image: url(img/pokemonBallBG.png);
+  background-repeat: repeat;
+  background-position: top;
+  background-size: cover;
 }
 
 .pokedexCard {
@@ -83,8 +104,7 @@ padding-left: 5px;
   padding-left: 28px;
   padding-right: 28px;
   background-color: #000221;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 40px;
 }
 
 .pokedexBorder {
@@ -135,6 +155,15 @@ padding-left: 5px;
   align-items: center;
   box-shadow: 0 0 16px 0px black, inset 0px 0px 4px 0px white;
 }
+
+.types{
+  color: white;
+  border: 1px solid #525390;
+  padding: 3px;
+  border-radius: 10px;
+  background: #00f2ff21;
+}
+
 .test {
   
   border: 14px solid black;
@@ -239,7 +268,7 @@ padding-left: 5px;
   right: calc(50% - 50px);
   left: calc(50% - 50px);
   top: 10%;
-  z-index: 1;
+  z-index: 2;
 }
 
 .mainContainerOpen {
@@ -249,9 +278,7 @@ padding-left: 5px;
   flex-direction: column;
 }
 .idPosi{
-  
-    padding-left: 32px;
-
+    padding-left: 28px;
 }
 
 .closeBtnPosi{
@@ -274,6 +301,14 @@ padding-left: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.imgCardsSize{
+  height: 180px;
+  width: 200px;
+  position: absolute;
+  right: -30px;
+  bottom: 0;
 }
 .imgSize {
   height: 180px;

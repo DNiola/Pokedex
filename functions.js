@@ -1,5 +1,8 @@
 function proofAndSetCurrentPokemonTypes(currentPokemon, t) {
   document.getElementById(`pokemonTypes${t}`).innerHTML = currentPokemon["types"][0]["type"]["name"];
+  if (currentPokemon["types"].length == 1) {
+    document.getElementById(`pokemonTypesX${t}`).classList.add('d-none')
+  }
   if (currentPokemon["types"][1]) {
     document.getElementById(`pokemonTypesX${t}`).innerHTML = currentPokemon["types"][1]["type"]["name"];
   }
@@ -136,26 +139,25 @@ function proofAndSetPokemonTypAndAbilities(currentPokemon, t) {
 
 
 function setTwoAbilities(currentPokemon, t) {
-    document.getElementById(`abilities${t}`).innerHTML +=
-      currentPokemon["abilities"][2]["ability"]["name"] + ", ";
+    document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][2]["ability"]["name"] + ", ";
 }
 
 function setOneAbilities(currentPokemon, t) {
-  document.getElementById(`abilities${t}`).innerHTML +=
-      currentPokemon["abilities"][1]["ability"]["name"] + ", ";
+  document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][1]["ability"]["name"] + ", ";
 }
 
 function setPokemonTypes(currentPokemon, t) {
-  document.getElementById(`pokemonTypesX${t}Open`).innerHTML +=
-      currentPokemon["types"][1]["type"]["name"];
+  document.getElementById(`pokemonTypesX${t}Open`).innerHTML += currentPokemon["types"][1]["type"]["name"];
 }
 
 
 function closeCard() {
-  document
-    .getElementById("cardContainer")
-    .classList.remove("roll-in-blurred-bottom");
+  document.getElementById("cardContainer").classList.remove("roll-in-blurred-bottom");
   document.getElementById("cardContainer").classList.add("slide-out-top");
+  setTimeout(() => {
+    document.getElementById("cardContainer").classList.add("d-none");
+  }, 600);
+  
   document.getElementById("backgroundCard").classList.add("d-none");
 }
 

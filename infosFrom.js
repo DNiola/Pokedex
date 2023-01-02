@@ -88,18 +88,16 @@ function setCardForLastEvolution(evoIMG2, t) {
 function setCurrentPokemonInfo(currentPokemon, t) {
   document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
   document.getElementById("backgroundCard").classList.remove("d-none");
-  proofAndSetNameTypesAndAbilities(currentPokemon, t)
+  proofAndSetTypesAndAbilities(currentPokemon, t)
   proofAndSetNameAndIMG(currentPokemon, t)
   proofAndSetPropotion(currentPokemon, t)
   proofAndSetMoves(currentPokemon, t);
   proofAndSetID(currentPokemon, t);
 }
 
-function proofAndSetNameTypesAndAbilities(currentPokemon, t){
-    document.getElementById(`pokemonTypes${t}Open`).innerHTML +=
-    currentPokemon["types"][0]["type"]["name"];
-  document.getElementById(`abilities${t}`).innerHTML +=
-    currentPokemon["abilities"][0]["ability"]["name"];
+function proofAndSetTypesAndAbilities(currentPokemon, t){
+    document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
+  document.getElementById(`abilities${t}`).innerHTML +=    currentPokemon["abilities"][0]["ability"]["name"];
 }
 
 function proofAndSetNameAndIMG(currentPokemon, t){
