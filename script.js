@@ -4,13 +4,14 @@ let currentAPI;
 let pokemonName;
 let NumberOfUrl = ["0"];
 
-
-async function loadAPIs()  {
-    for (let t = 1; t < 51; t++) {
-      const url = `${APIs}${t}`;
-      NumberOfUrl.push(url);
-      console.log(url);
-      await loadPokemon(url, t);
+async function loadAPIs() {
+  let promises = [];
+  for (let t = 1; t < 51; t++) {
+    const url = `${APIs}${t}`;
+    NumberOfUrl.push(url);
+    console.log(url);
+    promises.push(loadPokemon(url, t));
+    await Promise.all(promises);
   }
 }
 
@@ -31,7 +32,8 @@ function pokemonFilter(currentPokemon, t) {
 function renderPokemonInfo(currentPokemon, t) {
   const imageUrl = getPokemonImage(currentPokemon);
   document.getElementById(`pokemonImage${t}`).src = imageUrl;
-  document.getElementById(`pokemonID${t}`).innerHTML = "#" + currentPokemon["id"];
+  document.getElementById(`pokemonID${t}`).innerHTML =
+    "#" + currentPokemon["id"];
   document.getElementById(`pokemonName${t}`).innerHTML = currentPokemon["name"];
 }
 
@@ -54,16 +56,18 @@ function renderPokemonCardOpen(currentPokemon, t) {
   getRestOfPokemonSubInfo(currentPokemon, t);
 }
 
-
 function setRestOfPokemonSubInfo(speciesData, t) {
-  document.getElementById(`generation${t}`).innerHTML =speciesData["generation"]["name"]
-  document.getElementById(`growthRate${t}`).innerHTML = speciesData["growth_rate"]["name"];
-  document.getElementById(`eggGroup${t}`).innerHTML = speciesData["egg_groups"][0]["name"];
-  setHabitat(speciesData, t)
-  setGenderRate(speciesData, t)
-  setCaptureRate(speciesData, t)
-  setHatchCounter(speciesData, t) 
-  proofAndSetHeppiness(speciesData, t)
+  document.getElementById(`generation${t}`).innerHTML =
+    speciesData["generation"]["name"];
+  document.getElementById(`growthRate${t}`).innerHTML =
+    speciesData["growth_rate"]["name"];
+  document.getElementById(`eggGroup${t}`).innerHTML =
+    speciesData["egg_groups"][0]["name"];
+  setHabitat(speciesData, t);
+  setGenderRate(speciesData, t);
+  setCaptureRate(speciesData, t);
+  setHatchCounter(speciesData, t);
+  proofAndSetHeppiness(speciesData, t);
 }
 
 function proofAndSetHeppiness(speciesData, t) {
@@ -89,15 +93,13 @@ async function getEvolutionChainUrl(currentPokemon) {
       `https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`
     );
     const speciesData = await speciesResponse.json();
-    const evolutionChainUrl = proofEvolutionChain(speciesData)
+    const evolutionChainUrl = proofEvolutionChain(speciesData);
     console.log(evolutionChainUrl);
     return evolutionChainUrl;
   } catch (error) {
     console.error(error);
   }
 }
-
-
 
 async function getRestOfPokemonSubInfo(currentPokemon, t) {
   const currentPokemonID = currentPokemon["id"];
@@ -109,4 +111,3 @@ async function getRestOfPokemonSubInfo(currentPokemon, t) {
     setRestOfPokemonSubInfo(speciesData, t);
   } catch (error) {}
 }
-

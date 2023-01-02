@@ -46,6 +46,7 @@ function setCardForFirstEvolution(evoIMG0, t){
   document.getElementById(`evolutionChainIMG0${t}`).src = evoIMG0;
 }
 
+
 async function getSecondEvolutionImg(evolutionChain, t) {
   const evoURL1 = evolutionChain["chain"]["evolves_to"][0]["species"]["url"];
   const evoResponse1 = await fetch(evoURL1);
@@ -58,6 +59,7 @@ async function getSecondEvolutionImg(evolutionChain, t) {
   return;
 }
 
+
 function setCardForSecondEvolution(evoIMG1, t) {
   document.getElementById(`evolutionArray`).classList.remove("d-none");
   document.getElementById(`evolutionContainer`).classList.remove("evolutionSoloContainer");
@@ -65,6 +67,7 @@ function setCardForSecondEvolution(evoIMG1, t) {
   document.getElementById(`evolutionChain1${t}`).classList.remove("d-none");
   document.getElementById(`evolutionChainIMG1${t}`).src = evoIMG1;
 }
+
 
 async function getLastEvolutionImg(evolutionChain, t) {
   const evoURL1 = evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["url"];
@@ -78,12 +81,14 @@ async function getLastEvolutionImg(evolutionChain, t) {
   return;
 }
 
+
 function setCardForLastEvolution(evoIMG2, t) {
   document.getElementById(`secondEvolutionArray`).classList.remove("d-none");
   document.getElementById(`evolutionContainer`).classList.remove("evolutionSoloContainer");
   document.getElementById(`evolutionChain2${t}`).classList.remove("d-none");
   document.getElementById(`evolutionChainIMG2${t}`).src = evoIMG2;
 }
+
 
 function setCurrentPokemonInfo(currentPokemon, t) {
   document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
@@ -95,10 +100,12 @@ function setCurrentPokemonInfo(currentPokemon, t) {
   proofAndSetID(currentPokemon, t);
 }
 
+
 function proofAndSetTypesAndAbilities(currentPokemon, t){
     document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
   document.getElementById(`abilities${t}`).innerHTML +=    currentPokemon["abilities"][0]["ability"]["name"];
 }
+
 
 function proofAndSetNameAndIMG(currentPokemon, t){
   const imageUrl = getPokemonImage(currentPokemon);
@@ -106,6 +113,7 @@ function proofAndSetNameAndIMG(currentPokemon, t){
   document.getElementById(`pokemonName${t}Open`).innerHTML += currentPokemon["name"]; 
  
 }
+
 
 function proofAndSetPropotion(currentPokemon, t){
   const sizeInMeters = currentPokemon["height"] / 10;
@@ -115,6 +123,7 @@ function proofAndSetPropotion(currentPokemon, t){
   document.getElementById(`height${t}`).innerHTML +=
     "<br> " + sizeInMeters + "m";
 }
+
 
 function proofAndSetID(currentPokemon, t) {
   const id = currentPokemon["id"];
@@ -127,10 +136,8 @@ function proofAndSetID(currentPokemon, t) {
   if (id > 99) {
     document.getElementById(`pokemonID${t}Open`).innerHTML += "#" + id;
   }
-  else {
-    console.log("Proof/set ID fail");
-  }
 }
+
 
 function proofAndSetMoves(currentPokemon, t) {
   const pokemonMoves = currentPokemon["moves"];
