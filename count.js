@@ -1,6 +1,7 @@
 async function test() {
   pokeDexHTML.innerHTML = "";
   pokeDexCountHTML.innerHTML = "";
+  document.getElementById("pokeDexHTML").classList.add("d-none");
   document.getElementById("pokeDexCountHTML").classList.remove("d-none");  
   const getPokemonCountFrom = document.getElementById("pokemon-count-from").value;
   const getPokemonCountTo = document.getElementById("pokemon-count-to").value;

@@ -3,8 +3,7 @@ let currentPokemon;
 let currentAPI;
 let pokemonName;
 let NumberOfUrl = ["0"];
-let maxID = 19;
-
+let maxID = 51;
 let loadedPokemons = [];
 
 async function loadAPIs() {
@@ -119,8 +118,12 @@ async function getRestOfPokemonSubInfo(currentPokemon, t) {
 }
 
 window.onscroll = async function scroll() {
-  if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-    maxID = maxID + 6;
-    loadAPIs();
+  let scrollLimit = document.body.scrollHeight - 600;
+  let pokeDexHTML = document.getElementById("pokeDexHTML").classList;
+  if (window.innerHeight + window.scrollY >= scrollLimit) {
+    if (pokeDexHTML.value == "pokeDexContainer") {
+      maxID = maxID + 5;
+      await loadAPIs();
+    }
   }
 };
