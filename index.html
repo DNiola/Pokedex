@@ -46,10 +46,10 @@
             <form action=""><label for="pokemon-count">Number of Pokemon from:</label>
                 <input placeholder="from min. 1" id="pokemon-count-from" min="1" type="number" value="1" required>
                 To:
-                <input placeholder="to min. 1" id="pokemon-count-to" min="1" type="number" value="50" required>
+                <input style="width: 130px" placeholder="to min. 1 max. 905" id="pokemon-count-to" min="1" max="905" type="number" value="50" required>
             </form>
             <div class="paddLe5">
-                <button id="countBtn"class="countBtn" onclick="countFromTo()">
+                <button id="countBtn"class="countBtn" onclick="test()">
                     Show!
                     <img class="headerIcons" src="icon/apps-sort.png">
                 </button>
@@ -65,7 +65,8 @@
     <div class="mainContainerOpen">
         <div class="pokeDexContainerOpen" id="pokeDexHTMLOpen"></div>
         <div class="pokeDexContainer d-none" id="pokeDexCountHTML"></div>
-        <div class="pokeDexContainer" id="pokeDexHTML"></div>
+        <div class="pokeDexContainer" id="pokeDexHTML">
+            <div class="countainertest"></div></div>
     </div>
 </body>
 

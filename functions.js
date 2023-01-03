@@ -121,6 +121,8 @@ function proofAndSetCurrentEvolutionPokemonName(evolutionChain, t) {
   } else if (evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]) {
     document.getElementById(`evolutionChain2${t}`).innerHTML += " " + evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["name"];
     getLastEvolutionImg(evolutionChain, t);
+  } else {
+    console.log('no Evolution info');
   }
 }
 
@@ -212,7 +214,7 @@ function setSearchContainer(){
 }
 
 async function filterPokemons(searchIt) {
-  for (let t = 1; t < NumberOfUrl.length; t++) {
+  for (let t = 1; t < 906; t++) {
     const url = APIs + t
     let pokemon = await proofURL(url);
     let pokemonName = pokemon["name"];

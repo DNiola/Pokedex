@@ -43,6 +43,7 @@ async function getFirstEvolutionImg(evolutionChain, t) {
 function setCardForFirstEvolution(evoIMG0, t){
   document.getElementById(`evolutionChain0${t}`).classList.remove("d-none");
   document.getElementById(`evolutionContainer`).classList.add("evolutionSoloContainer");
+  document.getElementById(`evolutionContainer`).classList.remove("evolutionTwoContainer");
   document.getElementById(`evolutionChainIMG0${t}`).src = evoIMG0;
 }
 

@@ -1,16 +1,26 @@
-async function countFromTo() {
-  document.getElementById("pokeDexCountHTML").classList.remove("d-none");
+async function test() {
   pokeDexHTML.innerHTML = "";
   pokeDexCountHTML.innerHTML = "";
+  document.getElementById("pokeDexCountHTML").classList.remove("d-none");  
   const getPokemonCountFrom = document.getElementById("pokemon-count-from").value;
   const getPokemonCountTo = document.getElementById("pokemon-count-to").value;
-  const button = document.getElementById("countBtn");
-  button.disabled = true;
+  await countFromTo(getPokemonCountTo, getPokemonCountFrom)
+}
+
+
+
+async function countFromTo(getPokemonCountTo, getPokemonCountFrom) {
+ document.getElementById("countBtn").style.border = "2px solid black"
+ const countBtn = document.getElementById("countBtn");
+  countBtn.disabled = true;
+  const searchBtn = document.getElementById("search");
+  searchBtn.disabled = true
   if (
     getPokemonCountFrom == "" ||
     getPokemonCountTo == "" ||
     getPokemonCountFrom == "0" ||
-    getPokemonCountTo == "0"
+    getPokemonCountTo == "0" ||
+    getPokemonCountTo > "905" 
   ) {
     for (let t = 1; t < 31; t++) {
       const url = `${APIs}${t}`;
@@ -24,7 +34,9 @@ async function countFromTo() {
       await loadCountAPIs(t);
     }
   }
-  button.disabled = false;
+  document.getElementById("countBtn").style.border = "1px solid black"
+  countBtn.disabled = false;
+  searchBtn.disabled = false
 }
 
 async function loadCountAPIs(t) {

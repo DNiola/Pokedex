@@ -3,15 +3,21 @@ let currentPokemon;
 let currentAPI;
 let pokemonName;
 let NumberOfUrl = ["0"];
+let maxID = 19;
+
+let loadedPokemons = [];
 
 async function loadAPIs() {
   let promises = [];
-  for (let t = 1; t < 51; t++) {
-    const url = `${APIs}${t}`;
-    NumberOfUrl.push(url);
-    console.log(url);
-    promises.push(loadPokemon(url, t));
-    await Promise.all(promises);
+  for (let t = 1; t < maxID; t++) {
+    if (!loadedPokemons.includes(t)) {
+      const url = `${APIs}${t}`;
+      NumberOfUrl.push(url);
+      console.log(url);
+      promises.push(loadPokemon(url, t));
+      loadedPokemons.push(t);
+      await Promise.all(promises);
+    }
   }
 }
 
@@ -111,3 +117,10 @@ async function getRestOfPokemonSubInfo(currentPokemon, t) {
     setRestOfPokemonSubInfo(speciesData, t);
   } catch (error) {}
 }
+
+window.onscroll = async function scroll() {
+  if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+    maxID = maxID + 6;
+    loadAPIs();
+  }
+};
