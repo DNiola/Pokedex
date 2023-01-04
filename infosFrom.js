@@ -104,7 +104,10 @@ function setCurrentPokemonInfo(currentPokemon, t) {
 
 function proofAndSetTypesAndAbilities(currentPokemon, t){
     document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
-  document.getElementById(`abilities${t}`).innerHTML +=    currentPokemon["abilities"][0]["ability"]["name"];
+    if (currentPokemon["abilities"].length == 0) {
+      document.getElementById(`abilities${t}`).innerHTML += "?"
+    } else {document.getElementById(`abilities${t}`).innerHTML +=    currentPokemon["abilities"][0]["ability"]["name"];}
+  
 }
 
 
@@ -153,10 +156,8 @@ function proofAndSetMoves(currentPokemon, t) {
 }
 
 function setHabitat(speciesData, t) {
-  let habitat = speciesData["habitat"];
   if (speciesData["habitat"] === null) {
     document.getElementById(`habitat${t}`).innerHTML = "?";
-    console.log(speciesData["habitat"], habitat);
   } else {
     document.getElementById(`habitat${t}`).innerHTML =
       speciesData["habitat"]["name"];

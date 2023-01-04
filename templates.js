@@ -81,7 +81,7 @@ function openPokemonHTML(t) {
           <div class="subInfoCounatiner">
             <div class="positionTypes">
               <b class="abilities" id="pokemonTypes${t}Open"></b>
-              <b class="abilities" id="pokemonTypesX${t}Open"> </b>
+              <b class="abilities" id="pokemonTypesX${t}Open"></b>
             </div>
             <div class="positionWH">
               <b class="propotion" id="weight${t}">Weight</b>

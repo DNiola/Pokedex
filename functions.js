@@ -1,10 +1,10 @@
 function proofAndSetCurrentPokemonTypes(currentPokemon, t) {
-  document.getElementById(`pokemonTypes${t}`).innerHTML = currentPokemon["types"][0]["type"]["name"];
+  document.getElementById(`pokemonTypes${t}`).innerHTML =    currentPokemon["types"][0]["type"]["name"];
   if (currentPokemon["types"].length == 1) {
-    document.getElementById(`pokemonTypesX${t}`).classList.add('d-none')
+    document.getElementById(`pokemonTypesX${t}`).classList.add("d-none");
   }
   if (currentPokemon["types"][1]) {
-    document.getElementById(`pokemonTypesX${t}`).innerHTML = currentPokemon["types"][1]["type"]["name"];
+    document.getElementById(`pokemonTypesX${t}`).innerHTML =      currentPokemon["types"][1]["type"]["name"];
   }
 }
 
@@ -99,67 +99,72 @@ function setDesignCardOpen(currentPokemon, t) {
 }
 
 function getPokemonImage(currentPokemon) {
-  if (currentPokemon["sprites"]["other"]["dream_world"] && currentPokemon["sprites"]["other"]["dream_world"]["front_default"]) {
+  if (
+    currentPokemon["sprites"]["other"]["dream_world"] &&    currentPokemon["sprites"]["other"]["dream_world"]["front_default"]
+  ) {
     return currentPokemon["sprites"]["other"]["dream_world"]["front_default"];
-  } else if ( currentPokemon["sprites"]["other"]["official-artwork"] && currentPokemon["sprites"]["other"]["official-artwork"]["front_default"]) {
-    return currentPokemon["sprites"]["other"]["official-artwork"]["front_default"];
+  } else if (
+    currentPokemon["sprites"]["other"]["official-artwork"] &&    currentPokemon["sprites"]["other"]["official-artwork"]["front_default"]
+  ) {
+    return currentPokemon["sprites"]["other"]["official-artwork"][
+      "front_default"
+    ];
   }
   return null;
 }
 
 function proofAndSetCurrentEvolutionPokemonName(evolutionChain, t) {
   if (evolutionChain["chain"]["species"]) {
-    document.getElementById(`evolutionChain0${t}`).innerHTML += " " + evolutionChain["chain"]["species"]["name"];
+    document.getElementById(`evolutionChain0${t}`).innerHTML +=      " " + evolutionChain["chain"]["species"]["name"];
     getFirstEvolutionImg(evolutionChain, t);
   }
   if (evolutionChain["chain"]["evolves_to"][0]) {
-    document.getElementById(`evolutionChain1${t}`).innerHTML += " " + evolutionChain["chain"]["evolves_to"][0]["species"]["name"];
+    document.getElementById(`evolutionChain1${t}`).innerHTML +=      " " + evolutionChain["chain"]["evolves_to"][0]["species"]["name"];
     getSecondEvolutionImg(evolutionChain, t);
   }
   if (evolutionChain["chain"]["evolves_to"][0] == undefined) {
-    console.log("This Pokemon dont evolve/undefined");
+  
   } else if (evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]) {
-    document.getElementById(`evolutionChain2${t}`).innerHTML += " " + evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["name"];
+    document.getElementById(`evolutionChain2${t}`).innerHTML +=      " " +
+      evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"][
+        "name"
+      ];
     getLastEvolutionImg(evolutionChain, t);
-  } else {
-    console.log('no Evolution info');
-  }
 }
-
-
+}
 function proofAndSetPokemonTypAndAbilities(currentPokemon, t) {
   if (currentPokemon["types"][1]) {
-    setPokemonTypes(currentPokemon, t)
+    setPokemonTypes(currentPokemon, t);
   }
   if (currentPokemon["abilities"][1]) {
-    setOneAbilities(currentPokemon, t)
+    setOneAbilities(currentPokemon, t);
   }
   if (currentPokemon["abilities"][2]) {
-    setTwoAbilities(currentPokemon, t)
+    setTwoAbilities(currentPokemon, t);
   }
 }
 
-
 function setTwoAbilities(currentPokemon, t) {
-    document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][2]["ability"]["name"] + ", ";
+  document.getElementById(`abilities${t}`).innerHTML +=    currentPokemon["abilities"][2]["ability"]["name"] + ", ";
 }
 
 function setOneAbilities(currentPokemon, t) {
-  document.getElementById(`abilities${t}`).innerHTML += currentPokemon["abilities"][1]["ability"]["name"] + ", ";
+  document.getElementById(`abilities${t}`).innerHTML +=    currentPokemon["abilities"][1]["ability"]["name"] + ", ";
 }
 
 function setPokemonTypes(currentPokemon, t) {
-  document.getElementById(`pokemonTypesX${t}Open`).innerHTML += currentPokemon["types"][1]["type"]["name"];
+  document.getElementById(`pokemonTypesX${t}Open`).innerHTML +=    currentPokemon["types"][1]["type"]["name"];
 }
 
-
 function closeCard() {
-  document.getElementById("cardContainer").classList.remove("roll-in-blurred-bottom");
+  document
+    .getElementById("cardContainer")
+    .classList.remove("roll-in-blurred-bottom");
   document.getElementById("cardContainer").classList.add("slide-out-top");
   setTimeout(() => {
     document.getElementById("cardContainer").classList.add("d-none");
   }, 600);
-  
+
   document.getElementById("backgroundCard").classList.add("d-none");
 }
 
@@ -183,9 +188,8 @@ function lastPokemon(t) {
   }
 }
 
-
 //TODO:
-//function namee() { 
+//function namee() {
 //  document.getElementById("search").addEventListener("keyup", function(event) {
 //  if (event.key === 13) {
 //    document.getElementById("getSearch").click();
@@ -193,20 +197,19 @@ function lastPokemon(t) {
 //});
 //}
 
-
 async function getSearch() {
   let search = document.getElementById("search").value;
   if (search === "") {
-    console.log('search field need name of Pokemon/Text or the ID number ');
+    console.log("search field need name of Pokemon/Text or the ID number ");
   } else {
-      search = search.toLowerCase();
-      setSearchContainer()
- await filterPokemons(search);
+    search = search.toLowerCase();
+    setSearchContainer();
+    await filterPokemons(search);
   }
 }
 
-function setSearchContainer(){
-  document.getElementById('pokeDexCountHTML').classList.remove('d-none')
+function setSearchContainer() {
+  document.getElementById("pokeDexCountHTML").classList.remove("d-none");
   let searchCountContainer = document.getElementById("pokeDexCountHTML");
   let searchContainer = document.getElementById("pokeDexHTML");
   searchCountContainer.innerHTML = "";
@@ -215,15 +218,16 @@ function setSearchContainer(){
 
 async function filterPokemons(searchIt) {
   for (let t = 1; t < 906; t++) {
-    const url = APIs + t
+    const url = APIs + t;
     let pokemon = await proofURL(url);
     let pokemonName = pokemon["name"];
-    let pokemonID = pokemon["id"]
-    if (pokemonName.toLocaleLowerCase().includes(searchIt)||
-    pokemonID.toString().includes(searchIt)
+    let pokemonID = pokemon["id"];
+    if (
+      pokemonName.toLocaleLowerCase().includes(searchIt) ||
+      pokemonID.toString().includes(searchIt)
     ) {
-      loadCountPokemon(url, t)
-    } 
+      loadCountPokemon(url, t);
+    }
   }
 }
 
@@ -233,46 +237,41 @@ async function proofURL(url) {
   return pokemonIs;
 }
 
-
 function setGenderRate(speciesData, t) {
-  genderRate = speciesData['gender_rate']
-  if ( genderRate == -1) {
-    document.getElementById(`genderRate${t}`).innerHTML += speciesData['gender_rate'];
-    document.getElementById(`maleRate${t}`).innerHTML += "?" ;
-  document.getElementById(`femaleRate${t}`).innerHTML += "?" ;
+  genderRate = speciesData["gender_rate"];
+  if (genderRate == -1) {
+    document.getElementById(`genderRate${t}`).innerHTML +=      speciesData["gender_rate"];
+    document.getElementById(`maleRate${t}`).innerHTML += "?";
+    document.getElementById(`femaleRate${t}`).innerHTML += "?";
   } else {
     const { maleRate, femaleRate } = extractGenderRates(speciesData);
-    document.getElementById(`genderRate${t}`).innerHTML += speciesData['gender_rate'];
-  document.getElementById(`maleRate${t}`).innerHTML += "" + (maleRate * 100).toFixed(2) + "%";
-  document.getElementById(`femaleRate${t}`).innerHTML += "" + (femaleRate * 100).toFixed(2) + "%";
+    document.getElementById(`genderRate${t}`).innerHTML +=      speciesData["gender_rate"];
+    document.getElementById(`maleRate${t}`).innerHTML +=      "" + (maleRate * 100).toFixed(2) + "%";
+    document.getElementById(`femaleRate${t}`).innerHTML +=      "" + (femaleRate * 100).toFixed(2) + "%";
   }
 }
 
-
-
-function setCaptureRate(speciesData, t){
-const { captureRate, captureRateInPercent } = extractCaptureRates(speciesData);
-console.log(captureRate, captureRateInPercent );
-document.getElementById(`captureRate${t}`).innerHTML += "Rate: " + captureRate + "<br>"
-document.getElementById(`captureRate${t}`).innerHTML += (captureRateInPercent * 1).toFixed(2) + "%"
-
+function setCaptureRate(speciesData, t) {
+  const { captureRate, captureRateInPercent } =    extractCaptureRates(speciesData);
+  document.getElementById(`captureRate${t}`).innerHTML +=    "Rate: " + captureRate + "<br>";
+  document.getElementById(`captureRate${t}`).innerHTML +=    (captureRateInPercent * 1).toFixed(2) + "%";
 }
 
-function setHatchCounter(speciesData, t){
+function setHatchCounter(speciesData, t) {
   let steps = proofSteps(speciesData);
-  document.getElementById(`hatchCounter${t}`).innerHTML = "Count: " + speciesData["hatch_counter"] + "<br>";
-  document.getElementById(`hatchCounter${t}`).innerHTML += "Steps: " + (steps);
-  }
+  document.getElementById(`hatchCounter${t}`).innerHTML =    "Count: " + speciesData["hatch_counter"] + "<br>";
+  document.getElementById(`hatchCounter${t}`).innerHTML += "Steps: " + steps;
+}
 
-
-
-  function proofEvolutionChain(speciesData){
-    const evolution = speciesData["evolution_chain"]
-  if (evolution == null) {
-    const evolutionChainUrl = "?"
-    return  evolutionChainUrl
+function proofEvolutionChain(speciesData) {
+  const evolution = speciesData["evolution_chain"];   
+  if (evolution == null) { 
+    console.log("ERROR");
+    return 
   } else {
     const evolutionChainUrl = speciesData["evolution_chain"]["url"];
-    return  evolutionChainUrl
+    return evolutionChainUrl;
   }
-  }
+}
+
+

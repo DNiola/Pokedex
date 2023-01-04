@@ -99,7 +99,6 @@ async function getEvolutionChainUrl(currentPokemon) {
     );
     const speciesData = await speciesResponse.json();
     const evolutionChainUrl = proofEvolutionChain(speciesData);
-    console.log(evolutionChainUrl);
     return evolutionChainUrl;
   } catch (error) {
     console.error(error);
@@ -122,8 +121,10 @@ window.onscroll = async function scroll() {
   let pokeDexHTML = document.getElementById("pokeDexHTML").classList;
   if (window.innerHeight + window.scrollY >= scrollLimit) {
     if (pokeDexHTML.value == "pokeDexContainer") {
-      maxID = maxID + 5;
+      if (maxID < 905) {
+        maxID = maxID + 5;
       await loadAPIs();
+      }
     }
   }
 };

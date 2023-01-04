@@ -29,28 +29,28 @@
     <div class="headerContainer">
         <div class="logoPosi centerFlex">
             <div>
-                <img class="logoIcon" src="img/fav-icon.png">
+                <a href=""><img class="logoIcon" src="img/fav-icon.png"></a>
             </div>
             <div class="centerFlex">
-                <h2>PokeDexAPI</h2>
+                <a href=""><h2 class="headerText">PokeDexAPI</h2></a>
             </div>
         </div>
         <div class="centerFlex">
-            <form action="">
+            <form onsubmit="return false;">
                 <input id="search" type="text" class="inputText" autocomplete="off" maxlength="20" minlength="2"
                     placeholder="Search Pokemon.." required>
-            </form>
+             </form>
             <button id="getSearch" class="searchBtn" onclick="getSearch()"><img class="headerIcons" src="icon/search-alt.png"></button>
         </div>
         <div class="centerFlex">
-            <form action=""><label for="pokemon-count">Number of Pokemon from:</label>
+            <form action=""><label for="pokemon-count"><b>Number of Pokemon from:</b></label>
                 <input placeholder="from min. 1" id="pokemon-count-from" min="1" type="number" value="1" required>
-                To:
+               <b>To:</b>
                 <input style="width: 130px" placeholder="to min. 1 max. 905" id="pokemon-count-to" min="1" max="905" type="number" value="50" required>
             </form>
             <div class="paddLe5">
                 <button id="countBtn"class="countBtn" onclick="test()">
-                    Show!
+                    <b>Show!</b>
                     <img class="headerIcons" src="icon/apps-sort.png">
                 </button>
             </div>
