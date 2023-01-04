@@ -13,16 +13,21 @@ async function test() {
 async function countFromTo(getPokemonCountTo, getPokemonCountFrom) {
  document.getElementById("countBtn").style.border = "2px solid black"
  const countBtn = document.getElementById("countBtn");
+ countBtn.style = "cursor: wait;"
   countBtn.disabled = true;
-  const searchBtn = document.getElementById("search");
+  const searchBtn = document.getElementById("getSearch");
+  searchBtn.style = "cursor: wait;"
   searchBtn.disabled = true
+  const onchangeFunc = document.getElementById("search");
+  onchangeFunc.style = "cursor: wait;"
+  onchangeFunc.disabled = true;
   if (
     getPokemonCountFrom == "" ||
     getPokemonCountTo == "" ||
     getPokemonCountFrom == "0" ||
     getPokemonCountTo == "0" ||
     getPokemonCountTo > "905" ||
-    getPokemonCountTo >= getPokemonCountFrom
+    getPokemonCountTo <= getPokemonCountFrom
   ) {
     for (let t = 1; t < 51; t++) {
       const url = `${APIs}${t}`;
@@ -37,8 +42,13 @@ async function countFromTo(getPokemonCountTo, getPokemonCountFrom) {
     }
   }
   document.getElementById("countBtn").style.border = "1px solid black"
+  
   countBtn.disabled = false;
-  searchBtn.disabled = false
+  searchBtn.disabled = false;
+  onchangeFunc.disabled = false;
+  onchangeFunc.style = "cursor: default;"
+  countBtn.style = "cursor: default;"
+searchBtn.style = "cursor: default;"
 }
 
 async function loadCountAPIs(t) {
@@ -62,6 +72,7 @@ function pokemonCountFilter(currentPokemon, t) {
   renderCountPokemonInfo(currentPokemon, t);
   proofCountDesigns(currentPokemon, t);
   proofAndSetCountCurrentPokemonTypes(currentPokemon, t);
+  
 }
 
 function renderCountPokemonInfo(currentPokemon, t) {
