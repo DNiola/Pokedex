@@ -128,3 +128,11 @@ window.onscroll = async function scroll() {
     }
   }
 };
+
+if (document.getElementById('search')) {
+  document.getElementById('search').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+      document.getElementById('getSearch').click();
+  }
+});
+}

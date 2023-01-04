@@ -37,7 +37,7 @@
         </div>
         <div class="centerFlex">
             <form onsubmit="return false;">
-                <input id="search" type="text" class="inputText" autocomplete="off" maxlength="20" minlength="2"
+                <input onchange="getSearch()" id="search" type="text" class="inputText" autocomplete="off" maxlength="20" minlength="3"
                     placeholder="Search Pokemon.." required>
              </form>
             <button id="getSearch" class="searchBtn" onclick="getSearch()"><img class="headerIcons" src="icon/search-alt.png"></button>

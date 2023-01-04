@@ -21,9 +21,10 @@ async function countFromTo(getPokemonCountTo, getPokemonCountFrom) {
     getPokemonCountTo == "" ||
     getPokemonCountFrom == "0" ||
     getPokemonCountTo == "0" ||
-    getPokemonCountTo > "905" 
+    getPokemonCountTo > "905" ||
+    getPokemonCountTo >= getPokemonCountFrom
   ) {
-    for (let t = 1; t < 31; t++) {
+    for (let t = 1; t < 51; t++) {
       const url = `${APIs}${t}`;
       NumberOfUrl.push(url);
       console.log(url);

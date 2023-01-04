@@ -198,6 +198,9 @@ function lastPokemon(t) {
 //}
 
 async function getSearch() {
+  if (document.getElementById('search').value.length < 3) {
+    console.log('Search field need moore Text/Number');
+  } else {
   let search = document.getElementById("search").value;
   if (search === "") {
     console.log("search field need name of Pokemon/Text or the ID number ");
@@ -205,7 +208,7 @@ async function getSearch() {
     search = search.toLowerCase();
     setSearchContainer();
     await filterPokemons(search);
-  }
+  }}
 }
 
 function setSearchContainer() {
