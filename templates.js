@@ -80,14 +80,14 @@ function openPokemonHTML(t) {
           </div>
           <div class="subInfoCounatiner">
             <div class="positionTypes">
-              <b class="abilities" id="pokemonTypes${t}Open"></b>
-              <b class="abilities" id="pokemonTypesX${t}Open"></b>
+              <b class="typesOpen" id="pokemonTypes${t}Open"></b>
+              <b class="typesOpen" id="pokemonTypesX${t}Open"></b>
             </div>
             <div class="positionWH">
-              <b class="propotion" id="weight${t}">Weight</b>
-              <b class="propotion" id="height${t}">Size</b>
+              <b class="propotion propotionLeft" id="weight${t}">Weight</b>
+              <b class="propotion propotionRight" id="height${t}">Size</b>
             </div>
-            <b class="abilities positionWH" id="abilities${t}">Abilities: </b>
+            <b class="centerFlex abilities positionWH" id="abilities${t}">Abilities: </b>
           </div>
         
         <table class="blueTable">
@@ -116,9 +116,9 @@ function openPokemonHTML(t) {
 </div>
   <div class="genderContainer">
     <img class="genderMaleIMG" src="img/male.png">
-      <span id="maleRate${t}"></span>
+      <span class="genderRate" id="maleRate${t}"></span>
         <img class="genderIMG" src="img/female.png">
-          <span id="femaleRate${t}"></span>
+          <span class="genderRate" id="femaleRate${t}"></span>
   </div>
 </td>
 <td><span class="centerFlex" id="captureRate${t}"></span></td>

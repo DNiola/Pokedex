@@ -223,6 +223,12 @@ body {
 .abilities {
   background: black;
   box-shadow: 0px 0px 10px 0px black;
+  
+}
+.typesOpen{
+  background: black;
+  box-shadow: 0px 0px 10px 0px black;
+  
 }
 .propotion {
   display: flex;
@@ -779,4 +785,32 @@ padding: 8px;}
   padding-top: 104px;
 
 }
+.infoContainerPosi {
+  padding-bottom: 40px;
 }
+.propotionLeft{
+  border-top-left-radius: 0;
+
+}
+.propotionRight{
+  border-top-right-radius: 0;
+
+}
+.genderRate{
+  overflow-wrap: break-word;
+}
+.genderIMG {
+  height: 12px;
+}
+.genderMaleIMG {
+  height: 10px;
+}
+.abilities {
+  flex-direction: column;
+}
+.typesOpen{
+  font-size: 10px;
+  
+}
+}
+
