@@ -1,10 +1,12 @@
 function proofAndSetCurrentPokemonTypes(currentPokemon, t) {
-  document.getElementById(`pokemonTypes${t}`).innerHTML =    currentPokemon["types"][0]["type"]["name"];
+  document.getElementById(`pokemonTypes${t}`).innerHTML =
+    currentPokemon["types"][0]["type"]["name"];
   if (currentPokemon["types"].length == 1) {
     document.getElementById(`pokemonTypesX${t}`).classList.add("d-none");
   }
   if (currentPokemon["types"][1]) {
-    document.getElementById(`pokemonTypesX${t}`).innerHTML =      currentPokemon["types"][1]["type"]["name"];
+    document.getElementById(`pokemonTypesX${t}`).innerHTML =
+      currentPokemon["types"][1]["type"]["name"];
   }
 }
 
@@ -100,11 +102,13 @@ function setDesignCardOpen(currentPokemon, t) {
 
 function getPokemonImage(currentPokemon) {
   if (
-    currentPokemon["sprites"]["other"]["dream_world"] &&    currentPokemon["sprites"]["other"]["dream_world"]["front_default"]
+    currentPokemon["sprites"]["other"]["dream_world"] &&
+    currentPokemon["sprites"]["other"]["dream_world"]["front_default"]
   ) {
     return currentPokemon["sprites"]["other"]["dream_world"]["front_default"];
   } else if (
-    currentPokemon["sprites"]["other"]["official-artwork"] &&    currentPokemon["sprites"]["other"]["official-artwork"]["front_default"]
+    currentPokemon["sprites"]["other"]["official-artwork"] &&
+    currentPokemon["sprites"]["other"]["official-artwork"]["front_default"]
   ) {
     return currentPokemon["sprites"]["other"]["official-artwork"][
       "front_default"
@@ -115,22 +119,24 @@ function getPokemonImage(currentPokemon) {
 
 function proofAndSetCurrentEvolutionPokemonName(evolutionChain, t) {
   if (evolutionChain["chain"]["species"]) {
-    document.getElementById(`evolutionChain0${t}`).innerHTML +=      " " + evolutionChain["chain"]["species"]["name"];
+    document.getElementById(`evolutionChain0${t}`).innerHTML +=
+      " " + evolutionChain["chain"]["species"]["name"];
     getFirstEvolutionImg(evolutionChain, t);
   }
   if (evolutionChain["chain"]["evolves_to"][0]) {
-    document.getElementById(`evolutionChain1${t}`).innerHTML +=      " " + evolutionChain["chain"]["evolves_to"][0]["species"]["name"];
+    document.getElementById(`evolutionChain1${t}`).innerHTML +=
+      " " + evolutionChain["chain"]["evolves_to"][0]["species"]["name"];
     getSecondEvolutionImg(evolutionChain, t);
   }
   if (evolutionChain["chain"]["evolves_to"][0] == undefined) {
-  
   } else if (evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]) {
-    document.getElementById(`evolutionChain2${t}`).innerHTML +=      " " +
+    document.getElementById(`evolutionChain2${t}`).innerHTML +=
+      " " +
       evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"][
         "name"
       ];
     getLastEvolutionImg(evolutionChain, t);
-}
+  }
 }
 function proofAndSetPokemonTypAndAbilities(currentPokemon, t) {
   if (currentPokemon["types"][1]) {
@@ -145,15 +151,18 @@ function proofAndSetPokemonTypAndAbilities(currentPokemon, t) {
 }
 
 function setTwoAbilities(currentPokemon, t) {
-  document.getElementById(`abilities${t}`).innerHTML +=    currentPokemon["abilities"][2]["ability"]["name"] + ", ";
+  document.getElementById(`abilities${t}`).innerHTML +=
+    currentPokemon["abilities"][2]["ability"]["name"] + ", ";
 }
 
 function setOneAbilities(currentPokemon, t) {
-  document.getElementById(`abilities${t}`).innerHTML +=    currentPokemon["abilities"][1]["ability"]["name"] + ", ";
+  document.getElementById(`abilities${t}`).innerHTML +=
+    currentPokemon["abilities"][1]["ability"]["name"] + ", ";
 }
 
 function setPokemonTypes(currentPokemon, t) {
-  document.getElementById(`pokemonTypesX${t}Open`).innerHTML +=    currentPokemon["types"][1]["type"]["name"];
+  document.getElementById(`pokemonTypesX${t}Open`).innerHTML +=
+    currentPokemon["types"][1]["type"]["name"];
 }
 
 function closeCard() {
@@ -166,16 +175,19 @@ function closeCard() {
   }, 600);
 
   document.getElementById("backgroundCard").classList.add("d-none");
+  document.getElementById('blockScroll').classList.remove('oBlock')
 }
 
-function nextPokemon(t) {
+function nextPokemon(t) {  
   if (t > currentPokemon.length) {
-    t = 0;
+    t = 0;    
     openPokemon(t);
+   
   } else {
     t++;
     openPokemon(t);
   }
+
 }
 
 function lastPokemon(t) {
@@ -188,27 +200,19 @@ function lastPokemon(t) {
   }
 }
 
-//TODO:
-//function namee() {
-//  document.getElementById("search").addEventListener("keyup", function(event) {
-//  if (event.key === 13) {
-//    document.getElementById("getSearch").click();
-//  }
-//});
-//}
-
 async function getSearch() {
-  if (document.getElementById('search').value.length < 3) {
-    console.log('Search field need moore Text/Number');
+  if (document.getElementById("search").value.length < 3) {
+    console.log("Search field need moore Text/Number");
   } else {
-  let search = document.getElementById("search").value;
-  if (search === "") {
-    console.log("search field need name of Pokemon/Text or the ID number ");
-  } else {
-    search = search.toLowerCase();
-    setSearchContainer();
-    await filterPokemons(search);
-  }}
+    let search = document.getElementById("search").value;
+    if (search === "") {
+      console.log("search field need name of Pokemon or the ID number ");
+    } else {
+      search = search.toLowerCase();
+      setSearchContainer();
+      await filterPokemons(search);
+    }
+  }
 }
 
 function setSearchContainer() {
@@ -225,6 +229,17 @@ async function filterPokemons(searchIt) {
     let pokemon = await proofURL(url);
     let pokemonName = pokemon["name"];
     let pokemonID = pokemon["id"];
+
+    if (pokemonID < 10) {
+      pokemonID += "#00" + pokemonID;
+    }
+    if (pokemonID > 9 && pokemonID < 100) {
+      pokemonID += "#0" + pokemonID;
+    }
+    if (pokemonID > 99) {
+      pokemonID += "#" + pokemonID;
+    }
+
     if (
       pokemonName.toLocaleLowerCase().includes(searchIt) ||
       pokemonID.toString().includes(searchIt)
@@ -243,38 +258,44 @@ async function proofURL(url) {
 function setGenderRate(speciesData, t) {
   genderRate = speciesData["gender_rate"];
   if (genderRate == -1) {
-    document.getElementById(`genderRate${t}`).innerHTML +=      speciesData["gender_rate"];
+    document.getElementById(`genderRate${t}`).innerHTML +=
+      speciesData["gender_rate"];
     document.getElementById(`maleRate${t}`).innerHTML += "?";
     document.getElementById(`femaleRate${t}`).innerHTML += "?";
   } else {
     const { maleRate, femaleRate } = extractGenderRates(speciesData);
-    document.getElementById(`genderRate${t}`).innerHTML +=      speciesData["gender_rate"];
-    document.getElementById(`maleRate${t}`).innerHTML +=      "" + (maleRate * 100).toFixed(2) + "%";
-    document.getElementById(`femaleRate${t}`).innerHTML +=      "" + (femaleRate * 100).toFixed(2) + "%";
+    document.getElementById(`genderRate${t}`).innerHTML +=
+      speciesData["gender_rate"];
+    document.getElementById(`maleRate${t}`).innerHTML +=
+      "" + (maleRate * 100).toFixed(2) + "%";
+    document.getElementById(`femaleRate${t}`).innerHTML +=
+      "" + (femaleRate * 100).toFixed(2) + "%";
   }
 }
 
 function setCaptureRate(speciesData, t) {
-  const { captureRate, captureRateInPercent } =    extractCaptureRates(speciesData);
-  document.getElementById(`captureRate${t}`).innerHTML +=    "Rate: " + captureRate + "<br>";
-  document.getElementById(`captureRate${t}`).innerHTML +=    (captureRateInPercent * 1).toFixed(2) + "%";
+  const { captureRate, captureRateInPercent } =
+    extractCaptureRates(speciesData);
+  document.getElementById(`captureRate${t}`).innerHTML +=
+    "Rate: " + captureRate + "<br>";
+  document.getElementById(`captureRate${t}`).innerHTML +=
+    (captureRateInPercent * 1).toFixed(2) + "%";
 }
 
 function setHatchCounter(speciesData, t) {
   let steps = proofSteps(speciesData);
-  document.getElementById(`hatchCounter${t}`).innerHTML =    "Count: " + speciesData["hatch_counter"] + "<br>";
+  document.getElementById(`hatchCounter${t}`).innerHTML =
+    "Count: " + speciesData["hatch_counter"] + "<br>";
   document.getElementById(`hatchCounter${t}`).innerHTML += "Steps: " + steps;
 }
 
 function proofEvolutionChain(speciesData) {
-  const evolution = speciesData["evolution_chain"];   
-  if (evolution == null) { 
+  const evolution = speciesData["evolution_chain"];
+  if (evolution == null) {
     console.log("ERROR");
-    return 
+    return;
   } else {
     const evolutionChainUrl = speciesData["evolution_chain"]["url"];
     return evolutionChainUrl;
   }
 }
-
-

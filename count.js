@@ -1,4 +1,4 @@
-async function test() {
+async function startCount() {
   pokeDexHTML.innerHTML = "";
   pokeDexCountHTML.innerHTML = "";
   document.getElementById("pokeDexHTML").classList.add("d-none");
@@ -7,7 +7,6 @@ async function test() {
   const getPokemonCountTo = document.getElementById("pokemon-count-to").value;
   await countFromTo(getPokemonCountTo, getPokemonCountFrom)
 }
-
 
 
 async function countFromTo(getPokemonCountTo, getPokemonCountFrom) {
@@ -27,7 +26,7 @@ async function countFromTo(getPokemonCountTo, getPokemonCountFrom) {
     getPokemonCountFrom == "0" ||
     getPokemonCountTo == "0" ||
     getPokemonCountTo > "905" ||
-    getPokemonCountTo <= getPokemonCountFrom
+    getPokemonCountTo < getPokemonCountFrom
   ) {
     for (let t = 1; t < 51; t++) {
       const url = `${APIs}${t}`;
@@ -46,9 +45,9 @@ async function countFromTo(getPokemonCountTo, getPokemonCountFrom) {
   countBtn.disabled = false;
   searchBtn.disabled = false;
   onchangeFunc.disabled = false;
-  onchangeFunc.style = "cursor: default;"
-  countBtn.style = "cursor: default;"
-searchBtn.style = "cursor: default;"
+  onchangeFunc.style = "cursor: text;"
+  countBtn.style = "cursor: grab;"
+searchBtn.style = "cursor:grab;"
 }
 
 async function loadCountAPIs(t) {
@@ -78,10 +77,21 @@ function pokemonCountFilter(currentPokemon, t) {
 function renderCountPokemonInfo(currentPokemon, t) {
   const imageUrl = getPokemonImage(currentPokemon);
   document.getElementById(`pokemonCountImage${t}`).src = imageUrl;
-  document.getElementById(`pokemonCountID${t}`).innerHTML =
-    "#" + currentPokemon["id"];
-  document.getElementById(`pokemonCountName${t}`).innerHTML =
-    currentPokemon["name"];
+  document.getElementById(`pokemonCountName${t}`).innerHTML = currentPokemon["name"];
+  proofAndSetCountIDs(currentPokemon, t)
+}
+
+function proofAndSetCountIDs(currentPokemon, t) {
+  const id = currentPokemon["id"];
+  if (id < 10) {
+    document.getElementById(`pokemonCountID${t}`).innerHTML += "#00" + id;
+  }
+  if (id > 9 && id < 100) {
+    document.getElementById(`pokemonCountID${t}`).innerHTML += "#0" + id;
+  }
+  if (id > 99) {
+    document.getElementById(`pokemonCountID${t}`).innerHTML += "#" + id;
+  }
 }
 
 function proofAndSetCountCurrentPokemonTypes(currentPokemon, t) {

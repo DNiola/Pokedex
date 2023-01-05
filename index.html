@@ -25,8 +25,8 @@
     <title>Pokédex</title>
 </head>
 
-<body onload="loadAPIs()">
-    <div class="headerContainer">
+<body onload="loadAPIs()" id="blockScroll">
+    <div class="headerContainer" id="header">
         <div class="logoPosi centerFlex">
             <div>
                 <a href=""><img class="logoIcon" src="img/fav-icon.png"></a>
@@ -43,13 +43,14 @@
             <button id="getSearch" class="searchBtn" onclick="getSearch()"><img class="headerIcons" src="icon/search-alt.png"></button>
         </div>
         <div class="centerFlex">
-            <form action=""><label for="pokemon-count"><b>Number of Pokemon from:</b></label>
+            <form class="formCountContainer" action="">
+                <label for="pokemon-count"><b>Number of Pokemon from:</b></label>
                 <input placeholder="from min. 1" id="pokemon-count-from" min="1" type="number" value="1" required>
                <b>To:</b>
                 <input style="width: 130px" placeholder="to min. 1 max. 905" id="pokemon-count-to" min="1" max="905" type="number" value="50" required>
             </form>
             <div class="paddLe5">
-                <button id="countBtn"class="countBtn" onclick="test()">
+                <button id="countBtn"class="countBtn" onclick="startCount()">
                     <b>Show!</b>
                     <img class="headerIcons" src="icon/apps-sort.png">
                 </button>
@@ -65,8 +66,7 @@
     <div class="mainContainerOpen">
         <div class="pokeDexContainerOpen" id="pokeDexHTMLOpen"></div>
         <div class="pokeDexContainer d-none" id="pokeDexCountHTML"></div>
-        <div class="pokeDexContainer" id="pokeDexHTML">
-            <div class="countainertest"></div></div>
+        <div class="pokeDexContainer" id="pokeDexHTML"></div>
     </div>
 </body>
 

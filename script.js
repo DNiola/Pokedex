@@ -37,12 +37,26 @@ function pokemonFilter(currentPokemon, t) {
 function renderPokemonInfo(currentPokemon, t) {
   const imageUrl = getPokemonImage(currentPokemon);
   document.getElementById(`pokemonImage${t}`).src = imageUrl;
-  document.getElementById(`pokemonID${t}`).innerHTML =
-    "#" + currentPokemon["id"];
   document.getElementById(`pokemonName${t}`).innerHTML = currentPokemon["name"];
+  proofAndSetIDs(currentPokemon, t)
 }
 
+function proofAndSetIDs(currentPokemon, t) {
+  const id = currentPokemon["id"];
+  if (id < 10) {
+    document.getElementById(`pokemonID${t}`).innerHTML += "#00" + id;
+  }
+  if (id > 9 && id < 100) {
+    document.getElementById(`pokemonID${t}`).innerHTML += "#0" + id;
+  }
+  if (id > 99) {
+    document.getElementById(`pokemonID${t}`).innerHTML += "#" + id;
+  }
+}
+
+
 async function openPokemon(t) {
+ document.getElementById('blockScroll').classList.add('oBlock')
   urlRE = APIs + t;
   console.log("URL-RE:", urlRE);
   let response = await fetch(urlRE);
