@@ -1,10 +1,8 @@
 function proofSteps(speciesData) {
+  let steps;
   const generation = speciesData["generation"]["name"];
   const hatchCounter = speciesData["hatch_counter"];
-  let steps;
-  if (
-    generation == "generation-i" || generation === "generation-ii" || generation === "generation-iii" || generation === "generation-vii"
-  ) {
+  if ( generation == "generation-i" || generation === "generation-ii" || generation === "generation-iii" || generation === "generation-vii" ) {
     steps = hatchCounter * 256;
   } else if (generation === "generation-iv") {
     steps = hatchCounter * 255;
@@ -16,17 +14,20 @@ function proofSteps(speciesData) {
   return steps;
 }
 
+
 function extractCaptureRates(speciesData) {
   const captureRate = speciesData["capture_rate"];
   const captureRateInPercent = ((captureRate / 255) * 100).toFixed(2);
   return { captureRate, captureRateInPercent };
 }
 
+
 function extractGenderRates(speciesData) {
   const femaleRate = speciesData["gender_rate"] / 8;
   const maleRate = (8 - speciesData["gender_rate"]) / 8;
   return { maleRate, femaleRate };
 }
+
 
 async function getFirstEvolutionImg(evolutionChain, t) {
   const evoURL1 = evolutionChain["chain"]["species"]["url"];
@@ -36,15 +37,8 @@ async function getFirstEvolutionImg(evolutionChain, t) {
   let response = await fetch(API);
   const currentPokemon = await response.json();
   const evoIMG0 = getPokemonImage(currentPokemon);
-  setCardForFirstEvolution(evoIMG0, t)
+  setCardForFirstEvolution(evoIMG0, t);
   return;
-}
-
-function setCardForFirstEvolution(evoIMG0, t){
-  document.getElementById(`evolutionChain0${t}`).classList.remove("d-none");
-  document.getElementById(`evolutionContainer`).classList.add("evolutionSoloContainer");
-  document.getElementById(`evolutionContainer`).classList.remove("evolutionTwoContainer");
-  document.getElementById(`evolutionChainIMG0${t}`).src = evoIMG0;
 }
 
 
@@ -56,17 +50,8 @@ async function getSecondEvolutionImg(evolutionChain, t) {
   let response = await fetch(API);
   const currentPokemon = await response.json();
   const evoIMG1 = getPokemonImage(currentPokemon);
-  setCardForSecondEvolution(evoIMG1, t)
+  setCardForSecondEvolution(evoIMG1, t);
   return;
-}
-
-
-function setCardForSecondEvolution(evoIMG1, t) {
-  document.getElementById(`evolutionArray`).classList.remove("d-none");
-  document.getElementById(`evolutionContainer`).classList.remove("evolutionSoloContainer");
-  document.getElementById(`evolutionContainer`).classList.add("evolutionTwoContainer");
-  document.getElementById(`evolutionChain1${t}`).classList.remove("d-none");
-  document.getElementById(`evolutionChainIMG1${t}`).src = evoIMG1;
 }
 
 
@@ -78,88 +63,96 @@ async function getLastEvolutionImg(evolutionChain, t) {
   let response = await fetch(API);
   const currentPokemon = await response.json();
   const evoIMG2 = getPokemonImage(currentPokemon);
-  setCardForLastEvolution(evoIMG2, t)
+  setCardForLastEvolution(evoIMG2, t);
   return;
 }
 
 
-function setCardForLastEvolution(evoIMG2, t) {
-  document.getElementById(`secondEvolutionArray`).classList.remove("d-none");
-  document.getElementById(`evolutionContainer`).classList.remove("evolutionSoloContainer");
-  document.getElementById(`evolutionChain2${t}`).classList.remove("d-none");
-  document.getElementById(`evolutionChainIMG2${t}`).src = evoIMG2;
-}
-
-
-function setCurrentPokemonInfo(currentPokemon, t) {
-  document.getElementById("pokeDexHTMLOpen").classList.remove("d-noneI");
-  document.getElementById("backgroundCard").classList.remove("d-none");
-  proofAndSetTypesAndAbilities(currentPokemon, t)
-  proofAndSetNameAndIMG(currentPokemon, t)
-  proofAndSetPropotion(currentPokemon, t)
-  proofAndSetMoves(currentPokemon, t);
-  proofAndSetID(currentPokemon, t);
-}
-
-
-function proofAndSetTypesAndAbilities(currentPokemon, t){
-    document.getElementById(`pokemonTypes${t}Open`).innerHTML += currentPokemon["types"][0]["type"]["name"];
-    if (currentPokemon["abilities"].length == 0) {
-      document.getElementById(`abilities${t}`).innerHTML += "?"
-    } else {document.getElementById(`abilities${t}`).innerHTML +=    currentPokemon["abilities"][0]["ability"]["name"];}
-  
-}
-
-
-function proofAndSetNameAndIMG(currentPokemon, t){
-  const imageUrl = getPokemonImage(currentPokemon);
-  document.getElementById(`pokemonImage${t}Open`).src = imageUrl;
-  document.getElementById(`pokemonName${t}Open`).innerHTML += currentPokemon["name"]; 
- 
-}
-
-
-function proofAndSetPropotion(currentPokemon, t){
-  const sizeInMeters = currentPokemon["height"] / 10;
-  const weightInKilograms = currentPokemon["weight"] / 10;
- document.getElementById(`weight${t}`).innerHTML +=
-    "<br> " + weightInKilograms + " kg";
-  document.getElementById(`height${t}`).innerHTML +=
-    "<br> " + sizeInMeters + "m";
-}
-
-
-function proofAndSetID(currentPokemon, t) {
-  const id = currentPokemon["id"];
-  if (id < 10) {
-    document.getElementById(`pokemonID${t}Open`).innerHTML += "#00" + id;
+function getPokemonImage(currentPokemon) {
+  const dreamWorldImg1 = currentPokemon["sprites"]["other"]["dream_world"];
+  const dreamWorldImg2 = currentPokemon["sprites"]["other"]["dream_world"]["front_default"];
+  const dreamWorldImg3 = currentPokemon["sprites"]["other"]["official-artwork"]["front_default"];
+  const dreamWorldImg4 = currentPokemon["sprites"]["other"]["official-artwork"];
+  if (dreamWorldImg1 && dreamWorldImg2) {
+    return dreamWorldImg2;
+  } else if (dreamWorldImg4 && dreamWorldImg3) {
+    return dreamWorldImg3;
   }
-  if (id > 9 && id < 100) {
-    document.getElementById(`pokemonID${t}Open`).innerHTML += "#0" + id;
-  }
-  if (id > 99) {
-    document.getElementById(`pokemonID${t}Open`).innerHTML += "#" + id;
-  }
+  return null;
 }
 
 
-function proofAndSetMoves(currentPokemon, t) {
-  const pokemonMoves = currentPokemon["moves"];
-  if (pokemonMoves == "") {
-    document.getElementById(`moves${t}`).innerHTML += "Unknow";
+function proofEvolutionChain(speciesData) {
+  const evolution = speciesData["evolution_chain"];
+  if (evolution == null) {
+    console.log("ERROR");
+    return;
   } else {
-    for (let m = 0; m < currentPokemon["moves"].length; m++) {
-      const moves = currentPokemon["moves"][`${m}`]["move"]["name"];
-      document.getElementById(`moves${t}`).innerHTML += moves + ", ";
-    }
+    const evolutionChainUrl = speciesData["evolution_chain"]["url"];
+    return evolutionChainUrl;
   }
 }
 
-function setHabitat(speciesData, t) {
-  if (speciesData["habitat"] === null) {
-    document.getElementById(`habitat${t}`).innerHTML = "?";
-  } else {
-    document.getElementById(`habitat${t}`).innerHTML =
-      speciesData["habitat"]["name"];
-  }
+
+function openDiagram(currentPokemon) {
+  statHP = currentPokemon["stats"][0]["base_stat"];
+  statATK = currentPokemon["stats"][1]["base_stat"];
+  statDEF = currentPokemon["stats"][2]["base_stat"];
+  statSATK = currentPokemon["stats"][3]["base_stat"];
+  statSDEF = currentPokemon["stats"][4]["base_stat"];
+  statSPEED = currentPokemon["stats"][5]["base_stat"];
+  statMAX = 250;
+  Chart.defaults.borderColor = "#fafafa";
+  Chart.defaults.color = "white";
+  const ctx = document.getElementById("myChart");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["HP", "ATK", "DEF", "S.ATK", "S.DEF", "SPEED"],
+      datasets: [
+        {
+          label: "Base stats:",
+          data: [
+            statHP,
+            statATK,
+            statDEF,
+            statSATK,
+            statSDEF,
+            statSPEED,
+            statMAX,
+          ],
+          borderRadius: 8,
+          backgroundColor: [
+            "rgb(255, 99, 132)",
+            "rgb(255, 159, 64)",
+            "rgb(255, 205, 86)",
+            "rgb(75, 192, 192)",
+            "rgb(54, 162, 235)",
+            "rgb(153, 102, 255)",
+            "rgb(201, 203, 207)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 0.7)",
+            "rgba(255, 159, 64, 0.7)",
+            "rgba(255, 205, 86, 0.7)",
+            "rgba(75, 192, 192, 0.7)",
+            "rgba(54, 162, 235, 0.7)",
+            "rgba(153, 102, 255, 0.7)",
+            "rgba(201, 203, 207, 0.7)",
+          ],
+          borderWidth: 2,
+        },
+      ],
+    },
+    options: {
+      indexAxis: "y",
+      barPercentage: 0.6,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+    plugins: [ChartDataLabels],
+  });
 }

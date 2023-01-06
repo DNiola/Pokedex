@@ -6,7 +6,7 @@ let NumberOfUrl = ["0"];
 let maxID = 51;
 let loadedPokemons = [];
 let finish = [false];
-let searchAmount = []
+let searchAmount = [];
 
 
 async function loadAPIs() {
@@ -23,6 +23,7 @@ async function loadAPIs() {
   }
 }
 
+
 async function loadPokemon(url, t) {
   let response = await fetch(url);
   currentPokemon = await response.json();
@@ -30,76 +31,45 @@ async function loadPokemon(url, t) {
   pokemonFilter(currentPokemon, t);
 }
 
+
 function pokemonFilter(currentPokemon, t) {
   pokeDexHTML.innerHTML += renderAllPokemons(t);
-  renderPokemonInfo(currentPokemon, t);
   proofDesigns(currentPokemon, t);
+  proofAndSetIDs(currentPokemon, t);
   proofAndSetCurrentPokemonTypes(currentPokemon, t);
-}
-
-function renderPokemonInfo(currentPokemon, t) {
-  const imageUrl = getPokemonImage(currentPokemon);
-  document.getElementById(`pokemonImage${t}`).src = imageUrl;
-  document.getElementById(`pokemonName${t}`).innerHTML = currentPokemon["name"];
-  proofAndSetIDs(currentPokemon, t)
-}
-
-function proofAndSetIDs(currentPokemon, t) {
-  const id = currentPokemon["id"];
-  if (id < 10) {
-    document.getElementById(`pokemonID${t}`).innerHTML += "#00" + id;
-  }
-  if (id > 9 && id < 100) {
-    document.getElementById(`pokemonID${t}`).innerHTML += "#0" + id;
-  }
-  if (id > 99) {
-    document.getElementById(`pokemonID${t}`).innerHTML += "#" + id;
-  }
+  setImgAndName(currentPokemon, t);
 }
 
 
 async function openPokemon(t) {
- document.getElementById('blockScroll').classList.add('oBlock')
-  urlRE = APIs + t;
-  console.log("URL-RE:", urlRE);
-  let response = await fetch(urlRE);
+  let urlOpen = APIs + t;
+  let response = await fetch(urlOpen);
   const currentPokemon = await response.json();
-  console.log("Pokemon-RE:", currentPokemon);
   pokeDexHTMLOpen.innerHTML = openPokemonHTML(t);
   renderPokemonCardOpen(currentPokemon, t);
-  setDesignCardOpen(currentPokemon, t);
 }
 
+
 function renderPokemonCardOpen(currentPokemon, t) {
+  document.getElementById("blockScroll").classList.add("oBlock");
   proofAndSetPokemonTypAndAbilities(currentPokemon, t);
   setCurrentPokemonInfo(currentPokemon, t);
   openDiagram(currentPokemon, t);
   getCurrentEvolutionChain(currentPokemon, t);
   getRestOfPokemonSubInfo(currentPokemon, t);
+  setDesignCardOpen(currentPokemon, t);
 }
 
+
 function setRestOfPokemonSubInfo(speciesData, t) {
-  document.getElementById(`generation${t}`).innerHTML =
-    speciesData["generation"]["name"];
-  document.getElementById(`growthRate${t}`).innerHTML =
-    speciesData["growth_rate"]["name"];
-  document.getElementById(`eggGroup${t}`).innerHTML =
-    speciesData["egg_groups"][0]["name"];
   setHabitat(speciesData, t);
   setGenderRate(speciesData, t);
   setCaptureRate(speciesData, t);
   setHatchCounter(speciesData, t);
+  setEggGrowAndName(speciesData, t);
   proofAndSetHeppiness(speciesData, t);
 }
 
-function proofAndSetHeppiness(speciesData, t) {
-  happiness = speciesData["base_happiness"];
-  if (happiness == null) {
-    document.getElementById(`happiness${t}`).innerHTML = "?";
-  } else {
-    document.getElementById(`happiness${t}`).innerHTML = happiness;
-  }
-}
 
 async function getCurrentEvolutionChain(currentPokemon, t) {
   const evolutionChainUrl = await getEvolutionChainUrl(currentPokemon);
@@ -108,30 +78,23 @@ async function getCurrentEvolutionChain(currentPokemon, t) {
   proofAndSetCurrentEvolutionPokemonName(evolutionChain, t);
 }
 
+
 async function getEvolutionChainUrl(currentPokemon) {
   const currentPokemonID = currentPokemon["id"];
-  try {
-    const speciesResponse = await fetch(
-      `https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`
-    );
-    const speciesData = await speciesResponse.json();
-    const evolutionChainUrl = proofEvolutionChain(speciesData);
-    return evolutionChainUrl;
-  } catch (error) {
-    console.error(error);
-  }
+  const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`);
+  const speciesData = await speciesResponse.json();
+  const evolutionChainUrl = proofEvolutionChain(speciesData);
+  return evolutionChainUrl;
 }
+
 
 async function getRestOfPokemonSubInfo(currentPokemon, t) {
   const currentPokemonID = currentPokemon["id"];
-  try {
-    const speciesResponse = await fetch(
-      `https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`
-    );
-    const speciesData = await speciesResponse.json();
-    setRestOfPokemonSubInfo(speciesData, t);
-  } catch (error) {}
+  const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`);
+  const speciesData = await speciesResponse.json();
+  setRestOfPokemonSubInfo(speciesData, t);
 }
+
 
 window.onscroll = async function scroll() {
   let scrollLimit = document.body.scrollHeight - 600;
@@ -140,16 +103,19 @@ window.onscroll = async function scroll() {
     if (pokeDexHTML.value == "pokeDexContainer") {
       if (maxID < 905) {
         maxID = maxID + 5;
-      await loadAPIs();
+        await loadAPIs();
       }
     }
   }
 };
 
-if (document.getElementById('search')) {
-  document.getElementById('search').addEventListener('keydown', function(event) {
-  if (event.key === 'Enter') {
-      document.getElementById('getSearch').click();
-  }
-});
+
+if (document.getElementById("search")) {
+  document
+    .getElementById("search")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        document.getElementById("getSearch").click();
+      }
+    });
 }
