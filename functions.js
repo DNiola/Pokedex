@@ -171,7 +171,7 @@ function closeCard() {
     .classList.remove("roll-in-blurred-bottom");
   document.getElementById("cardContainer").classList.add("slide-out-top");
   setTimeout(() => {
-    document.getElementById("cardContainer").classList.add("d-none");
+    document.getElementById("cardContainer").classList.add("d-noneI");
   }, 600);
 
   document.getElementById("backgroundCard").classList.add("d-none");
@@ -216,7 +216,7 @@ async function getSearch() {
 }
 
 function setSearchContainer() {
-  document.getElementById("pokeDexCountHTML").classList.remove("d-none");
+  document.getElementById("pokeDexCountHTML").classList.remove("d-noneI");
   let searchCountContainer = document.getElementById("pokeDexCountHTML");
   let searchContainer = document.getElementById("pokeDexHTML");
   searchCountContainer.innerHTML = "";

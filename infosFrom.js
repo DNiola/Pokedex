@@ -92,7 +92,7 @@ function setCardForLastEvolution(evoIMG2, t) {
 
 
 function setCurrentPokemonInfo(currentPokemon, t) {
-  document.getElementById("pokeDexHTMLOpen").classList.remove("d-none");
+  document.getElementById("pokeDexHTMLOpen").classList.remove("d-noneI");
   document.getElementById("backgroundCard").classList.remove("d-none");
   proofAndSetTypesAndAbilities(currentPokemon, t)
   proofAndSetNameAndIMG(currentPokemon, t)

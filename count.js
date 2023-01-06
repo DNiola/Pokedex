@@ -1,8 +1,8 @@
 async function startCount() {
   pokeDexHTML.innerHTML = "";
   pokeDexCountHTML.innerHTML = "";
-  document.getElementById("pokeDexHTML").classList.add("d-none");
-  document.getElementById("pokeDexCountHTML").classList.remove("d-none");  
+  document.getElementById("pokeDexHTML").classList.add("d-noneI");
+  document.getElementById("pokeDexCountHTML").classList.remove("d-noneI");  
   const getPokemonCountFrom = document.getElementById("pokemon-count-from").value;
   const getPokemonCountTo = document.getElementById("pokemon-count-to").value;
   await countFromTo(getPokemonCountTo, getPokemonCountFrom)
@@ -25,8 +25,7 @@ async function countFromTo(getPokemonCountTo, getPokemonCountFrom) {
     getPokemonCountTo == "" ||
     getPokemonCountFrom == "0" ||
     getPokemonCountTo == "0" ||
-    getPokemonCountTo > "905" ||
-    getPokemonCountTo < getPokemonCountFrom
+    getPokemonCountTo <= getPokemonCountFrom
   ) {
     for (let t = 1; t < 51; t++) {
       const url = `${APIs}${t}`;
