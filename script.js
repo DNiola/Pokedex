@@ -5,6 +5,9 @@ let pokemonName;
 let NumberOfUrl = ["0"];
 let maxID = 51;
 let loadedPokemons = [];
+let finish = [false];
+let searchAmount = []
+
 
 async function loadAPIs() {
   let promises = [];

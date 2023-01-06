@@ -24,7 +24,13 @@ function renderAllPokemons(t) {
 function renderCountsPokemons(t) {
   return `
 <div class="pokedexBG">
-  <div onclick="openPokemon(${t})" id="pokemonCountContainer${t}" class="pokedex">
+  <div id="loadingContainer${t}" class="d-none">
+    <div id="loading-wrapper">
+      <div id="loading-text">LOADING</div>
+      <div id="loading-content"></div>
+    </div>
+  </div>
+  <div onclick="openPokemon(${t})" id="pokemonCountContainer${t}" class="pokedex d-none">  
   <div class="pokeballIMG"></div>
     <div class="zIndex1 cursorP">
       <span id="pokemonCountID${t}" style="text-decoration: underline";></span>

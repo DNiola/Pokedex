@@ -200,60 +200,7 @@ function lastPokemon(t) {
   }
 }
 
-async function getSearch() {
-  if (document.getElementById("search").value.length < 3) {
-    console.log("Search field need moore Text/Number");
-  } else {
-    let search = document.getElementById("search").value;
-    if (search === "") {
-      console.log("search field need name of Pokemon or the ID number ");
-    } else {
-      search = search.toLowerCase();
-      setSearchContainer();
-      await filterPokemons(search);
-    }
-  }
-}
 
-function setSearchContainer() {
-  document.getElementById("pokeDexCountHTML").classList.remove("d-noneI");
-  let searchCountContainer = document.getElementById("pokeDexCountHTML");
-  let searchContainer = document.getElementById("pokeDexHTML");
-  searchCountContainer.innerHTML = "";
-  searchContainer.innerHTML = "";
-}
-
-async function filterPokemons(searchIt) {
-  for (let t = 1; t < 906; t++) {
-    const url = APIs + t;
-    let pokemon = await proofURL(url);
-    let pokemonName = pokemon["name"];
-    let pokemonID = pokemon["id"];
-
-    if (pokemonID < 10) {
-      pokemonID += "#00" + pokemonID;
-    }
-    if (pokemonID > 9 && pokemonID < 100) {
-      pokemonID += "#0" + pokemonID;
-    }
-    if (pokemonID > 99) {
-      pokemonID += "#" + pokemonID;
-    }
-
-    if (
-      pokemonName.toLocaleLowerCase().includes(searchIt) ||
-      pokemonID.toString().includes(searchIt)
-    ) {
-      loadCountPokemon(url, t);
-    }
-  }
-}
-
-async function proofURL(url) {
-  let response = await fetch(url);
-  pokemonIs = await response.json();
-  return pokemonIs;
-}
 
 function setGenderRate(speciesData, t) {
   genderRate = speciesData["gender_rate"];
