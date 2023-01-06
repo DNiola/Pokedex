@@ -128,20 +128,17 @@ function proofAndSetCurrentPokemonTypes(currentPokemon, t) {
 
 
 function proofAndSetCurrentEvolutionPokemonName(evolutionChain, t) {
-  const nameEvolution1 = evolutionChain["chain"]["species"]["name"];
-  const nameEvolution2 = evolutionChain["chain"]["evolves_to"][0]["species"]["name"];
-  const nameEvolution3 = evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["name"];
   if (evolutionChain["chain"]["species"]) {
-    document.getElementById(`evolutionChain0${t}`).innerHTML += nameEvolution1;
+    document.getElementById(`evolutionChain0${t}`).innerHTML += evolutionChain["chain"]["species"]["name"];
     getFirstEvolutionImg(evolutionChain, t);
   }
   if (evolutionChain["chain"]["evolves_to"][0]) {
-    document.getElementById(`evolutionChain1${t}`).innerHTML += nameEvolution2;
+    document.getElementById(`evolutionChain1${t}`).innerHTML += evolutionChain["chain"]["evolves_to"][0]["species"]["name"];
     getSecondEvolutionImg(evolutionChain, t);
   }
   if (evolutionChain["chain"]["evolves_to"][0] == undefined) {
   } else if (evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]) {
-    document.getElementById(`evolutionChain2${t}`).innerHTML += nameEvolution3;
+    document.getElementById(`evolutionChain2${t}`).innerHTML += evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["name"];
     getLastEvolutionImg(evolutionChain, t);
   }
 }
@@ -173,8 +170,7 @@ function proofAndSetTypesAndAbilities(currentPokemon, t) {
 function proofAndSetNameAndIMG(currentPokemon, t) {
   const imageUrl = getPokemonImage(currentPokemon);
   document.getElementById(`pokemonImage${t}Open`).src = imageUrl;
-  document.getElementById(`pokemonName${t}Open`).innerHTML +=
-    currentPokemon["name"];
+  document.getElementById(`pokemonName${t}Open`).innerHTML += currentPokemon["name"];
 }
 
 
@@ -232,6 +228,11 @@ function closeCard() {
   }, 600);
 }
 
+//function auto(t) {
+//  setTimeout(() => {
+//    nextPokemon(t)
+//  }, 300);
+//}
 
 function nextPokemon(t) {
   if (t > currentPokemon.length) {
@@ -239,7 +240,8 @@ function nextPokemon(t) {
     openPokemon(t);
   } else {
     t++;
-    openPokemon(t);
+    openPokemon(t); 
+    //auto(t)
   }
 }
 

@@ -8,7 +8,6 @@ let loadedPokemons = [];
 let finish = [false];
 let searchAmount = [];
 
-
 async function loadAPIs() {
   let promises = [];
   for (let t = 1; t < maxID; t++) {
@@ -23,14 +22,12 @@ async function loadAPIs() {
   }
 }
 
-
 async function loadPokemon(url, t) {
   let response = await fetch(url);
   currentPokemon = await response.json();
   console.log("Pokemon:", currentPokemon);
   pokemonFilter(currentPokemon, t);
 }
-
 
 function pokemonFilter(currentPokemon, t) {
   pokeDexHTML.innerHTML += renderAllPokemons(t);
@@ -40,26 +37,24 @@ function pokemonFilter(currentPokemon, t) {
   setImgAndName(currentPokemon, t);
 }
 
-
 async function openPokemon(t) {
   let urlOpen = APIs + t;
   let response = await fetch(urlOpen);
   const currentPokemon = await response.json();
   pokeDexHTMLOpen.innerHTML = openPokemonHTML(t);
-  renderPokemonCardOpen(currentPokemon, t);
+  await renderPokemonCardOpen(currentPokemon, t);
 }
 
 
-function renderPokemonCardOpen(currentPokemon, t) {
+async function renderPokemonCardOpen(currentPokemon, t) {
   document.getElementById("blockScroll").classList.add("oBlock");
+  setDesignCardOpen(currentPokemon, t);
   proofAndSetPokemonTypAndAbilities(currentPokemon, t);
   setCurrentPokemonInfo(currentPokemon, t);
-  openDiagram(currentPokemon, t);
-  getCurrentEvolutionChain(currentPokemon, t);
-  getRestOfPokemonSubInfo(currentPokemon, t);
-  setDesignCardOpen(currentPokemon, t);
+  await openDiagram(currentPokemon, t);
+  await getCurrentEvolutionChain(currentPokemon, t);
+  await getRestOfPokemonSubInfo(currentPokemon, t);
 }
-
 
 function setRestOfPokemonSubInfo(speciesData, t) {
   setHabitat(speciesData, t);
@@ -70,7 +65,6 @@ function setRestOfPokemonSubInfo(speciesData, t) {
   proofAndSetHeppiness(speciesData, t);
 }
 
-
 async function getCurrentEvolutionChain(currentPokemon, t) {
   const evolutionChainUrl = await getEvolutionChainUrl(currentPokemon);
   const evolutionChainResponse = await fetch(evolutionChainUrl);
@@ -78,23 +72,24 @@ async function getCurrentEvolutionChain(currentPokemon, t) {
   proofAndSetCurrentEvolutionPokemonName(evolutionChain, t);
 }
 
-
 async function getEvolutionChainUrl(currentPokemon) {
   const currentPokemonID = currentPokemon["id"];
-  const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`);
+  const speciesResponse = await fetch(
+    `https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`
+  );
   const speciesData = await speciesResponse.json();
   const evolutionChainUrl = proofEvolutionChain(speciesData);
   return evolutionChainUrl;
 }
 
-
 async function getRestOfPokemonSubInfo(currentPokemon, t) {
   const currentPokemonID = currentPokemon["id"];
-  const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`);
+  const speciesResponse = await fetch(
+    `https://pokeapi.co/api/v2/pokemon-species/${currentPokemonID}/`
+  );
   const speciesData = await speciesResponse.json();
   setRestOfPokemonSubInfo(speciesData, t);
 }
-
 
 window.onscroll = async function scroll() {
   let scrollLimit = document.body.scrollHeight - 600;
@@ -108,7 +103,6 @@ window.onscroll = async function scroll() {
     }
   }
 };
-
 
 if (document.getElementById("search")) {
   document

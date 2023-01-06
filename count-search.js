@@ -20,12 +20,20 @@ async function countFromTo(getPokemonCountTo, getPokemonCountFrom) {
   ) {
     countFalse();
   } else {
-    countTrue(getPokemonCountTo, getPokemonCountFrom);
+   await countTrue(getPokemonCountTo, getPokemonCountFrom);
   }
   finish.push(true);
   proofFinish(getPokemonCountTo, getPokemonCountFrom);
 }
 
+function proofFinish(getPokemonCountTo, getPokemonCountFrom) {
+  if (finish) {
+    let proofSum = getPokemonCountTo - getPokemonCountFrom + 2;
+    for (let t = 1; t < proofSum; t++) {
+      finishLoading(t);
+    }
+  }
+}
 
 async function countFalse() {
   for (let t = 1; t < 2; t++) {
@@ -127,26 +135,17 @@ function proofAndSetCountCurrentPokemonTypes(currentPokemon, t) {
 }
 
 
-function proofFinish(getPokemonCountTo, getPokemonCountFrom) {
-  if (finish) {
-    let proofSum = getPokemonCountTo - getPokemonCountFrom + 2;
-    for (let t = 1; t < proofSum; t++) {
-      finishLoading(t);
-    }
-  }
-}
+
 
 
 function finishLoading(t) {
-  const loadingContainer = document.getElementById(`loadingContainer${t}`);
-  const pokemonCountContainer = document.getElementById(
-    `pokemonCountContainer${t}`
-  );
-  if (loadingContainer) {
-    loadingContainer.classList.add("d-none");
+  const loading = document.getElementById(`loadingContainer${t}`);
+  const pokemonCount = document.getElementById(`pokemonCountContainer${t}`);
+  if (loading) {
+    loading.classList.add("d-none");
   }
-  if (pokemonCountContainer) {
-    pokemonCountContainer.classList.remove("d-none");
+  if (pokemonCount) {
+    pokemonCount.classList.remove("d-none");
   }
   finishBtn();
 }
@@ -258,18 +257,10 @@ async function searchPokemons(searchIt) {
 }
 
 
-function proofIDAndSetNull(pokemon) {
-  let pokemonID = pokemon["id"];
-  if (pokemonID < 10) {
-    pokemonID += "#00" + pokemonID;
-  }
-  if (pokemonID > 9 && pokemonID < 100) {
-    pokemonID += "#0" + pokemonID;
-  }
-  if (pokemonID > 99) {
-    pokemonID += "#" + pokemonID;
-  }
-  return pokemonID;
+async function proofURL(url) {
+  let response = await fetch(url);
+  pokemonIs = await response.json();
+  return pokemonIs;
 }
 
 //TODO:::___
@@ -286,8 +277,21 @@ async function proofSearchFinish() {
 }
 
 
-async function proofURL(url) {
-  let response = await fetch(url);
-  pokemonIs = await response.json();
-  return pokemonIs;
+function proofIDAndSetNull(pokemon) {
+  let pokemonID = pokemon["id"];
+  if (pokemonID < 10) {
+    pokemonID += "#00" + pokemonID;
+  }
+  if (pokemonID > 9 && pokemonID < 100) {
+    pokemonID += "#0" + pokemonID;
+  }
+  if (pokemonID > 99) {
+    pokemonID += "#" + pokemonID;
+  }
+  return pokemonID;
 }
+
+
+
+
+
