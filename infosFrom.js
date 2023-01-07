@@ -30,10 +30,10 @@ function extractGenderRates(speciesData) {
 
 
 async function getFirstEvolutionImg(evolutionChain, t) {
-  const evoURL1 = evolutionChain["chain"]["species"]["url"];
-  const evoResponse1 = await fetch(evoURL1);
-  const evoTest = await evoResponse1.json();
-  const API = APIs + evoTest["id"];
+  const url = evolutionChain["chain"]["species"]["url"];
+  const evoResponse = await fetch(url);
+  const evo = await evoResponse.json();
+  const API = APIs + evo["id"];
   let response = await fetch(API);
   const currentPokemon = await response.json();
   const evoIMG0 = getPokemonImage(currentPokemon);
@@ -43,10 +43,10 @@ async function getFirstEvolutionImg(evolutionChain, t) {
 
 
 async function getSecondEvolutionImg(evolutionChain, t) {
-  const evoURL1 = evolutionChain["chain"]["evolves_to"][0]["species"]["url"];
-  const evoResponse1 = await fetch(evoURL1);
-  const evoTest = await evoResponse1.json();
-  const API = APIs + evoTest["id"];
+  const url = evolutionChain["chain"]["evolves_to"][0]["species"]["url"];
+  const evoResponse = await fetch(url);
+  const evo = await evoResponse.json();
+  const API = APIs + evo["id"];
   let response = await fetch(API);
   const currentPokemon = await response.json();
   const evoIMG1 = getPokemonImage(currentPokemon);
@@ -56,10 +56,10 @@ async function getSecondEvolutionImg(evolutionChain, t) {
 
 
 async function getLastEvolutionImg(evolutionChain, t) {
-  const evoURL1 = evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["url"];
-  const evoResponse1 = await fetch(evoURL1);
-  const evoTest = await evoResponse1.json();
-  const API = APIs + evoTest["id"];
+  const url = evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["url"];
+  const evoResponse = await fetch(url);
+  const evo = await evoResponse.json();
+  const API = APIs + evo["id"];
   let response = await fetch(API);
   const currentPokemon = await response.json();
   const evoIMG2 = getPokemonImage(currentPokemon);

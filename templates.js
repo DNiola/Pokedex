@@ -48,7 +48,7 @@ function renderCountsPokemons(t) {
 function openPokemonHTML(t) {
   return `
   <div id="cardContainer" class="pokemonContainerOpen">
-   <div class="test">
+   <div class="cardContainer">
       <div id="pokemonContainer${t}Open" class="pokedexCard">
         <div class="pokemonNameContainerPosi">
           <div class="pokemonNameContainer">

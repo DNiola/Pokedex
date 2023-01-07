@@ -10,13 +10,14 @@ let searchAmount = [];
 maxID = 906
 
 async function loadAPIs() {
+  startBtn()
   let promises = [];
   for (let t = 1; t < lastStartID; t++) {
     if (!loadedPokemons.includes(t)) {
       const url = APIs + t;
       NumberOfUrl.push(url);
       console.log(url);
-      promises.push(await loadPokemon(url, t));
+      promises.push(loadPokemon(url, t));
       loadedPokemons.push(t);
       await Promise.all(promises);
     }
@@ -35,6 +36,7 @@ async function startHiddenSearch() {
   }
   await Promise.all(promises);
   hiddenFinish();
+  finishBtn();
 }
 
 
@@ -73,9 +75,9 @@ async function openPokemon(t) {
 async function renderPokemonCardOpen(currentPokemon, t) {
   document.getElementById("blockScroll").classList.add("oBlock");
   setDesignCardOpen(currentPokemon, t);
-  getCurrentEvolutionChain(currentPokemon, t);
   proofAndSetPokemonTypAndAbilities(currentPokemon, t);
   setCurrentPokemonInfo(currentPokemon, t);
+  getCurrentEvolutionChain(currentPokemon, t);
   openDiagram(currentPokemon, t);
   getRestOfPokemonSubInfo(currentPokemon, t);
 }
@@ -93,9 +95,12 @@ async function setRestOfPokemonSubInfo(speciesData, t) {
 
 async function getCurrentEvolutionChain(currentPokemon, t) {
   const evolutionChainUrl = await getEvolutionChainUrl(currentPokemon);
+  if (evolutionChainUrl == undefined) {
+  }else {
   const evolutionChainResponse = await fetch(evolutionChainUrl);
   const evolutionChain = await evolutionChainResponse.json();
   proofAndSetCurrentEvolutionPokemonName(evolutionChain, t);
+  }
 }
 
 
@@ -123,7 +128,7 @@ window.onscroll = async function scroll() {
     if (pokeDexHTML.value == "pokeDexContainer") {
       if (lastStartID < 905) {
         lastStartID = lastStartID + 5;
-        await loadAPIs();
+         loadAPIs();
       }
     }
   }

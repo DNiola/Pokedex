@@ -263,6 +263,7 @@ async function proofURL(t) {
   
 }
 
+
 async function proofSearchFinish() {
   let foundMessage = document.getElementById("notFoundMessage");
   let dexCount = document.getElementById("pokeDexCountHTML");
@@ -279,6 +280,7 @@ async function proofSearchFinish() {
   }
   searchFinish()
 }
+
 
 function searchFinish() {
   document.getElementById("isLoading").classList.add("d-none")

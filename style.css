@@ -5,17 +5,17 @@ body {
   background-image: url("img/pokeballSideBG.jpg");
 }
 
-.notFound{
+.notFound {
   padding-top: 100px;
-    background: black;
-    color: white;
-    height: 85px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background: black;
+  color: white;
+  height: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.isLoading{
+.isLoading {
   background: black;
   color: white;
   height: 100%;
@@ -27,12 +27,14 @@ body {
 .oBlock {
   overflow: hidden;
 }
+
 .formCountContainer {
   width: max-content;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .headerContainer {
   padding: 10px;
   display: flex;
@@ -46,22 +48,26 @@ body {
   border-bottom: 1px solid #0000003d;
   box-shadow: 0px 0px 20px 10px #000000;
 }
+
 .headerText {
   color: black;
   text-decoration: inherit;
 }
+
 .paddLe5 {
   padding-left: 5px;
 }
+
 .logoPosi {
   display: flex;
-  padding-left: 5%;
 }
+
 .pokemonNameContainerPosi {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
 .pokemonNameContainer {
   position: absolute;
   display: flex;
@@ -74,6 +80,7 @@ body {
   box-shadow: 0px 0px 10px 0px #000000;
   top: 0;
 }
+
 .chart {
   background: black;
   height: 320px !important;
@@ -98,6 +105,7 @@ body {
   align-content: space-between;
   cursor: pointer;
 }
+
 .zIndex1 {
   z-index: 1;
 }
@@ -105,6 +113,7 @@ body {
 .cursorP {
   cursor: pointer;
 }
+
 .pokeballIMG {
   height: 150px;
   width: 216px;
@@ -128,6 +137,7 @@ body {
   overflow: auto;
   box-shadow: inset 0px 0px 20px 10px #000000;
 }
+
 .pokedexBG {
   padding-left: 28px;
   padding-right: 28px;
@@ -141,12 +151,14 @@ body {
   background: #000000;
   border: 1px solid black;
 }
+
 .sideShadow {
   position: fixed;
   background-color: #00000038;
   height: 100%;
   width: 100%;
 }
+
 .shadow {
   position: fixed;
   backdrop-filter: blur(2px);
@@ -164,16 +176,20 @@ body {
 .pokemonPosiID {
   display: flex;
 }
+
 .headerIcons {
   height: 16px;
 }
+
 .logoIcon {
   height: 40px;
   padding: 4px;
 }
+
 .cardIconsImg {
   height: 26px;
 }
+
 .cardBtnIcons {
   padding: 10px;
   background-color: #ffffff21;
@@ -193,16 +209,11 @@ body {
   background: #00f2ff21;
 }
 
-.test {
+.cardContainer {
   border: 14px solid black;
   border-radius: 12px;
   box-shadow: 0px 0px 71px 26px #000000, 0px 0px 0px 0px #4b4c4b,
     0px 0px 0px 0px #3d3f3d, 0px 0px 0px 0px rgb(0 0 0 / 0%);
-}
-
-.test2 {
-  box-shadow: 0px 0px 0px 5px #a0a0a0, 0px 10px 27px -8px #141414,
-    inset 0px -10px 27px -8px #fff7f8, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
 .infoContainer {
@@ -241,11 +252,13 @@ body {
   background: black;
   box-shadow: 0px 0px 10px 0px black;
 }
+
 .typesOpen {
   padding-left: 5px;
   padding-right: 5px;
   display: flex;
 }
+
 .propotion {
   display: flex;
   align-items: center;
@@ -259,6 +272,7 @@ body {
   box-shadow: 0px 0px 10px 0px black;
   border-top: 1px solid rgba(86, 85, 85, 0.998);
 }
+
 .pokemonNamePosi {
   display: flex;
   justify-content: center;
@@ -282,25 +296,27 @@ body {
   justify-content: center;
   margin-left: 400px;
   margin-right: 400px;
-
   box-shadow: 0px 0px 20px 10px #000000;
 }
+
 .pokeDexContainer {
   padding-top: 102px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .d-noneI {
   display: none !important;
 }
+
 .pokemonContainerOpen {
   display: flex;
   justify-content: center;
   position: fixed;
   right: calc(50% - 50px);
   left: calc(50% - 50px);
-  top: 10%;
+  bottom: 15%;
   z-index: 2;
 }
 
@@ -310,6 +326,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .idPosi {
   padding-left: 28px;
 }
@@ -318,6 +335,7 @@ body {
   padding-right: 22px;
   padding-top: 13px;
 }
+
 .positionWH {
   display: flex;
   justify-content: space-around;
@@ -327,9 +345,11 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .subInfoCounatiner {
   margin-top: -72px;
 }
+
 .cardheader {
   display: flex;
   justify-content: space-between;
@@ -344,6 +364,7 @@ body {
   bottom: 0;
   cursor: pointer;
 }
+
 .imgSize {
   height: 180px;
   width: 200px;
@@ -371,9 +392,11 @@ body {
   padding-top: 10px;
   align-items: center;
 }
+
 .evolutionTwoContainer {
   justify-content: space-evenly;
 }
+
 .evolutionSoloContainer {
   justify-content: center;
 }
@@ -404,7 +427,9 @@ body {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
-
+.inputText:hover {
+  border-color: rgba(128, 128, 128, 0.728);
+}
 .searchBtn {
   height: 34px;
   width: 35px;
@@ -417,8 +442,9 @@ body {
   background: rgb(245, 245, 245);
   cursor: grab;
 }
+
 .searchBtn:hover {
-  background-color: rgb(233, 80, 80);
+  border: 1px solid rgba(128, 128, 128, 0.728);
 }
 
 .countBtn {
@@ -433,10 +459,14 @@ body {
   justify-content: center;
   cursor: grab;
 }
+.countBtn:hover{
+  border-color: rgba(128, 128, 128, 0.728);
+}
 .genderContainer {
   display: flex;
   align-items: center;
 }
+
 .genderIMG {
   height: 20px;
 }
@@ -450,6 +480,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .d-none {
   display: none;
 }
@@ -615,7 +646,6 @@ table.blueTable thead th {
   border-radius: 10px;
 }
 
-
 #loading-wrapper {
   display: flex;
   width: 100%;
@@ -630,7 +660,7 @@ table.blueTable thead th {
   width: 100px;
   height: 30px;
   text-align: center;
-  font-family: 'PT Sans Narrow', sans-serif;
+  font-family: "PT Sans Narrow", sans-serif;
   font-size: 20px;
   justify-content: center;
 }
@@ -638,18 +668,15 @@ table.blueTable thead th {
 #loading-content {
   display: block;
   position: relative;
-  left: 50%;
-  top: 50%;
   width: 120px;
   height: 120px;
-  margin: -85px 0 0 -85px;
-  border: 3px solid #F00;
+  border: 3px solid #f00;
 }
 
 #loading-content:after {
   content: "";
   position: absolute;
-  border: 3px solid #0F0;
+  border: 3px solid #0f0;
   left: 15px;
   right: 15px;
   top: 15px;
@@ -659,7 +686,7 @@ table.blueTable thead th {
 #loading-content:before {
   content: "";
   position: absolute;
-  border: 3px solid #00F;
+  border: 3px solid #00f;
   left: 5px;
   right: 5px;
   top: 5px;
@@ -668,8 +695,8 @@ table.blueTable thead th {
 
 #loading-content {
   border: 3px solid transparent;
-  border-top-color: #4D658D;
-  border-bottom-color: #4D658D;
+  border-top-color: #4d658d;
+  border-bottom-color: #4d658d;
   border-radius: 50%;
   -webkit-animation: loader 20s linear infinite;
   -moz-animation: loader 20s linear infinite;
@@ -679,26 +706,25 @@ table.blueTable thead th {
 
 #loading-content:before {
   border: 3px solid transparent;
-  border-top-color: #D4CC6A;
-  border-bottom-color: #D4CC6A;
+  border-top-color: #d4cc6a;
+  border-bottom-color: #d4cc6a;
   border-radius: 50%;
   -webkit-animation: loader 30s linear infinite;
-    -moz-animation: loader 20s linear infinite;
+  -moz-animation: loader 20s linear infinite;
   -o-animation: loader 20s linear infinite;
   animation: loader 30s linear infinite;
 }
 
 #loading-content:after {
   border: 3px solid transparent;
-  border-top-color: #84417C;
-  border-bottom-color: #84417C;
+  border-top-color: #84417c;
+  border-bottom-color: #84417c;
   border-radius: 50%;
   -webkit-animation: loader 1.5s linear infinite;
   animation: loader 1.5s linear infinite;
-    -moz-animation: loader 2s linear infinite;
+  -moz-animation: loader 2s linear infinite;
   -o-animation: loader 2s linear infinite;
 }
-
 
 @keyframes loader {
   0% {
@@ -714,7 +740,7 @@ table.blueTable thead th {
 }
 
 #content-wrapper {
-  color: #FFF;
+  color: #fff;
   position: fixed;
   left: 0;
   top: 20px;
@@ -722,20 +748,30 @@ table.blueTable thead th {
   height: 100%;
 }
 
-
-#content
-{
+#content {
   width: 800px;
   height: 1000px;
   margin: 0 auto;
   text-align: center;
   background-color: #888;
 }
+@media screen and (max-height: 1220px){
 
+  .pokemonContainerOpen {
+    bottom: 5%;
+  }
+}
+@media screen and (max-height: 1080px){
 
+  .pokemonContainerOpen {
+    bottom: 10%;
+  }
+  .pokedexCard{
+    height:700px;
+  }
+}
 @media screen and (max-width: 920px) {
-
-  .isLoading{
+  .isLoading {
     padding-top: 270px;
   }
   .pokedexCard {
@@ -814,7 +850,7 @@ table.blueTable thead th {
     padding-left: 0;
   }
 
-  .test {
+  .cardContainer {
     border: 4px solid black;
     border-radius: 0px;
     overflow: auto;
@@ -832,7 +868,6 @@ table.blueTable thead th {
 }
 
 @media screen and (max-width: 630px) {
- 
   .evolutionIMG {
     height: 52px;
     width: 52px;
@@ -926,22 +961,7 @@ table.blueTable thead th {
   .typesOpen {
     font-size: 10px;
   }
+  .inputText {
+    width: 220px;
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

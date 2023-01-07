@@ -137,9 +137,7 @@ async function proofAndSetCurrentEvolutionPokemonName(evolutionChain, t) {
   }
   if (evolutionChain["chain"]["evolves_to"][0] == undefined) {
   } else if (evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]) {
-    document.getElementById(`evolutionChain2${t}`).innerHTML += evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"][
-        "name"
-      ];
+    document.getElementById(`evolutionChain2${t}`).innerHTML += evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["name"];
     getLastEvolutionImg(evolutionChain, t);
   }
 }
@@ -216,10 +214,9 @@ function setHabitat(speciesData, t) {
   }
 }
 
+
 function closeCard() {
-  document
-    .getElementById("cardContainer")
-    .classList.remove("roll-in-blurred-bottom");
+  document.getElementById("cardContainer").classList.remove("roll-in-blurred-bottom");
   document.getElementById("cardContainer").classList.add("slide-out-top");
   document.getElementById("backgroundCard").classList.add("d-none");
   document.getElementById("blockScroll").classList.remove("oBlock");
