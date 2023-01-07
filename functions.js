@@ -33,8 +33,7 @@ function setCaptureRate(speciesData, t) {
 
 function setHatchCounter(speciesData, t) {
   let steps = proofSteps(speciesData);
-  document.getElementById(`hatchCounter${t}`).innerHTML = "Count: " + speciesData["hatch_counter"] + "<br>";
-  document.getElementById(`hatchCounter${t}`).innerHTML += "Steps: " + steps;
+  document.getElementById(`hatchCounter${t}`).innerHTML = "Count: " + speciesData["hatch_counter"] + "<br>" + "Steps: " + steps;
 }
 
 
@@ -127,7 +126,7 @@ function proofAndSetCurrentPokemonTypes(currentPokemon, t) {
 }
 
 
-function proofAndSetCurrentEvolutionPokemonName(evolutionChain, t) {
+async function proofAndSetCurrentEvolutionPokemonName(evolutionChain, t) {
   if (evolutionChain["chain"]["species"]) {
     document.getElementById(`evolutionChain0${t}`).innerHTML += evolutionChain["chain"]["species"]["name"];
     getFirstEvolutionImg(evolutionChain, t);
@@ -138,7 +137,9 @@ function proofAndSetCurrentEvolutionPokemonName(evolutionChain, t) {
   }
   if (evolutionChain["chain"]["evolves_to"][0] == undefined) {
   } else if (evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]) {
-    document.getElementById(`evolutionChain2${t}`).innerHTML += evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"]["name"];
+    document.getElementById(`evolutionChain2${t}`).innerHTML += evolutionChain["chain"]["evolves_to"][0]["evolves_to"][0]["species"][
+        "name"
+      ];
     getLastEvolutionImg(evolutionChain, t);
   }
 }
@@ -195,7 +196,6 @@ function proofAndSetID(currentPokemon, t) {
   }
 }
 
-
 function proofAndSetMoves(currentPokemon, t) {
   const pokemonMoves = currentPokemon["moves"];
   if (pokemonMoves == "") {
@@ -208,7 +208,6 @@ function proofAndSetMoves(currentPokemon, t) {
   }
 }
 
-
 function setHabitat(speciesData, t) {
   if (speciesData["habitat"] === null) {
     document.getElementById(`habitat${t}`).innerHTML = "?";
@@ -217,9 +216,10 @@ function setHabitat(speciesData, t) {
   }
 }
 
-
 function closeCard() {
-  document.getElementById("cardContainer").classList.remove("roll-in-blurred-bottom");
+  document
+    .getElementById("cardContainer")
+    .classList.remove("roll-in-blurred-bottom");
   document.getElementById("cardContainer").classList.add("slide-out-top");
   document.getElementById("backgroundCard").classList.add("d-none");
   document.getElementById("blockScroll").classList.remove("oBlock");
@@ -228,20 +228,16 @@ function closeCard() {
   }, 600);
 }
 
-//function auto(t) {
-//  setTimeout(() => {
-//    nextPokemon(t)
-//  }, 300);
-//}
 
 function nextPokemon(t) {
   if (t > currentPokemon.length) {
     t = 0;
     openPokemon(t);
   } else {
-    t++;
-    openPokemon(t); 
-    //auto(t)
+    {
+      t++;
+      openPokemon(t);
+    }
   }
 }
 

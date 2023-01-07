@@ -1,32 +1,28 @@
 async function startCount() {
+  document.getElementById("notFoundMessage").classList.add("d-none");
+  document.getElementById("pokeDexHTML").classList.add("d-noneI");
+  pokeDexHTML.innerHTML = "";
+  document.getElementById("pokeDexCountHTML").classList.remove("d-noneI");
+  pokeDexCountHTML.innerHTML = "";
+  await countFromTo();
+}
+
+
+async function countFromTo() {
   const getPokemonCountFrom = document.getElementById("pokemon-count-from").value;
   const getPokemonCountTo = document.getElementById("pokemon-count-to").value;
-  document.getElementById("pokeDexHTML").classList.add("d-noneI");
-  document.getElementById("pokeDexCountHTML").classList.remove("d-noneI");
-  pokeDexHTML.innerHTML = "";
-  pokeDexCountHTML.innerHTML = "";
-  await countFromTo(getPokemonCountTo, getPokemonCountFrom);
-}
-
-
-async function countFromTo(getPokemonCountTo, getPokemonCountFrom) {
   let proofSum = getPokemonCountTo - getPokemonCountFrom;
-  if (
-    getPokemonCountFrom == "" ||
-    getPokemonCountTo == "" ||
-    getPokemonCountFrom == "0" ||
-    getPokemonCountTo == "0" ||
-    proofSum <= 0
-  ) {
+  if ( getPokemonCountFrom == "" || getPokemonCountTo == "" || getPokemonCountFrom == "0" || getPokemonCountTo == "0" || proofSum <= 0 ) {
     countFalse();
   } else {
-   await countTrue(getPokemonCountTo, getPokemonCountFrom);
+    await countTrue(getPokemonCountTo, getPokemonCountFrom);
   }
   finish.push(true);
-  proofFinish(getPokemonCountTo, getPokemonCountFrom);
+  proofIsFinish(getPokemonCountTo, getPokemonCountFrom);
 }
 
-function proofFinish(getPokemonCountTo, getPokemonCountFrom) {
+
+function proofIsFinish(getPokemonCountTo, getPokemonCountFrom) {
   if (finish) {
     let proofSum = getPokemonCountTo - getPokemonCountFrom + 2;
     for (let t = 1; t < proofSum; t++) {
@@ -35,9 +31,10 @@ function proofFinish(getPokemonCountTo, getPokemonCountFrom) {
   }
 }
 
+
 async function countFalse() {
-  for (let t = 1; t < 2; t++) {
-    const url = `${APIs}${t}`;
+  for (let t = 1; t < 4; t++) {
+    const url = APIs + t;
     NumberOfUrl.push(url);
     console.log(url);
     await loadCountPokemon(url, t);
@@ -56,7 +53,7 @@ async function countTrue(getPokemonCountTo, getPokemonCountFrom) {
 
 async function loadCountAPIs(t) {
   let promises = [];
-  const url = `${APIs}${t}`;
+  const url = APIs + t;
   NumberOfUrl.push(url);
   console.log(url);
   promises.push(loadCountPokemon(url, t));
@@ -67,13 +64,14 @@ async function loadCountAPIs(t) {
 async function loadCountPokemon(url, t) {
   let response = await fetch(url);
   currentPokemon = await response.json();
-  console.log("Pokemon:", currentPokemon);
+  console.log("Pokemon:", currentPokemon); 
+  ;
   pokemonCountFilter(currentPokemon, t);
 }
 
 
 function pokemonCountFilter(currentPokemon, t) {
-  pokeDexCountHTML.innerHTML += renderCountsPokemons(t);
+  pokeDexCountHTML.innerHTML += renderCountsPokemons(t)
   startLoading(t);
   proofCountDesigns(currentPokemon, t);
   setCountImgAndName(currentPokemon, t);
@@ -133,9 +131,6 @@ function proofAndSetCountCurrentPokemonTypes(currentPokemon, t) {
     document.getElementById(`pokemonCountTypesX${t}`).classList.add("d-none");
   }
 }
-
-
-
 
 
 function finishLoading(t) {
@@ -211,9 +206,10 @@ function proofCountDesigns(currentPokemon, t) {
   }
 }
 
-///SEARCH///
+//////////////////////////////SEARCH/////////////////////////////
 
 async function getSearch() {
+  document.getElementById("notFoundMessage").classList.add("d-none");
   if (document.getElementById("search").value.length < 3) {
     console.log("Search field need moore Text/Number");
   } else {
@@ -230,7 +226,9 @@ async function getSearch() {
 
 
 function setSearchContainer() {
-  document.getElementById("pokeDexCountHTML").classList.remove("d-noneI");
+  document.getElementById("isLoading").classList.remove("d-none")
+  document.getElementById("pokeDexHTML").classList.add("d-noneI");
+  document.getElementById("pokeDexCountHTML").classList.add("d-noneI");
   let searchCountContainer = document.getElementById("pokeDexCountHTML");
   let searchContainer = document.getElementById("pokeDexHTML");
   searchCountContainer.innerHTML = "";
@@ -241,7 +239,7 @@ function setSearchContainer() {
 async function searchPokemons(searchIt) {
   for (let t = 1; t < 906; t++) {
     const url = APIs + t;
-    let pokemon = await proofURL(url);
+    let pokemon = await proofURL(t);
     let pokemonName = pokemon["name"];
     let pokemonID = proofIDAndSetNull(pokemon);
     if (
@@ -257,41 +255,47 @@ async function searchPokemons(searchIt) {
 }
 
 
-async function proofURL(url) {
+async function proofURL(t) {
+  const url = APIs + t;
   let response = await fetch(url);
   pokemonIs = await response.json();
   return pokemonIs;
+  
 }
 
-//TODO:::___
 async function proofSearchFinish() {
+  let foundMessage = document.getElementById("notFoundMessage");
+  let dexCount = document.getElementById("pokeDexCountHTML");
   if (finish) {
-    if (searchAmount.length == 0) {
-      document.getElementById("notFoundMessage").innerHTML = "Pokemon not found!.";
-    }
-    for (let s = 0; s < searchAmount.length; s++) {
-      const t = searchAmount[s];
-      finishLoading(t);
+    if (dexCount.innerHTML == "") {
+      foundMessage.classList.remove("d-none");
+      foundMessage.innerHTML = "Pokemon not found!.";
+    } else {
+      for (let s = 0; s < searchAmount.length; s++) {
+        const t = searchAmount[s];
+        finishLoading(t);
+      }
     }
   }
+  searchFinish()
+}
+
+function searchFinish() {
+  document.getElementById("isLoading").classList.add("d-none")
+  document.getElementById("pokeDexCountHTML").classList.remove("d-noneI");
 }
 
 
 function proofIDAndSetNull(pokemon) {
   let pokemonID = pokemon["id"];
   if (pokemonID < 10) {
-    pokemonID += "#00" + pokemonID;
+    pokemonID = "#00" + pokemonID;
   }
   if (pokemonID > 9 && pokemonID < 100) {
-    pokemonID += "#0" + pokemonID;
+    pokemonID = "#0" + pokemonID;
   }
   if (pokemonID > 99) {
-    pokemonID += "#" + pokemonID;
+    pokemonID = "#" + pokemonID;
   }
   return pokemonID;
 }
-
-
-
-
-
