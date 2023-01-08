@@ -85,7 +85,7 @@ function getPokemonImage(currentPokemon) {
 function proofEvolutionChain(speciesData) {
   const evolution = speciesData["evolution_chain"];
   if (evolution == null) {
-    console.log("ERROR");
+    console.log("Evolution = NULL");
     return;
   } else {
     const evolutionChainUrl = speciesData["evolution_chain"]["url"];

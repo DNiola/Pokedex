@@ -1,7 +1,7 @@
 Erste mal seite laden dauert bei mir 10 sek. Normal?
 
-Wen ich eine neue css datai anlege und ich dort die responive 
-classen einfüge arbeitet mein code nicht richtig. Mit !important arbeiten?
-
 Wen ich zu schnell das Pokemon Wechsle bekomme ich eine fehler meldung (API anfrage dauert zu lange).
-habe versucht mit tru und false zu arbe
+
+scroll nach unten -> (während pokemn geladen werden) crad nicht anclickbar.
+
+count function bei ab 100 pokemon rendern und dan wieder die nächten 100 laden

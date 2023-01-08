@@ -1,4 +1,3 @@
-
 function renderAllPokemons(t) {
   return `
 <div class="pokedexBG">
@@ -44,6 +43,7 @@ function renderCountsPokemons(t) {
 </div>
 `;
 }
+
 
 function openPokemonHTML(t) {
   return `

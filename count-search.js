@@ -17,15 +17,14 @@ async function countFromTo() {
   } else {
     await countTrue(getPokemonCountTo, getPokemonCountFrom);
   }
-  finish.push(true);
+  finish.push("Count finish");
   proofIsFinish(getPokemonCountTo, getPokemonCountFrom);
 }
 
 
 function proofIsFinish(getPokemonCountTo, getPokemonCountFrom) {
   if (finish) {
-    let proofSum = getPokemonCountTo - getPokemonCountFrom + 2;
-    for (let t = 1; t < proofSum; t++) {
+    for (let t = getPokemonCountFrom; t <getPokemonCountTo + 1 ; t++) {
       finishLoading(t);
     }
   }
@@ -65,7 +64,6 @@ async function loadCountPokemon(url, t) {
   let response = await fetch(url);
   currentPokemon = await response.json();
   console.log("Pokemon:", currentPokemon); 
-  ;
   pokemonCountFilter(currentPokemon, t);
 }
 
@@ -101,6 +99,33 @@ function startBtn() {
 }
 
 
+async function finishLoading(t) {
+  const loading = document.getElementById(`loadingContainer${t}`);
+  const pokemonCount = document.getElementById(`pokemonCountContainer${t}`);
+  if (loading) {
+    loading.classList.add("d-none");
+  }
+  if (pokemonCount) {
+    pokemonCount.classList.remove("d-none");
+  }
+  finishBtn();
+}
+
+
+function finishBtn() {
+  document.getElementById("countBtn").style.border = "1px solid black";
+  const countBtn = document.getElementById("countBtn");
+  countBtn.disabled = false;
+  countBtn.style = "cursor: grab;";
+  const searchBtn = document.getElementById("getSearch");
+  searchBtn.disabled = false;
+  searchBtn.style = "cursor:grab;";
+  const onchangeFunc = document.getElementById("search");
+  onchangeFunc.disabled = false;
+  onchangeFunc.style = "cursor: text;";
+}
+
+
 function setCountImgAndName(currentPokemon, t) {
   const imageUrl = getPokemonImage(currentPokemon);
   document.getElementById(`pokemonCountImage${t}`).src = imageUrl;
@@ -133,76 +158,67 @@ function proofAndSetCountCurrentPokemonTypes(currentPokemon, t) {
 }
 
 
-function finishLoading(t) {
-  const loading = document.getElementById(`loadingContainer${t}`);
-  const pokemonCount = document.getElementById(`pokemonCountContainer${t}`);
-  if (loading) {
-    loading.classList.add("d-none");
-  }
-  if (pokemonCount) {
-    pokemonCount.classList.remove("d-none");
-  }
-  finishBtn();
-}
-
-
-function finishBtn() {
-  document.getElementById("countBtn").style.border = "1px solid black";
-  const countBtn = document.getElementById("countBtn");
-  countBtn.disabled = false;
-  countBtn.style = "cursor: grab;";
-  const searchBtn = document.getElementById("getSearch");
-  searchBtn.disabled = false;
-  searchBtn.style = "cursor:grab;";
-  const onchangeFunc = document.getElementById("search");
-  onchangeFunc.disabled = false;
-  onchangeFunc.style = "cursor: text;";
-}
-
-
 function proofCountDesigns(currentPokemon, t) {
-  proofedTypeNamee = currentPokemon["types"][0]["type"]["name"];
-  pokemonStylee = document.getElementById(`pokemonCountContainer${t}`);
-  proofedTypeName = currentPokemon["types"][0]["type"]["name"];
-  pokemonStyle = document.getElementById(`pokemonCountContainer${t}`);
-  if (proofedTypeName == "grass") {
-    pokemonStyle.classList.add("designGrass");
-  } else if (proofedTypeName == "fire") {
-    pokemonStyle.classList.add("designFire");
-  } else if (proofedTypeName == "water") {
-    pokemonStyle.classList.add("designWater");
-  } else if (proofedTypeName == "bug") {
-    pokemonStyle.classList.add("designBug");
-  } else if (proofedTypeName == "normal") {
-    pokemonStyle.classList.add("designNormal");
-  } else if (proofedTypeName == "poison") {
-    pokemonStyle.classList.add("designPoison");
-  } else if (proofedTypeName == "electric") {
-    pokemonStyle.classList.add("designElectric");
-  } else if (proofedTypeName == "ground") {
-    pokemonStyle.classList.add("designGround");
-  } else if (proofedTypeName == "fairy") {
-    pokemonStyle.classList.add("designFairy");
-  } else if (proofedTypeName == "fighting") {
-    pokemonStyle.classList.add("designFighting");
-  } else if (proofedTypeName == "psychic") {
-    pokemonStyle.classList.add("designPsychic");
-  } else if (proofedTypeName == "rock") {
-    pokemonStyle.classList.add("designRock");
-  } else if (proofedTypeName == "ghost") {
-    pokemonStyle.classList.add("designGhost");
-  } else if (proofedTypeName == "ice") {
-    pokemonStyle.classList.add("designIce");
-  } else if (proofedTypeName == "dragon") {
-    pokemonStyle.classList.add("designDragon");
-  } else if (proofedTypeName == "dark") {
-    pokemonStyle.classList.add("designDark");
-  } else if (proofedTypeName == "steel") {
-    pokemonStyle.classList.add("designSteel");
-  } else if (proofedTypeName == "flying") {
-    pokemonStyle.classList.add("designFlying");
-  } else {
-    console.log("Hier fehlt der design/Neuer Pokemon Typ");
+  const proofedTypeName = currentPokemon["types"][0]["type"]["name"];
+  const pokemonStyle = document.getElementById(`pokemonCountContainer${t}`);
+
+  switch (proofedTypeName) {
+    case "grass":
+      pokemonStyle.classList.add("designGrass");
+      break;
+    case "fire":
+      pokemonStyle.classList.add("designFire");
+      break;
+    case "water":
+      pokemonStyle.classList.add("designWater");
+      break;
+    case "bug":
+      pokemonStyle.classList.add("designBug");
+      break;
+    case "normal":
+      pokemonStyle.classList.add("designNormal");
+      break;
+    case "poison":
+      pokemonStyle.classList.add("designPoison");
+      break;
+    case "electric":
+      pokemonStyle.classList.add("designElectric");
+      break;
+    case "ground":
+      pokemonStyle.classList.add("designGround");
+      break;
+    case "fairy":
+      pokemonStyle.classList.add("designFairy");
+      break;
+    case "fighting":
+      pokemonStyle.classList.add("designFighting");
+      break;
+    case "psychic":
+      pokemonStyle.classList.add("designPsychic");
+      break;
+    case "rock":
+      pokemonStyle.classList.add("designRock");
+      break;
+    case "ghost":
+      pokemonStyle.classList.add("designGhost");
+      break;
+    case "ice":
+      pokemonStyle.classList.add("designIce");
+      break;
+    case "dragon":
+      pokemonStyle.classList.add("designDragon");
+      break;
+    case "dark":
+      pokemonStyle.classList.add("designDark");
+      break;
+    case "steel":
+      pokemonStyle.classList.add("designSteel");
+      break;
+    case "flying":
+      pokemonStyle.classList.add("designFlying");
+      break;
+    default:
+      console.log("Hier fehlt der design/Neuer Pokemon Typ");
   }
 }
 
