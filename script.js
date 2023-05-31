@@ -22,6 +22,7 @@ async function loadAPIs() {
       await Promise.all(promises);
     }
   }
+  hiddenFinish();
   startHiddenSearch()
 }
 
@@ -35,7 +36,6 @@ async function startHiddenSearch() {
     }
   }
   await Promise.all(promises);
-  hiddenFinish();
   finishBtn();
 }
 
@@ -49,6 +49,7 @@ function hiddenFinish() {
 async function loadPokemon(url, t) {
   let response = await fetch(url);
   currentPokemon = await response.json();
+  const evolutionChainUrl = await getEvolutionChainUrl(currentPokemon);
   console.log("Pokemon:", currentPokemon);
   pokemonFilter(currentPokemon, t);
 }
@@ -99,7 +100,7 @@ async function getCurrentEvolutionChain(currentPokemon, t) {
   }else {
   const evolutionChainResponse = await fetch(evolutionChainUrl);
   const evolutionChain = await evolutionChainResponse.json();
-  proofAndSetCurrentEvolutionPokemonName(evolutionChain, t);
+   proofAndSetCurrentEvolutionPokemonName(evolutionChain, t);
   }
 }
 
